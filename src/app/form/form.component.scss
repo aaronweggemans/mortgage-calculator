@@ -1,0 +1,26 @@
+mat-stepper {
+  background-color: transparent
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #222356; 
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #49c5b6 ;
+}
+
+::ng-deep  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #49c5b6 ;
+}
+
+.next-button {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+}
+
+.mat-button-toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

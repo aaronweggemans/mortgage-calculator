@@ -1,0 +1,192 @@
+<div class="text-jwz-primary">
+  <p class="mb-3 h3">Bereken hier uw hypotheek.</p>
+
+  <mat-stepper orientation="vertical" [linear]="true" #stepper>
+    <form [formGroup]="hypotheek" (ngSubmit)="submitForm()">
+      <!-- Bruto jaar inkomen plus evt. partner -->
+      <mat-step>
+        <div class="card bg-light p-4 m-2">
+          <ng-template matStepLabel>Wat is uw bruto jaarinkomen?</ng-template>
+          <div class="form-group">
+            <p class="h6 text-jwz-primary">Wat is uw bruto jaar inkomen.</p>
+            <p class="text-jwz-primary">Uw bruto jaar inkomen is het inkomen dat u geniet elke kaar.</p>
+            <input class="form-control mb-3" id="bruto-jaarinkomen" type="number" formControlName="brutoInkomen">
+            <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomen }"></ng-container>
+
+            <p class="text-jwz-primary">Wat is uw leeftijd</p>
+            <input class="form-control mb-3" id="leeftijd" type="number" formControlName="leeftijd">
+            <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijd }"></ng-container>
+            
+            <mat-slide-toggle color="primary" class="mb-3" formControlName="partner" (change)="togglePartner($event)">Partner</mat-slide-toggle>
+          
+            <div id="partner-form-group" *ngIf="partner?.value">
+              <p class="text-jwz-primary">Bruto jaarinkomen van uw partner</p>
+              <input class="form-control mb-3" id="bruto-jaarinkomen-partner" type="number" formControlName="brutoInkomenPartner">
+              <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomenPartner }"></ng-container>
+
+              <p class="text-jwz-primary">Leeftijd van uw partner</p>
+              <input class="form-control" id="leeftijd" type="number" formControlName="leeftijdPartner">
+              <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijdPartner }"></ng-container>
+            </div>
+            
+            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Spaargeld -->
+      <mat-step>
+        <div class="card bg-light p-4 m-2">
+          <ng-template matStepLabel>Heeft u spaargeld?</ng-template>
+          <div class="form-group">
+            <p class="h6 text-jwz-primary">U spaargeld.</p>
+            <p class="text-jwz-primary">
+              Heeft u spaargeld? Zo ja, dit kan namelijk invloed hebben het hypotheek dat u kunt krijgen.
+              Tel eventueel ook uw partner's spaargeld hierbij op.
+            </p>
+
+            <mat-slide-toggle class="mb-3" color="primary" formControlName="spaargeld" (change)="toggleSpaargeld($event)">Spaargeld</mat-slide-toggle>
+
+            <div class="form-group" *ngIf="spaargeld?.value">
+              <input class="form-control" id="totaalGespaard" type="number" formControlName="totaalGespaard">
+              <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: totaalGespaard }"></ng-container>
+            </div>
+            
+            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Studie schuld -->
+      <mat-step>
+        <div class="card bg-light p-4 m-2">
+          <ng-template matStepLabel>Heeft u een studieschuld?</ng-template>
+          <div class="form-group">
+            <p class="h6 text-jwz-primary">Uw studieschuld.</p>
+            <p class="text-jwz-primary">
+              In het geval dat u een studieschuld heeft, kan dit gevolgen hebben voor de hoogte van uw hypotheek.
+              Voer in deze sectie uw studieschuld in. Eventueel ook het studieschuld van uw partner.
+            </p>
+
+            <mat-slide-toggle class="mb-3" color="primary" formControlName="studieSchuld" (change)="toggleStudieSchuld($event)">Studieschuld</mat-slide-toggle>
+
+            <div class="form-group" *ngIf="studieSchuld?.value">
+              <input class="form-control" id="studieSchuldKosten" type="number" formControlName="studieSchuldKosten">
+              <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: studieSchuldKosten }"></ng-container>
+            </div>
+
+            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Overge leningen of kredieten -->
+      <mat-step>
+        <div class="card bg-light p-4 m-2">
+          <ng-template matStepLabel>Heeft u overige leningen of kredieten?</ng-template>
+          <div class="form-group">
+            <p class="h6 text-jwz-primary">Overige leningen of kredieten.</p>
+            <p class="text-jwz-primary">
+              In het geval dat u overige leningen of kredieten heeft, kan dit gevolgen hebben voor de hoogte van uw hypotheek.
+              Voer hier a.u.b. uw overige leningen of kredieten in.
+            </p>
+
+            <mat-slide-toggle class="mb-3" color="primary" formControlName="overigeLening" (change)="toggleOverigeLeningen($event)">Overge leningen of kredieten</mat-slide-toggle>
+
+            <div class="form-group" *ngIf="overigeLening?.value">
+              <input class="form-control" id="overigeLeningKosten" type="number" formControlName="overigeLeningKosten">
+              <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: overigeLeningKosten }"></ng-container>
+            </div>
+
+            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Hypotheek vorm -->
+      <mat-step>
+        <div class="card bg-light p-4 m-2">
+          <ng-template matStepLabel>Kies uw hypotheekvorm.</ng-template>
+          
+          <div class="form-group">
+            <p class="h6 text-jwz-primary">Uw hypotheekvorm.</p>
+            <p class="text-jwz-primary">
+              Een hypotheekvorm verwijst naar de specifieke manier waarop een hypotheeklening is gestructureerd of afgelost. 
+              In Nederland zijn er verschillende hypotheekvormen, maar de twee meest voorkomende zijn de 
+              lineaire hypotheek en de annuïteitenhypotheek.
+            </p>
+
+            <mat-button-toggle-group class="mat-button-toggle-group">
+              <mat-button-toggle>Lineaire hypotheek</mat-button-toggle>
+              <mat-button-toggle>Annuïteitenhypotheek</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <hr />
+
+            <p class="h6 text-jwz-primary">Bepaal je rentevaste periode.</p>
+            <p class="text-jwz-primary">
+              De rentevaste periode betreft de overeengekomen termijn gedurende welke het rentepercentage constant blijft. Voor jouw hypotheek 
+              kun je kiezen om het rentetarief vast te zetten voor diverse rentevaste periodes.
+            </p>
+            <div class="form-group">
+              <select class="form-control" name="periode" id="">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+              <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: overigeLeningKosten }"></ng-container>
+            </div>
+
+
+            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Uitberekenen van de hypotheek -->
+      <mat-step>
+        <div class="card bg-light p-4 m-2">
+          <ng-template matStepLabel>Bereken de hoogte van uw hypotheek.</ng-template>
+          <div class="form-group">
+            <p class="h6 text-jwz-primary">Bereken uw hypotheek.</p>
+            <p class="text-jwz-primary">
+              U heeft alle benodigde hypotheek gevens ingevoerd. U kunt nu een berekening maken.
+              Druk op de onderste knop om de computer een berekening te laten maken.
+            </p>
+          <button class="btn btn-primary" (click)="submitForm()">Bereken uw hypotheek</button>
+          </div>
+        </div>
+
+        <div>
+          <button mat-button (click)="stepper.reset()">Reset de pagina en begin opnieuw</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-stepper>
+</div>
+  
+<ng-template #errorHandler let-errorRow>
+  <div *ngIf="errorRow?.invalid && (errorRow?.dirty || errorRow?.touched)" class="alert alert-danger" role="alert">
+    <div *ngIf="errorRow.hasError('required')">
+      U moet hier een valide waarde invullen.
+    </div>
+    <div *ngIf="errorRow.hasError('min')">
+      Negatieve getallen zijn niet toegestaan.
+    </div>
+    <div *ngIf="errorRow.hasError('max')">
+      U heeft hier een te hoog getal!
+    </div>
+  </div>
+</ng-template> 

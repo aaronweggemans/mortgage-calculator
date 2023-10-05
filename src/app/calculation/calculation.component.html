@@ -1,0 +1,53 @@
+<div class="card bg-light p-5 mt-5" *ngIf="formData | async as formData">
+  <div class="text-jwz-primary" *ngIf="calculations | async as calculations">
+    <p class="h2 mb-5">Berekening gebaseerd op:</p>
+  
+    <table class="table table-borderless table-transparent mb-5">
+      <tbody>
+        <tr>
+          <td>Uw bruto jaarinkomen</td>
+          <td>&euro; {{ formData.brutoInkomen }},-</td>
+        </tr>
+        <tr *ngIf="formData.partner">
+          <td>Bruto jaarinkomen partner</td>
+          <td>&euro;  {{ formData.brutoInkomenPartner }},-</td>
+        </tr>
+        <tr class="border-top">
+          <td>Totaal bruto jaarinkomen</td>
+          <td>&euro; {{ calculations.totalBrutoIncome }},-</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <p class="h2">Te realiseren hypotheek:</p>
+  
+    <table class="table table-borderless table-transparent">
+      <tbody>
+        <tr>
+          <td>Maximale hypotheek</td>
+          <td>&euro; {{ calculations.maxMortgage }},-</td>
+        </tr>
+        <tr>
+          <td>Maximale koopsom</td>
+          <td>&euro; {{ calculations.maxMortgage }},-</td>
+        </tr>
+        <tr class="border-top">
+          <td>Benodigd eigen geld</td>
+          <td>&euro; {{ calculations.ownContribution }},-</td>
+        </tr>
+        <tr>
+          <td>Berekende maandlast</td>
+          <td>&euro; 334,-</td>
+        </tr>
+        <tr *ngIf="formData.studieSchuld">
+          <td>Studieschuld</td>
+          <td>&euro; {{ formData.studieSchuldKosten }},-</td>
+        </tr>
+        <tr *ngIf="formData.overigeLening">
+          <td>Overige leningen</td>
+          <td>&euro; {{ formData.overigeLeningKosten }},-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
