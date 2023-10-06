@@ -1,53 +1,69 @@
-<div class="card bg-light p-5 mt-5" *ngIf="formData | async as formData">
-  <div class="text-jwz-primary" *ngIf="calculations | async as calculations">
-    <p class="h2 mb-5">Berekening gebaseerd op:</p>
+<div *ngIf="data$ | async as data">
+  <div class="alert alert-danger" *ngIf="data.showError">
+    Er is iets mis gegaan. Wellicht heeft u niet alle waardes in de berekening goed gezet.
+  </div>
   
-    <table class="table table-borderless table-transparent mb-5">
-      <tbody>
-        <tr>
-          <td>Uw bruto jaarinkomen</td>
-          <td>&euro; {{ formData.brutoInkomen }},-</td>
-        </tr>
-        <tr *ngIf="formData.partner">
-          <td>Bruto jaarinkomen partner</td>
-          <td>&euro;  {{ formData.brutoInkomenPartner }},-</td>
-        </tr>
-        <tr class="border-top">
-          <td>Totaal bruto jaarinkomen</td>
-          <td>&euro; {{ calculations.totalBrutoIncome }},-</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="card bg-light p-5" *ngIf="!data.showError">
+    <div class="text-jwz-primary">
+      <p class="h5">Berekening gebaseerd op</p>
+    
+      <table class="table table-borderless table-transparent mb-4">
+        <tbody>
+          <tr>
+            <td>Uw bruto jaarinkomen</td>
+            <td>&euro; {{ _roundByThirdNumber(data.formData.brutoInkomen) }},-</td>
+          </tr>
+          <tr *ngIf="data.formData.partner">
+            <td>Bruto jaarinkomen partner</td>
+            <td>&euro;  {{ _roundByThirdNumber(data.formData.brutoInkomenPartner) }},-</td>
+          </tr>
+          <tr class="border-top">
+            <td>Totaal bruto jaarinkomen</td>
+            <td>&euro; {{ _roundByThirdNumber(data.calculation.totalBrutoIncome) }},-</td>
+          </tr>
+        </tbody>
+      </table>
+    
+      <p class="h5">Te realiseren hypotheek</p>
+
+      <table class="table table-borderless table-transparent mb-4">
+        <tbody>
+          <tr>
+            <td>Maximale hypotheek</td>
+            <td>&euro; {{ _roundByThirdNumber(data.calculation.mortgageCalculation) }},-</td>
+          </tr>
+          <tr *ngIf="data.formData.spaargeld">
+            <td>Totaal spaargeld</td>
+            <td>&euro; {{ _roundByThirdNumber(data.formData.totaalGespaard) }},-</td>
+          </tr>
+          <tr>
+            <!-- Totaal neer te leggen bedrag -->
+            <td>Totaal te realiseren hypotheek</td>
+            <td>&euro; {{ _roundByThirdNumber(data.calculation.maxMortgage) }},-</td>
+          </tr>
+          <tr class="border-top">
+            <td>Berekende maandlast</td>
+            <td>&euro; {{ _roundByThirdNumber(data.calculation.monthlyCosts)}},-</td>
+          </tr>
+        </tbody>
+      </table>
   
-    <p class="h2">Te realiseren hypotheek:</p>
-  
-    <table class="table table-borderless table-transparent">
-      <tbody>
-        <tr>
-          <td>Maximale hypotheek</td>
-          <td>&euro; {{ calculations.maxMortgage }},-</td>
-        </tr>
-        <tr>
-          <td>Maximale koopsom</td>
-          <td>&euro; {{ calculations.maxMortgage }},-</td>
-        </tr>
-        <tr class="border-top">
-          <td>Benodigd eigen geld</td>
-          <td>&euro; {{ calculations.ownContribution }},-</td>
-        </tr>
-        <tr>
-          <td>Berekende maandlast</td>
-          <td>&euro; 334,-</td>
-        </tr>
-        <tr *ngIf="formData.studieSchuld">
-          <td>Studieschuld</td>
-          <td>&euro; {{ formData.studieSchuldKosten }},-</td>
-        </tr>
-        <tr *ngIf="formData.overigeLening">
-          <td>Overige leningen</td>
-          <td>&euro; {{ formData.overigeLeningKosten }},-</td>
-        </tr>
-      </tbody>
-    </table>
+      <ng-container *ngIf="data.formData.leeftijd">
+        <p class="h5">Overige inbreng</p>
+      
+        <table class="table table-borderless table-transparent">
+          <tbody>
+            <tr *ngIf="data.formData.previousHouse || data.formData.leeftijd >= 35">
+              <td>Overdrachtsbelasting (2%)</td>
+              <td>&euro; {{ _roundByThirdNumber(data.calculation.transferTax) }}</td>
+            </tr>
+            <tr *ngIf="!data.formData.previousHouse && data.formData.leeftijd < 35">
+              <td>U betaald geen overdrachtsbelasting</td>
+              <td>&euro; 0,-</td>
+            </tr>
+          </tbody>
+        </table>  
+      </ng-container>
+    </div>
   </div>
 </div>

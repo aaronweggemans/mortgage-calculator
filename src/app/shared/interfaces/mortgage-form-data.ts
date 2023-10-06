@@ -4,10 +4,7 @@ export interface MortgageFormData {
   partner: boolean | null;
   brutoInkomenPartner: number | null;
   leeftijdPartner: number | null;
+  previousHouse: boolean | null;
   spaargeld: boolean | null;
   totaalGespaard: number | null;
-  studieSchuld: boolean | null;
-  studieSchuldKosten: number | null;
-  overigeLening: boolean | null;
-  overigeLeningKosten: number | null;
 }

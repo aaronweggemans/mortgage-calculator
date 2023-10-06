@@ -24,17 +24,13 @@ export class FormComponent {
     ]),
 
     partner: new FormControl(false),
-    brutoInkomenPartner: new FormControl(30000),
+    brutoInkomenPartner: new FormControl(0),
     leeftijdPartner: new FormControl(20),
+
+    previousHouse: new FormControl(false),
 
     spaargeld: new FormControl(false),
     totaalGespaard: new FormControl(0),
-
-    studieSchuld: new FormControl(false),
-    studieSchuldKosten: new FormControl(0),
-
-    overigeLening: new FormControl(false),
-    overigeLeningKosten: new FormControl(0),
   });
 
   get brutoInkomen() {
@@ -58,17 +54,8 @@ export class FormComponent {
   get totaalGespaard() {
     return this.hypotheek.get('totaalGespaard');
   }
-  get studieSchuld() {
-    return this.hypotheek.get('studieSchuld');
-  }
-  get studieSchuldKosten() {
-    return this.hypotheek.get('studieSchuldKosten');
-  }
-  get overigeLening() {
-    return this.hypotheek.get('overigeLening');
-  }
-  get overigeLeningKosten() {
-    return this.hypotheek.get('overigeLeningKosten');
+  get previousHouse() {
+    return this.hypotheek.get('previousHouse');
   }
 
   togglePartner(event: MatSlideToggleChange) {
@@ -87,24 +74,6 @@ export class FormComponent {
     this.leeftijdPartner?.updateValueAndValidity();
   }
 
-  toggleStudieSchuld(event: MatSlideToggleChange) {
-    this.studieSchuldKosten?.setValidators(
-      event.checked
-        ? [Validators.required, Validators.min(0), Validators.max(100000000)]
-        : null
-    );
-    this.studieSchuldKosten?.updateValueAndValidity();
-  }
-
-  toggleOverigeLeningen(event: MatSlideToggleChange) {
-    this.overigeLeningKosten?.setValidators(
-      event.checked
-        ? [Validators.required, Validators.min(0), Validators.max(100000000)]
-        : null
-    );
-    this.overigeLeningKosten?.updateValueAndValidity();
-  }
-
   toggleSpaargeld(event: MatSlideToggleChange) {
     this.totaalGespaard?.setValidators(
       event.checked
@@ -116,24 +85,11 @@ export class FormComponent {
 
   submitForm(): void {
     if (this.hypotheek.invalid) {
-      // error message;
+      this.calculations.setError(true);
       return;
     }
 
+    this.calculations.setError(false);
     this.calculations.setFormData(this.hypotheek.value);
-    this.calculations.setTotaleBrutoIncome(this._calculateFullBrutoIncomes());
-  }
-
-  private _calculateFullBrutoIncomes(): number {
-    const brutoInkomen: number = this.brutoInkomen?.value
-      ? this.brutoInkomen?.value
-      : 30000;
-
-    const brutoInkomenPartner: number =
-      this.brutoInkomenPartner?.value && this.partner?.value
-        ? this.brutoInkomenPartner?.value
-        : 0;
-
-    return brutoInkomen + brutoInkomenPartner;
   }
 }

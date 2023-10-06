@@ -1,5 +1,8 @@
 export interface Calculation {
-  totalBrutoIncome: string;
-  maxMortgage: string;
-  ownContribution: string;
+  totalBrutoIncome: number;
+  maxMortgage: number;
+  mortgageCalculation: number;
+  monthlyCosts: number;
+  ownContribution: number;
+  transferTax: number;
 }

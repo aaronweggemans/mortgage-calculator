@@ -1,10 +1,10 @@
 # MortgageCalculator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
+This project is created to implement on the website of https://www.jwz-fd.nl/. It is meant to calculate the mortgage in the netherlands.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+First run `npm install` to install all packages for this Angular project. Only the default material design package and the angular package will be installed. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
