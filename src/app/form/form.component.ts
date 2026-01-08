@@ -4,9 +4,10 @@ import { CalculateMortgageService } from '../shared/services/calculate-mortgage.
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+    selector: 'app-form',
+    templateUrl: './form.component.html',
+    styleUrls: ['./form.component.scss'],
+    standalone: false
 })
 export class FormComponent {
   constructor(private calculations: CalculateMortgageService) {}

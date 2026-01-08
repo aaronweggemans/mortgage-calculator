@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { FullCalculation } from '../shared/interfaces/full-calculation';
 
 @Component({
-  selector: 'app-calculation',
-  templateUrl: './calculation.component.html',
-  styleUrls: ['./calculation.component.scss'],
+    selector: 'app-calculation',
+    templateUrl: './calculation.component.html',
+    styleUrls: ['./calculation.component.scss'],
+    standalone: false
 })
 export class CalculationComponent {
   data$: Observable<FullCalculation> = this.calculateMortgageService.data$;
