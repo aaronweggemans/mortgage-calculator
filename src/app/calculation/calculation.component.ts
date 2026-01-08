@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CalculateMortgageService } from '../shared/services/calculate-mortgage.service';
 import { Observable } from 'rxjs';
 import { FullCalculation } from '../shared/interfaces/full-calculation';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-calculation',
     templateUrl: './calculation.component.html',
     styleUrls: ['./calculation.component.scss'],
-    standalone: false
+    imports: [AsyncPipe]
 })
 export class CalculationComponent {
   data$: Observable<FullCalculation> = this.calculateMortgageService.data$;

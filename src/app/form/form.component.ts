@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CalculateMortgageService } from '../shared/services/calculate-mortgage.service';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatStepper, MatStep, MatStepLabel, MatStepperNext } from '@angular/material/stepper';
+import { NgTemplateOutlet } from '@angular/common';
+import { MatMiniFabButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'app-form',
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.scss'],
-    standalone: false
+    imports: [MatStepper, ReactiveFormsModule, MatStep, MatStepLabel, NgTemplateOutlet, MatSlideToggle, MatStepperNext, MatMiniFabButton, MatIcon, MatButton]
 })
 export class FormComponent {
   constructor(private calculations: CalculateMortgageService) {}
