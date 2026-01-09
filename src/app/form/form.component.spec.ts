@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormComponent } from './form.component';
-import {beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -9,7 +9,7 @@ describe('FormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormComponent]
+      imports: [FormComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FormComponent);

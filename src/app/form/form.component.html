@@ -9,28 +9,70 @@
           <ng-template matStepLabel>Wat is uw bruto jaarinkomen?</ng-template>
           <div class="form-group">
             <p class="h6 text-jwz-primary">Wat is uw bruto jaar inkomen.</p>
-            <p class="text-jwz-primary">Uw bruto jaar inkomen is het inkomen dat u geniet elke kaar.</p>
-            <input class="form-control mb-3" id="bruto-jaarinkomen" type="number" formControlName="brutoInkomen">
-            <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomen }"></ng-container>
+            <p class="text-jwz-primary">
+              Uw bruto jaar inkomen is het inkomen dat u geniet elke kaar.
+            </p>
+            <input
+              class="form-control mb-3"
+              id="bruto-jaarinkomen"
+              type="number"
+              formControlName="brutoInkomen"
+            />
+            <ng-container
+              *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomen }"
+            ></ng-container>
 
             <p class="text-jwz-primary">Wat is uw leeftijd</p>
-            <input class="form-control mb-3" id="leeftijd" type="number" formControlName="leeftijd">
-            <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijd }"></ng-container>
+            <input
+              class="form-control mb-3"
+              id="leeftijd"
+              type="number"
+              formControlName="leeftijd"
+            />
+            <ng-container
+              *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijd }"
+            ></ng-container>
 
-            <mat-slide-toggle color="primary" class="mb-3" formControlName="partner" (change)="togglePartner($event)">Partner</mat-slide-toggle>
+            <mat-slide-toggle
+              color="primary"
+              class="mb-3"
+              formControlName="partner"
+              (change)="togglePartner($event)"
+              >Partner</mat-slide-toggle
+            >
 
             @if (partner?.value) {
               <div id="partner-form-group">
                 <p class="text-jwz-primary">Bruto jaarinkomen van uw partner</p>
-                <input class="form-control mb-3" id="bruto-jaarinkomen-partner" type="number" formControlName="brutoInkomenPartner">
-                <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomenPartner }"></ng-container>
+                <input
+                  class="form-control mb-3"
+                  id="bruto-jaarinkomen-partner"
+                  type="number"
+                  formControlName="brutoInkomenPartner"
+                />
+                <ng-container
+                  *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomenPartner }"
+                ></ng-container>
                 <p class="text-jwz-primary">Leeftijd van uw partner</p>
-                <input class="form-control" id="leeftijd" type="number" formControlName="leeftijdPartner">
-                <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijdPartner }"></ng-container>
+                <input
+                  class="form-control"
+                  id="leeftijd"
+                  type="number"
+                  formControlName="leeftijdPartner"
+                />
+                <ng-container
+                  *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijdPartner }"
+                ></ng-container>
               </div>
             }
 
-            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+            <button
+              matStepperNext
+              color="primary"
+              class="next-button"
+              mat-mini-fab
+              aria-label="Next question"
+            >
               <mat-icon>arrow_downward</mat-icon>
             </button>
           </div>
@@ -44,16 +86,23 @@
           <div class="form-group">
             <p class="h6 text-jwz-primary">Heeft u al eerder een keer een huis gekocht?</p>
             <p class="text-jwz-primary">
-              In het geval dat u eerder al een keer een huis heeft gekocht, moet u overdrachtsbelasting betalen. Dit is niet
-              het geval bij mensen die voor de eerste keer een woning kopen. Vink a.u.b. hieronder aan of u al eerder een keer
-              een huis heeft gekocht.
+              In het geval dat u eerder al een keer een huis heeft gekocht, moet u
+              overdrachtsbelasting betalen. Dit is niet het geval bij mensen die voor de eerste keer
+              een woning kopen. Vink a.u.b. hieronder aan of u al eerder een keer een huis heeft
+              gekocht.
             </p>
 
             <mat-slide-toggle class="mb-3" color="primary" formControlName="previousHouse">
               Ik heb eerder een keer een huis gekocht.
             </mat-slide-toggle>
 
-            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+            <button
+              matStepperNext
+              color="primary"
+              class="next-button"
+              mat-mini-fab
+              aria-label="Next question"
+            >
               <mat-icon>arrow_downward</mat-icon>
             </button>
           </div>
@@ -67,20 +116,39 @@
           <div class="form-group">
             <p class="h6 text-jwz-primary">U spaargeld.</p>
             <p class="text-jwz-primary">
-              Heeft u spaargeld? Zo ja, dit kan namelijk invloed hebben het hypotheek dat u kunt krijgen.
-              Tel eventueel ook uw partner's spaargeld hierbij op.
+              Heeft u spaargeld? Zo ja, dit kan namelijk invloed hebben het hypotheek dat u kunt
+              krijgen. Tel eventueel ook uw partner's spaargeld hierbij op.
             </p>
 
-            <mat-slide-toggle class="mb-3" color="primary" formControlName="spaargeld" (change)="toggleSpaargeld($event)">Spaargeld</mat-slide-toggle>
+            <mat-slide-toggle
+              class="mb-3"
+              color="primary"
+              formControlName="spaargeld"
+              (change)="toggleSpaargeld($event)"
+              >Spaargeld</mat-slide-toggle
+            >
 
             @if (spaargeld?.value) {
               <div class="form-group">
-                <input class="form-control" id="totaalGespaard" type="number" formControlName="totaalGespaard">
-                <ng-container *ngTemplateOutlet="errorHandler; context: { $implicit: totaalGespaard }"></ng-container>
+                <input
+                  class="form-control"
+                  id="totaalGespaard"
+                  type="number"
+                  formControlName="totaalGespaard"
+                />
+                <ng-container
+                  *ngTemplateOutlet="errorHandler; context: { $implicit: totaalGespaard }"
+                ></ng-container>
               </div>
             }
 
-            <button matStepperNext color="primary" class="next-button" mat-mini-fab aria-label="Next question">
+            <button
+              matStepperNext
+              color="primary"
+              class="next-button"
+              mat-mini-fab
+              aria-label="Next question"
+            >
               <mat-icon>arrow_downward</mat-icon>
             </button>
           </div>
@@ -113,19 +181,13 @@
   @if (errorRow?.invalid && (errorRow?.dirty || errorRow?.touched)) {
     <div class="alert alert-danger" role="alert">
       @if (errorRow.hasError('required')) {
-        <div>
-          U moet hier een valide waarde invullen.
-        </div>
+        <div>U moet hier een valide waarde invullen.</div>
       }
       @if (errorRow.hasError('min')) {
-        <div>
-          Negatieve getallen zijn niet toegestaan.
-        </div>
+        <div>Negatieve getallen zijn niet toegestaan.</div>
       }
       @if (errorRow.hasError('max')) {
-        <div>
-          U heeft hier een te hoog getal!
-        </div>
+        <div>U heeft hier een te hoog getal!</div>
       }
     </div>
   }
