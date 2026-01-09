@@ -9,8 +9,16 @@ import { AppComponent } from './app/app.component';
 import { importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        provideZoneChangeDetection(),importProvidersFrom(BrowserModule, ReactiveFormsModule, MatStepperModule, MatSlideToggleModule, MatButtonModule, MatIconModule, MatButtonToggleModule),
-    ]
-})
-  .catch(err => console.error(err));
+  providers: [
+    provideZoneChangeDetection(),
+    importProvidersFrom(
+      BrowserModule,
+      ReactiveFormsModule,
+      MatStepperModule,
+      MatSlideToggleModule,
+      MatButtonModule,
+      MatIconModule,
+      MatButtonToggleModule,
+    ),
+  ],
+}).catch((err) => console.error(err));

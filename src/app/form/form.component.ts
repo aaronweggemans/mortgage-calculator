@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CalculateMortgageService } from '../shared/services/calculate-mortgage.service';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
@@ -8,13 +8,24 @@ import { MatMiniFabButton, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-form',
-    templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss'],
-    imports: [MatStepper, ReactiveFormsModule, MatStep, MatStepLabel, NgTemplateOutlet, MatSlideToggle, MatStepperNext, MatMiniFabButton, MatIcon, MatButton]
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss'],
+  imports: [
+    MatStepper,
+    ReactiveFormsModule,
+    MatStep,
+    MatStepLabel,
+    NgTemplateOutlet,
+    MatSlideToggle,
+    MatStepperNext,
+    MatMiniFabButton,
+    MatIcon,
+    MatButton,
+  ],
 })
 export class FormComponent {
-  constructor(private calculations: CalculateMortgageService) {}
+  private calculations = inject(CalculateMortgageService);
 
   hypotheek = new FormGroup({
     brutoInkomen: new FormControl(30000, [
@@ -22,11 +33,7 @@ export class FormComponent {
       Validators.min(0),
       Validators.max(100000000),
     ]),
-    leeftijd: new FormControl(20, [
-      Validators.required,
-      Validators.min(0),
-      Validators.max(150),
-    ]),
+    leeftijd: new FormControl(20, [Validators.required, Validators.min(0), Validators.max(150)]),
 
     partner: new FormControl(false),
     brutoInkomenPartner: new FormControl(0),
@@ -65,14 +72,10 @@ export class FormComponent {
 
   togglePartner(event: MatSlideToggleChange) {
     this.brutoInkomenPartner?.setValidators(
-      event.checked
-        ? [Validators.required, Validators.min(0), Validators.max(100000000)]
-        : null
+      event.checked ? [Validators.required, Validators.min(0), Validators.max(100000000)] : null,
     );
     this.leeftijdPartner?.setValidators(
-      event.checked
-        ? [Validators.required, Validators.min(0), Validators.max(150)]
-        : null
+      event.checked ? [Validators.required, Validators.min(0), Validators.max(150)] : null,
     );
 
     this.brutoInkomenPartner?.updateValueAndValidity();
@@ -81,9 +84,7 @@ export class FormComponent {
 
   toggleSpaargeld(event: MatSlideToggleChange) {
     this.totaalGespaard?.setValidators(
-      event.checked
-        ? [Validators.required, Validators.min(0), Validators.max(100000000)]
-        : null
+      event.checked ? [Validators.required, Validators.min(0), Validators.max(100000000)] : null,
     );
     this.totaalGespaard?.updateValueAndValidity();
   }

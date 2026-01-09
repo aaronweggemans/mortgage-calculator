@@ -18,7 +18,7 @@
               @if (data.formData.partner) {
                 <tr>
                   <td>Bruto jaarinkomen partner</td>
-                  <td>&euro;  {{ _roundByThirdNumber(data.formData.brutoInkomenPartner) }},-</td>
+                  <td>&euro; {{ _roundByThirdNumber(data.formData.brutoInkomenPartner) }},-</td>
                 </tr>
               }
               <tr class="border-top">
@@ -47,7 +47,7 @@
               </tr>
               <tr class="border-top">
                 <td>Berekende maandlast</td>
-                <td>&euro; {{ _roundByThirdNumber(data.calculation.monthlyCosts)}},-</td>
+                <td>&euro; {{ _roundByThirdNumber(data.calculation.monthlyCosts) }},-</td>
               </tr>
             </tbody>
           </table>

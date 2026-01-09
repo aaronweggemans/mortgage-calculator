@@ -9,11 +9,11 @@ import { Calculation } from '../interfaces/calculation';
 })
 export class CalculateMortgageService {
   private _showError$ = new BehaviorSubject(false);
-  private _formData$: Subject<Partial<MortgageFormData>> = new Subject();
+  private _formData$ = new Subject<Partial<MortgageFormData>>();
 
   private _toFullCalculation = ([showError, formData]: [
     boolean,
-    Partial<MortgageFormData>
+    Partial<MortgageFormData>,
   ]): FullCalculation => ({
     showError,
     formData,
@@ -55,12 +55,10 @@ export class CalculateMortgageService {
     return Math.round(uitvoerwaarde);
   }
 
-  private _toCalculation = (
-    formData: Partial<MortgageFormData>
-  ): Calculation => {
+  private _toCalculation = (formData: Partial<MortgageFormData>): Calculation => {
     const totalBrutoIncome = this._calculateFullBrutoIncomes(
       formData.brutoInkomen,
-      formData.brutoInkomenPartner
+      formData.brutoInkomenPartner,
     )!;
 
     const mortgageCalculation = this._calculateMaxMortgage(totalBrutoIncome)!;
@@ -69,9 +67,7 @@ export class CalculateMortgageService {
       totalBrutoIncome,
       mortgageCalculation,
       monthlyCosts: this._monthlyCosts(mortgageCalculation),
-      maxMortgage:
-        mortgageCalculation +
-        (formData.totaalGespaard ? formData.totaalGespaard : 0),
+      maxMortgage: mortgageCalculation + (formData.totaalGespaard ? formData.totaalGespaard : 0),
       ownContribution: Math.floor(mortgageCalculation * 0.1),
       transferTax: Math.floor(mortgageCalculation * 0.02),
     };
@@ -90,11 +86,10 @@ export class CalculateMortgageService {
 
   private _calculateFullBrutoIncomes(
     brutoIncome: number | null | undefined,
-    partnerBrutoIncome: number | null | undefined
+    partnerBrutoIncome: number | null | undefined,
   ): number {
     const brutoInkomen: number = brutoIncome ? brutoIncome : 0;
-    const brutoInkomenPartner: number =
-      partnerBrutoIncome && brutoIncome ? partnerBrutoIncome : 0;
+    const brutoInkomenPartner: number = partnerBrutoIncome && brutoIncome ? partnerBrutoIncome : 0;
 
     return brutoInkomen + brutoInkomenPartner;
   }
