@@ -1,77 +1,68 @@
-@if (data$ | async; as data) {
-  <div>
-    @if (data.showError) {
-      <div class="alert alert-danger">
-        Er is iets mis gegaan. Wellicht heeft u niet alle waardes in de berekening goed gezet.
-      </div>
-    }
-    @if (!data.showError) {
-      <div class="card bg-light p-5">
-        <div class="text-jwz-primary">
-          <p class="h5">Berekening gebaseerd op</p>
-          <table class="table table-borderless table-transparent mb-4">
-            <tbody>
-              <tr>
-                <td>Uw bruto jaarinkomen</td>
-                <td>&euro; {{ _roundByThirdNumber(data.formData.brutoInkomen) }},-</td>
-              </tr>
-              @if (data.formData.partner) {
-                <tr>
-                  <td>Bruto jaarinkomen partner</td>
-                  <td>&euro; {{ _roundByThirdNumber(data.formData.brutoInkomenPartner) }},-</td>
-                </tr>
-              }
-              <tr class="border-top">
-                <td>Totaal bruto jaarinkomen</td>
-                <td>&euro; {{ _roundByThirdNumber(data.calculation.totalBrutoIncome) }},-</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="h5">Te realiseren hypotheek</p>
-          <table class="table table-borderless table-transparent mb-4">
-            <tbody>
-              <tr>
-                <td>Maximale hypotheek</td>
-                <td>&euro; {{ _roundByThirdNumber(data.calculation.mortgageCalculation) }},-</td>
-              </tr>
-              @if (data.formData.spaargeld) {
-                <tr>
-                  <td>Totaal spaargeld</td>
-                  <td>&euro; {{ _roundByThirdNumber(data.formData.totaalGespaard) }},-</td>
-                </tr>
-              }
-              <tr>
-                <!-- Totaal neer te leggen bedrag -->
-                <td>Totaal te realiseren hypotheek</td>
-                <td>&euro; {{ _roundByThirdNumber(data.calculation.maxMortgage) }},-</td>
-              </tr>
-              <tr class="border-top">
-                <td>Berekende maandlast</td>
-                <td>&euro; {{ _roundByThirdNumber(data.calculation.monthlyCosts) }},-</td>
-              </tr>
-            </tbody>
-          </table>
-          @if (data.formData.leeftijd) {
-            <p class="h5">Overige inbreng</p>
-            <table class="table table-borderless table-transparent">
-              <tbody>
-                @if (data.formData.previousHouse || data.formData.leeftijd >= 35) {
-                  <tr>
-                    <td>Overdrachtsbelasting (2%)</td>
-                    <td>&euro; {{ _roundByThirdNumber(data.calculation.transferTax) }}</td>
-                  </tr>
-                }
-                @if (!data.formData.previousHouse && data.formData.leeftijd < 35) {
-                  <tr>
-                    <td>U betaald geen overdrachtsbelasting</td>
-                    <td>&euro; 0,-</td>
-                  </tr>
-                }
-              </tbody>
-            </table>
-          }
-        </div>
-      </div>
-    }
+<div class="card bg-light p-5">
+  <div class="text-jwz-primary">
+    <table class="table table-borderless table-transparent mb-4">
+      <tbody>
+        <p class="h5 border-bottom">Berekening gebaseerd op</p>
+        <tr>
+          <td>Uw bruto jaarinkomen</td>
+          <td>{{ formData().brutoInkomen | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
+        </tr>
+        @if (formData().partner) {
+          <tr>
+            <td>Bruto jaarinkomen partner</td>
+            <td>{{ formData().brutoInkomenPartner | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
+          </tr>
+        }
+        <tr>
+          <td>Totaal bruto jaarinkomen</td>
+          <td>
+            {{
+              formData().brutoInkomen + (formData().brutoInkomenPartner ?? 0)
+                | currency: 'EUR' : 'symbol' : '1.0-0'
+            }},-
+          </td>
+        </tr>
+
+        <p class="h5 border-bottom">Te realiseren hypotheek</p>
+        <tr>
+          <td>Maximale hypotheek</td>
+          <td>{{ maxMortgage | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
+        </tr>
+        @if (formData().spaargeld) {
+          <tr>
+            <td>Totaal spaargeld</td>
+            <td>{{ formData().totaalGespaard | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
+          </tr>
+          <tr>
+            <!-- Totaal neer te leggen bedrag -->
+            <td>Totaal te realiseren hypotheek</td>
+            <td>
+              {{
+                maxMortgage + (formData().totaalGespaard ?? 0)
+                  | currency: 'EUR' : 'symbol' : '1.0-0'
+              }},-
+            </td>
+          </tr>
+        }
+
+        <p class="h5 border-bottom">Overige inbreng</p>
+        <tr>
+          <td>Berekende maandlast</td>
+          <td>{{ monthlyCosts | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
+        </tr>
+        @if (formData().previousHouse || formData().leeftijd >= 35) {
+          <tr>
+            <td>Overdrachtsbelasting (2%)</td>
+            <td>{{ transferTax | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
+          </tr>
+        }
+        @if (!formData().previousHouse && formData().leeftijd < 35) {
+          <tr>
+            <td>U betaald geen overdrachtsbelasting</td>
+            <td>&euro; 0,-</td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
-}
+</div>
