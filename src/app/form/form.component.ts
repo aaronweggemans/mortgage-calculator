@@ -1,11 +1,21 @@
-import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CalculateMortgageService } from '../shared/services/calculate-mortgage.service';
+import { Component, output, OutputEmitterRef } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatStepper, MatStep, MatStepLabel, MatStepperNext } from '@angular/material/stepper';
 import { NgTemplateOutlet } from '@angular/common';
 import { MatMiniFabButton, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MortgageCalculation } from '../mortgage-calculation';
+
+type MortageCalculationForm = {
+  [K in keyof MortgageCalculation]: AbstractControl<MortgageCalculation[K]>;
+};
 
 @Component({
   selector: 'app-form',
@@ -25,77 +35,75 @@ import { MatIcon } from '@angular/material/icon';
   ],
 })
 export class FormComponent {
-  private calculations = inject(CalculateMortgageService);
+  public readonly formError: OutputEmitterRef<boolean> = output<boolean>();
+  public readonly formData: OutputEmitterRef<MortgageCalculation> = output<MortgageCalculation>();
 
-  hypotheek = new FormGroup({
-    brutoInkomen: new FormControl(30000, [
-      Validators.required,
-      Validators.min(0),
-      Validators.max(100000000),
-    ]),
-    leeftijd: new FormControl(20, [Validators.required, Validators.min(0), Validators.max(150)]),
-
-    partner: new FormControl(false),
+  protected readonly form = new FormGroup<MortageCalculationForm>({
+    brutoInkomen: new FormControl(30000, {
+      validators: [Validators.required, Validators.min(0), Validators.max(100000000)],
+      nonNullable: true,
+    }),
+    leeftijd: new FormControl(20, {
+      validators: [Validators.required, Validators.min(0), Validators.max(150)],
+      nonNullable: true,
+    }),
+    partner: new FormControl(false, { validators: [Validators.required], nonNullable: true }),
     brutoInkomenPartner: new FormControl(0),
     leeftijdPartner: new FormControl(20),
-
-    previousHouse: new FormControl(false),
-
-    spaargeld: new FormControl(false),
+    previousHouse: new FormControl(false, { validators: [Validators.required], nonNullable: true }),
+    spaargeld: new FormControl(false, { validators: [Validators.required], nonNullable: true }),
     totaalGespaard: new FormControl(0),
   });
 
-  get brutoInkomen() {
-    return this.hypotheek.get('brutoInkomen');
+  get brutoInkomen(): AbstractControl {
+    return this.form.get('brutoInkomen')!;
   }
-  get leeftijd() {
-    return this.hypotheek.get('leeftijd');
+  get leeftijd(): AbstractControl {
+    return this.form.get('leeftijd')!;
   }
-  get partner() {
-    return this.hypotheek.get('partner');
+  get partner(): AbstractControl {
+    return this.form.get('partner')!;
   }
-  get brutoInkomenPartner() {
-    return this.hypotheek.get('brutoInkomenPartner');
+  get brutoInkomenPartner(): AbstractControl {
+    return this.form.get('brutoInkomenPartner')!;
   }
-  get leeftijdPartner() {
-    return this.hypotheek.get('leeftijdPartner');
+  get leeftijdPartner(): AbstractControl {
+    return this.form.get('leeftijdPartner')!;
   }
-  get spaargeld() {
-    return this.hypotheek.get('spaargeld');
+  get spaargeld(): AbstractControl {
+    return this.form.get('spaargeld')!;
   }
-  get totaalGespaard() {
-    return this.hypotheek.get('totaalGespaard');
-  }
-  get previousHouse() {
-    return this.hypotheek.get('previousHouse');
+  get totaalGespaard(): AbstractControl {
+    return this.form.get('totaalGespaard')!;
   }
 
-  togglePartner(event: MatSlideToggleChange) {
-    this.brutoInkomenPartner?.setValidators(
-      event.checked ? [Validators.required, Validators.min(0), Validators.max(100000000)] : null,
-    );
-    this.leeftijdPartner?.setValidators(
-      event.checked ? [Validators.required, Validators.min(0), Validators.max(150)] : null,
-    );
+  protected togglePartner(event: MatSlideToggleChange) {
+    const brutoInkomenPartnerRules = event.checked
+      ? [Validators.required, Validators.min(0), Validators.max(100000000)]
+      : null;
 
-    this.brutoInkomenPartner?.updateValueAndValidity();
-    this.leeftijdPartner?.updateValueAndValidity();
+    const leeftijdPartnerRules = event.checked
+      ? [Validators.required, Validators.min(0), Validators.max(150)]
+      : null;
+
+    this.brutoInkomenPartner.setValidators(brutoInkomenPartnerRules);
+    this.brutoInkomenPartner.updateValueAndValidity();
+
+    this.leeftijdPartner.setValidators(leeftijdPartnerRules);
+    this.leeftijdPartner.updateValueAndValidity();
   }
 
-  toggleSpaargeld(event: MatSlideToggleChange) {
-    this.totaalGespaard?.setValidators(
-      event.checked ? [Validators.required, Validators.min(0), Validators.max(100000000)] : null,
-    );
-    this.totaalGespaard?.updateValueAndValidity();
+  protected toggleSpaargeld(event: MatSlideToggleChange) {
+    const rules = event.checked
+      ? [Validators.required, Validators.min(0), Validators.max(100000000)]
+      : null;
+
+    this.totaalGespaard.setValidators(rules);
+    this.totaalGespaard.updateValueAndValidity();
   }
 
-  submitForm(): void {
-    if (this.hypotheek.invalid) {
-      this.calculations.setError(true);
-      return;
-    }
-
-    this.calculations.setError(false);
-    this.calculations.setFormData(this.hypotheek.value);
+  protected submitForm(): void {
+    this.formError.emit(this.form.invalid);
+    this.formData.emit(this.form.getRawValue());
   }
 }

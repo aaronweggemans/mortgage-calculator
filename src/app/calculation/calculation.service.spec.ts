@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { describe, beforeEach, it, expect } from 'vitest';
-import { CalculateMortgageService } from './calculate-mortgage.service';
+import { CalculationService } from './calculation.service';
 
 describe('CalculateMortgageService', () => {
-  let service: CalculateMortgageService;
+  let service: CalculationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CalculateMortgageService);
+    service = TestBed.inject(CalculationService);
   });
 
   it('should be created', () => {
