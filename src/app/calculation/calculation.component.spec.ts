@@ -4,20 +4,14 @@ import { CalculationComponent } from './calculation.component';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('CalculationComponent', () => {
-  let component: CalculationComponent;
   let fixture: ComponentFixture<CalculationComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CalculationComponent],
-    }).compileComponents();
-
+    await TestBed.configureTestingModule({ imports: [CalculationComponent] }).compileComponents();
     fixture = TestBed.createComponent(CalculationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });
