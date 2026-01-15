@@ -77,7 +77,7 @@ export class FormComponent {
     return this.form.get('totaalGespaard')!;
   }
 
-  protected togglePartner(event: MatSlideToggleChange) {
+  protected togglePartner(event: MatSlideToggleChange): void {
     const brutoInkomenPartnerRules = event.checked
       ? [Validators.required, Validators.min(0), Validators.max(100000000)]
       : null;
@@ -93,7 +93,7 @@ export class FormComponent {
     this.leeftijdPartner.updateValueAndValidity();
   }
 
-  protected toggleSpaargeld(event: MatSlideToggleChange) {
+  protected toggleSpaargeld(event: MatSlideToggleChange): void {
     const rules = event.checked
       ? [Validators.required, Validators.min(0), Validators.max(100000000)]
       : null;

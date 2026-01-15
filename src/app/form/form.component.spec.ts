@@ -1,5 +1,5 @@
 import { FormComponent } from './form.component';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { createComponentFactory, Spectator } from '@ngneat/spectator/vitest';
@@ -41,6 +41,42 @@ describe('FormComponent', () => {
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
+  });
+
+  it('should emit valid values', () => {
+    const spyOnFormError = vi.spyOn(spectator.component.formError, 'emit');
+    const spyOnFormData = vi.spyOn(spectator.component.formData, 'emit');
+
+    spectator.query(MatStepper)!.next();
+    spectator.query(MatStepper)!.next();
+    spectator.query(MatStepper)!.next();
+    spectator.detectChanges();
+
+    spectator.click(screen.getByRole('button', { name: 'Bereken uw hypotheek' }));
+    expect(spyOnFormError).toHaveBeenCalledWith(false);
+    expect(spyOnFormData).toHaveBeenCalledWith({
+      brutoInkomen: 30000,
+      brutoInkomenPartner: 0,
+      leeftijd: 20,
+      leeftijdPartner: 20,
+      partner: false,
+      previousHouse: false,
+      spaargeld: false,
+      totaalGespaard: 0,
+    });
+  });
+
+  it('should call the form error when there is a error in the form', () => {
+    const spyOnFormError = vi.spyOn(spectator.component.formError, 'emit');
+
+    spectator.typeInElement('e', screen.getByLabelText('Wat is uw bruto jaar inkomen'));
+    spectator.query(MatStepper)!.next();
+    spectator.query(MatStepper)!.next();
+    spectator.query(MatStepper)!.next();
+    spectator.detectChanges();
+
+    spectator.click(screen.getByRole('button', { name: 'Bereken uw hypotheek' }));
+    expect(spyOnFormError).toHaveBeenCalledWith(true);
   });
 
   describe('Step 1', () => {

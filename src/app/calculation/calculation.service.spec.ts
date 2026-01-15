@@ -1,16 +1,19 @@
-import { TestBed } from '@angular/core/testing';
 import { describe, beforeEach, it, expect } from 'vitest';
 import { CalculationService } from './calculation.service';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator/vitest';
 
 describe('CalculateMortgageService', () => {
-  let service: CalculationService;
+  let service: SpectatorService<CalculationService>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CalculationService);
+  const createService = createServiceFactory({
+    service: CalculationService,
   });
 
-  it('should be created', () => {
+  beforeEach(() => {
+    service = createService();
+  });
+
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 });
