@@ -13,7 +13,7 @@ import { MatMiniFabButton, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MortgageCalculation } from '../mortgage-calculation';
 
-type MortageCalculationForm = {
+type MortgageCalculationForm = {
   [K in keyof MortgageCalculation]: AbstractControl<MortgageCalculation[K]>;
 };
 
@@ -38,7 +38,7 @@ export class FormComponent {
   public readonly formError: OutputEmitterRef<boolean> = output<boolean>();
   public readonly formData: OutputEmitterRef<MortgageCalculation> = output<MortgageCalculation>();
 
-  protected readonly form = new FormGroup<MortageCalculationForm>({
+  protected readonly form = new FormGroup<MortgageCalculationForm>({
     brutoInkomen: new FormControl(30000, {
       validators: [Validators.required, Validators.min(0), Validators.max(100000000)],
       nonNullable: true,
