@@ -1,0 +1,22 @@
+name: Test - Build and Publish to Docker Hub
+
+on: [workflow_dispatch]
+
+# on:
+#  push:
+#    branches: [ "master" ]
+#  pull_request:
+#    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Running tests
+        run: npm run test
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag aaronweggemans/${file(./package.json):name}:latest
+      - name: push image to docker hub
+        run: docker push aaronweggemans/${file(./package.json):name}:latest
