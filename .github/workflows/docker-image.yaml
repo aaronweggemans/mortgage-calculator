@@ -16,5 +16,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag aaronweggemans/mortgage-calculator:latest
-      - name: push image to docker hub
-        run: docker push aaronweggemans/mortgage-calculator:latest
+      - name: Push image to docker hub
+        run: |
+          docker login -u aaronweggemans -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push aaronweggemans/mortgage-calculator:latest
