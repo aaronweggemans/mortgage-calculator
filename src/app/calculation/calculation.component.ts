@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
-import { Component, inject, input, LOCALE_ID, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, computed, inject, input, InputSignal, LOCALE_ID, Signal } from '@angular/core';
 import { MortgageCalculation } from '../mortgage-calculation';
 import { CalculationService } from './calculation.service';
 
@@ -10,33 +10,32 @@ registerLocaleData(localeNl);
 @Component({
   selector: 'app-calculation',
   templateUrl: './calculation.component.html',
-  styleUrls: ['./calculation.component.scss'],
   imports: [CurrencyPipe],
   providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }],
 })
-export class CalculationComponent implements OnChanges {
+export class CalculationComponent {
   private readonly calculationService: CalculationService = inject(CalculationService);
 
-  public readonly formData = input.required<MortgageCalculation>();
+  public readonly formData: InputSignal<MortgageCalculation> =
+    input.required<MortgageCalculation>();
 
-  protected maxMortgage = 0;
-  protected monthlyCosts = 0;
-  protected ownContribution = 0;
-  protected transferTax = 0;
+  protected readonly totalIncome: Signal<number> = computed(() => {
+    return this.formData().brutoInkomen + (this.formData().brutoInkomenPartner ?? 0);
+  });
 
-  ngOnChanges(changes: SimpleChanges<CalculationComponent>) {
-    const formDataChanges = changes.formData?.currentValue !== changes.formData?.previousValue;
-    if (formDataChanges) {
-      this.setMortgageProperties();
-    }
-  }
+  protected readonly maxMortgage: Signal<number> = computed(() => {
+    return this.calculationService.calculateMaxMortgage(this.totalIncome());
+  });
 
-  private setMortgageProperties(): void {
-    const totalIncome = this.formData().brutoInkomen + (this.formData().brutoInkomenPartner ?? 0);
-    const maxMortgage = this.calculationService.calculateMaxMortgage(totalIncome);
-    this.maxMortgage = maxMortgage;
-    this.monthlyCosts = this.calculationService.monthlyCosts(maxMortgage);
-    this.ownContribution = this.calculationService.ownContribution(maxMortgage);
-    this.transferTax = this.calculationService.transferTax(maxMortgage);
-  }
+  protected readonly monthlyCosts: Signal<number> = computed(() => {
+    return this.calculationService.monthlyCosts(this.maxMortgage());
+  });
+
+  protected readonly ownContribution: Signal<number> = computed(() => {
+    return this.calculationService.ownContribution(this.maxMortgage());
+  });
+
+  protected readonly transferTax: Signal<number> = computed(() => {
+    return this.calculationService.transferTax(this.maxMortgage());
+  });
 }
