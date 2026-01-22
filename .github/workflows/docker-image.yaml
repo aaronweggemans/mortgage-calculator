@@ -17,6 +17,6 @@ jobs:
       - name: Running tests
         run: npm run test
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag aaronweggemans/${file(./package.json):name}:latest
+        run: docker build . --file Dockerfile --tag aaronweggemans/${file(../../package.json):name}:latest
       - name: push image to docker hub
-        run: docker push aaronweggemans/${file(./package.json):name}:latest
+        run: docker push aaronweggemans/${file(../../package.json):name}:latest
