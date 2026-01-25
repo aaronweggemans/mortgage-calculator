@@ -1,68 +1,86 @@
 <div class="card bg-light p-5">
-  <div class="text-jwz-primary">
-    <table class="table table-borderless table-transparent mb-4">
-      <tbody>
-        <p class="h5 border-bottom">Berekening gebaseerd op</p>
-        <tr>
-          <td>Uw bruto jaarinkomen</td>
-          <td>{{ formData().brutoInkomen | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
-        </tr>
-        @if (formData().partner) {
-          <tr>
-            <td>Bruto jaarinkomen partner</td>
-            <td>{{ formData().brutoInkomenPartner | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
-          </tr>
-        }
-        <tr>
-          <td>Totaal bruto jaarinkomen</td>
-          <td>
-            {{
-              formData().brutoInkomen + (formData().brutoInkomenPartner ?? 0)
-                | currency: 'EUR' : 'symbol' : '1.0-0'
-            }},-
-          </td>
-        </tr>
+  <div class="mb-3">
+    <p class="h5 border-bottom">Berekening gebaseerd op</p>
 
-        <p class="h5 border-bottom">Te realiseren hypotheek</p>
-        <tr>
-          <td>Maximale hypotheek</td>
-          <td>{{ maxMortgage | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
-        </tr>
-        @if (formData().spaargeld) {
-          <tr>
-            <td>Totaal spaargeld</td>
-            <td>{{ formData().totaalGespaard | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
-          </tr>
-          <tr>
-            <!-- Totaal neer te leggen bedrag -->
-            <td>Totaal te realiseren hypotheek</td>
-            <td>
-              {{
-                maxMortgage + (formData().totaalGespaard ?? 0)
-                  | currency: 'EUR' : 'symbol' : '1.0-0'
-              }},-
-            </td>
-          </tr>
-        }
+    <dl class="d-flex justify-content-between m-0">
+      <dt id="bruto-jaarinkomen">Uw bruto jaarinkomen</dt>
+      <dd aria-labelledby="bruto-jaarinkomen">
+        {{ formData().brutoInkomen | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+      </dd>
+    </dl>
 
-        <p class="h5 border-bottom">Overige inbreng</p>
-        <tr>
-          <td>Berekende maandlast</td>
-          <td>{{ monthlyCosts | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
-        </tr>
-        @if (formData().previousHouse || formData().leeftijd >= 35) {
-          <tr>
-            <td>Overdrachtsbelasting (2%)</td>
-            <td>{{ transferTax | currency: 'EUR' : 'symbol' : '1.0-0' }},-</td>
-          </tr>
-        }
-        @if (!formData().previousHouse && formData().leeftijd < 35) {
-          <tr>
-            <td>U betaald geen overdrachtsbelasting</td>
-            <td>&euro; 0,-</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    @if (formData().partner) {
+      <dl class="d-flex justify-content-between m-0">
+        <dt id="bruto-jaarinkomen-partner">Bruto jaarinkomen partner</dt>
+        <dd aria-labelledby="bruto-jaarinkomen-partner">
+          {{ formData().brutoInkomenPartner | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+        </dd>
+      </dl>
+    }
+
+    <dl class="d-flex justify-content-between m-0">
+      <dt id="totaal-bruto-jaarinkomen">Totaal bruto jaarinkomen</dt>
+      <dd aria-labelledby="totaal-bruto-jaarinkomen">
+        {{ totalIncome() | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+      </dd>
+    </dl>
   </div>
+
+  <div class="mb-3">
+    <p class="h5 border-bottom">Te realiseren hypotheek</p>
+
+    <dl class="d-flex justify-content-between m-0">
+      <dt id="maximale-hypotheek">Maximale hypotheek</dt>
+      <dd aria-labelledby="maximale-hypotheek">
+        {{ maxMortgage() | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+      </dd>
+    </dl>
+
+    <dl class="d-flex justify-content-between m-0">
+      <dt id="benodigde-eigen-geld">Benodigde eigen geld</dt>
+      <dd aria-labelledby="benodigde-eigen-geld">
+        {{ ownContribution() | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+      </dd>
+    </dl>
+
+    @if (formData().spaargeld) {
+      <dl class="d-flex justify-content-between m-0">
+        <dt id="totaal-gespaard">Totaal spaargeld</dt>
+        <dd aria-labelledby="totaal-gespaard">
+          {{ formData().totaalGespaard | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+        </dd>
+      </dl>
+
+      <dl class="d-flex justify-content-between m-0">
+        <dt id="totaal-te-realiseren-hypotheek">Totaal te realiseren hypotheek</dt>
+        <dd aria-labelledby="totaal-te-realiseren-hypotheek">
+          {{
+            maxMortgage() + (formData().totaalGespaard ?? 0) | currency: 'EUR' : 'symbol' : '1.0-0'
+          }},-
+        </dd>
+      </dl>
+    }
+  </div>
+
+  <p class="h5 border-bottom">Overige inbreng</p>
+  <dl class="d-flex justify-content-between m-0">
+    <dt id="berekende-maandlast">Berekende maandlast</dt>
+    <dd aria-labelledby="berekende-maandlast">
+      {{ monthlyCosts() | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+    </dd>
+  </dl>
+  @if (formData().previousHouse || formData().leeftijd >= 35) {
+    <dl class="d-flex justify-content-between m-0">
+      <dt id="overdrachtsbelasting">Overdrachtsbelasting (2%)</dt>
+      <dd aria-labelledby="overdrachtsbelasting">
+        {{ transferTax() | currency: 'EUR' : 'symbol' : '1.0-0' }},-
+      </dd>
+    </dl>
+  }
+  @if (!formData().previousHouse && formData().leeftijd < 35) {
+    <dl class="d-flex justify-content-between m-0">
+      <dt id="overdrachtsbelasting">U betaald geen overdrachtsbelasting</dt>
+      <dd aria-labelledby="overdrachtsbelasting">&euro; 0,-</dd>
+    </dl>
+  }
 </div>

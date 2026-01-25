@@ -4,7 +4,25 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CalculationService {
-  monthlyCosts(maxMortgage: number): number {
+  /**
+   * Calculate the maximum mortgage based on gross annual income (bruto jaarinkomen).
+   * @param grossAnnualIncome
+   */
+  public calculateMaxMortgage(grossAnnualIncome: number): number {
+    const slope = 0.000011;
+    const intercept = 3.7;
+
+    const interestRate = slope * grossAnnualIncome + intercept;
+    const roundInterestRate = Math.min(interestRate);
+
+    return Math.round(grossAnnualIncome * roundInterestRate);
+  }
+
+  /**
+   * Calculate monthly costs based on maximum mortgage.
+   * @param maxMortgage
+   */
+  public monthlyCosts(maxMortgage: number): number {
     const x1 = 120000;
     const y1 = 580;
 
@@ -14,26 +32,23 @@ export class CalculationService {
     const m = (y2 - y1) / (x2 - x1);
     const b = y1 - m * x1;
 
-    const uitvoerwaarde = m * maxMortgage + b;
-
-    return Math.round(uitvoerwaarde);
+    const monthlyCosts = m * maxMortgage + b;
+    return Math.round(monthlyCosts);
   }
 
-  transferTax(maxMortgage: number): number {
+  /**
+   * Calculate transfer tax based on maximum mortgage (overdrachtsbelasting).
+   * @param maxMortgage
+   */
+  public transferTax(maxMortgage: number): number {
     return Math.floor(maxMortgage * 0.02);
   }
 
-  ownContribution(maxMortgage: number): number {
+  /**
+   * Calculate own contribution based on maximum mortgage (eigen inbreng).
+   * @param maxMortgage
+   */
+  public ownContribution(maxMortgage: number): number {
     return Math.floor(maxMortgage * 0.1);
-  }
-
-  calculateMaxMortgage(brutoIncome: number): number {
-    const slope = 0.000011;
-    const intercept = 3.7;
-
-    const interestRate = slope * brutoIncome + intercept;
-    const roundInterestRate = Math.min(interestRate);
-
-    return Math.round(brutoIncome * roundInterestRate);
   }
 }
