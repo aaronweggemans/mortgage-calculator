@@ -24,3 +24,5 @@ environment*.ts
 # IDE
 .idea
 .vscode
+.nvmrc
+.prettierignore
