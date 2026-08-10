@@ -1,12 +1,11 @@
 <mat-stepper orientation="vertical" [linear]="true" #stepper>
   <form [formGroup]="form">
-    <!-- Bruto jaar inkomen plus evt. partner -->
     <mat-step>
       <div class="card bg-light p-4 m-2">
         <ng-template matStepLabel>Wat is uw bruto jaarinkomen?</ng-template>
         <div class="form-group">
           <label class="h6 text-jwz-primary" for="bruto-inkomen"
-            >Wat is uw bruto jaar inkomen.</label
+            >Wat is uw bruto jaar inkomen</label
           >
           <input
             class="form-control mb-3"
@@ -15,16 +14,20 @@
             formControlName="brutoInkomen"
           />
           <ng-container
-            *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomen }"
+            *ngTemplateOutlet="
+              errorHandler;
+              context: { $implicit: brutoInkomen, name: 'brutoInkomen' }
+            "
           ></ng-container>
 
           <label for="leeftijd" class="h6 text-jwz-primary">Wat is uw leeftijd</label>
           <input class="form-control mb-3" type="number" formControlName="leeftijd" id="leeftijd" />
           <ng-container
-            *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijd }"
+            *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijd, name: 'leeftijd' }"
           ></ng-container>
 
           <mat-slide-toggle
+            id="heeft-een-partner"
             color="primary"
             class="mb-3"
             formControlName="partner"
@@ -44,20 +47,26 @@
                 id="bruto-inkomen-partner"
               />
               <ng-container
-                *ngTemplateOutlet="errorHandler; context: { $implicit: brutoInkomenPartner }"
+                *ngTemplateOutlet="
+                  errorHandler;
+                  context: { $implicit: brutoInkomenPartner, name: 'brutoInkomenPartner' }
+                "
               ></ng-container>
 
               <label for="leeftijd-partner" class="h6 text-jwz-primary"
                 >Leeftijd van uw partner</label
               >
               <input
-                class="form-control"
+                class="form-control mb-3"
                 type="number"
                 formControlName="leeftijdPartner"
                 id="leeftijd-partner"
               />
               <ng-container
-                *ngTemplateOutlet="errorHandler; context: { $implicit: leeftijdPartner }"
+                *ngTemplateOutlet="
+                  errorHandler;
+                  context: { $implicit: leeftijdPartner, name: 'leeftijdPartner' }
+                "
               ></ng-container>
             </div>
           }
@@ -75,7 +84,6 @@
       </div>
     </mat-step>
 
-    <!-- Spaargeld -->
     <mat-step>
       <div class="card bg-light p-4 m-2">
         <ng-template matStepLabel>Voorgaande woning?</ng-template>
@@ -110,12 +118,11 @@
       </div>
     </mat-step>
 
-    <!-- Spaargeld -->
     <mat-step>
       <div class="card bg-light p-4 m-2">
         <ng-template matStepLabel>Heeft u spaargeld?</ng-template>
         <div class="form-group">
-          <label for="spaargeld" class="h6 text-jwz-primary">Uw spaargeld.</label>
+          <label for="spaargeld" class="h6 text-jwz-primary">Uw spaargeld</label>
           <p class="text-jwz-primary">
             Heeft u spaargeld? Zo ja, dit kan namelijk invloed hebben het hypotheek dat u kunt
             krijgen. Tel eventueel ook uw partner's spaargeld hierbij op.
@@ -123,6 +130,7 @@
 
           <mat-slide-toggle
             class="mb-3"
+            id="toggle-spaargeld"
             color="primary"
             formControlName="spaargeld"
             (change)="toggleSpaargeld($event)"
@@ -138,7 +146,10 @@
                 formControlName="totaalGespaard"
               />
               <ng-container
-                *ngTemplateOutlet="errorHandler; context: { $implicit: totaalGespaard }"
+                *ngTemplateOutlet="
+                  errorHandler;
+                  context: { $implicit: totaalGespaard, name: 'totaalGespaard' }
+                "
               ></ng-container>
             </div>
           }
@@ -156,7 +167,6 @@
       </div>
     </mat-step>
 
-    <!-- Uitberekenen van de hypotheek -->
     <mat-step>
       <div class="card bg-light p-4 m-2">
         <ng-template matStepLabel>Bereken de hoogte van uw hypotheek.</ng-template>
@@ -177,8 +187,13 @@
   </form>
 </mat-stepper>
 
-<ng-template #errorHandler let-errorRow>
-  <div class="alert alert-danger" role="alert" [class.visually-hidden]="errorRow.valid">
+<ng-template #errorHandler let-errorRow let-name="name">
+  <div
+    class="alert alert-danger"
+    role="alert"
+    [attr.data-testid]="name"
+    [class.visually-hidden]="errorRow.valid"
+  >
     @if (errorRow.hasError('required')) {
       <div>U moet hier een valide waarde invullen.</div>
     }
@@ -186,7 +201,7 @@
       <div>Negatieve getallen zijn niet toegestaan.</div>
     }
     @if (errorRow.hasError('max')) {
-      <div>U heeft hier een te hoog getal!</div>
+      <div>U heeft hier een te hoog getal.</div>
     }
   </div>
 </ng-template>
