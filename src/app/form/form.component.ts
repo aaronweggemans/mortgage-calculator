@@ -53,13 +53,19 @@ export class FormComponent {
       when: ({ valueOf }) => valueOf(schemaPath.partner),
     });
     min(schemaPath.brutoInkomenPartner, 0, {
-      message: 'U moet hier een valide waarde invullen.',
+      message: 'Negatieve getallen zijn niet toegestaan.',
       when: ({ valueOf }) => valueOf(schemaPath.partner),
     });
     max(schemaPath.brutoInkomenPartner, 100000000, {
-      message: 'U moet hier een valide waarde invullen.',
+      message: 'U heeft hier een te hoog getal.',
       when: ({ valueOf }) => valueOf(schemaPath.partner),
     });
+    required(schemaPath.leeftijdPartner, { message: 'U moet hier een valide waarde invullen.' });
+    min(schemaPath.leeftijdPartner, 0, { message: 'Negatieve getallen zijn niet toegestaan.' });
+    max(schemaPath.leeftijdPartner, 150, { message: 'U heeft hier een te hoog getal.' });
+    required(schemaPath.totaalGespaard, { message: 'U moet hier een valide waarde invullen.' });
+    min(schemaPath.totaalGespaard, 0, { message: 'Negatieve getallen zijn niet toegestaan.' });
+    max(schemaPath.totaalGespaard, 100000000, { message: 'U heeft hier een te hoog getal.' });
   });
 
   protected submitForm(): void {

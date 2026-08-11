@@ -26,3 +26,4 @@ environment*.ts
 .vscode
 .nvmrc
 .prettierignore
+.gitignore

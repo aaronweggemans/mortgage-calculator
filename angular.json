@@ -73,7 +73,15 @@
           }
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "runnerConfig": "vitest.config.mts",
+            "outputFile": "./coverage/vitest.html",
+            "coverage": true,
+            "coverageReporters": ["json", "html", "lcov"],
+            "coverageInclude": ["./src/**/*.ts"],
+            "coverageExclude": ["./src/**/*.spec.ts", "./src/main.ts", "vitest.config.mts"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",

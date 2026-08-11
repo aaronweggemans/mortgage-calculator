@@ -16,7 +16,7 @@
           <ng-container
             *ngTemplateOutlet="
               errorHandler;
-              context: { $implicit: form.brutoInkomen().value(), name: 'brutoInkomen' }
+              context: { $implicit: form.brutoInkomen, name: 'brutoInkomen' }
             "
           />
 
@@ -30,7 +30,7 @@
           <ng-container
             *ngTemplateOutlet="
               errorHandler;
-              context: { $implicit: form.leeftijd(), name: 'leeftijd' }
+              context: { $implicit: form.leeftijd, name: 'leeftijd' }
             "
           />
 
@@ -57,7 +57,7 @@
               <ng-container
                 *ngTemplateOutlet="
                   errorHandler;
-                  context: { $implicit: form.brutoInkomenPartner(), name: 'brutoInkomenPartner' }
+                  context: { $implicit: form.brutoInkomenPartner, name: 'brutoInkomenPartner' }
                 "
               />
 
@@ -73,7 +73,7 @@
               <ng-container
                 *ngTemplateOutlet="
                   errorHandler;
-                  context: { $implicit: form.leeftijdPartner(), name: 'leeftijdPartner' }
+                  context: { $implicit: form.leeftijdPartner, name: 'leeftijdPartner' }
                 "
               />
             </div>
@@ -155,7 +155,7 @@
               <ng-container
                 *ngTemplateOutlet="
                   errorHandler;
-                  context: { $implicit: form.totaalGespaard(), name: 'totaalGespaard' }
+                  context: { $implicit: form.totaalGespaard, name: 'totaalGespaard' }
                 "
               />
             </div>
@@ -195,20 +195,14 @@
 </mat-stepper>
 
 <ng-template #errorHandler let-errorRow let-name="name">
-  <!--  <div-->
-  <!--    class="alert alert-danger"-->
-  <!--    role="alert"-->
-  <!--    [attr.data-testid]="name"-->
-  <!--    [class.visually-hidden]="errorRow.valid"-->
-  <!--  >-->
-  <!--    @if (errorRow.hasError('required')) {-->
-  <!--      <div>U moet hier een valide waarde invullen.</div>-->
-  <!--    }-->
-  <!--    @if (errorRow.hasError('min')) {-->
-  <!--      <div>Negatieve getallen zijn niet toegestaan.</div>-->
-  <!--    }-->
-  <!--    @if (errorRow.hasError('max')) {-->
-  <!--      <div>U heeft hier een te hoog getal.</div>-->
-  <!--    }-->
-  <!--  </div>-->
+  <div
+    class="alert alert-danger"
+    role="alert"
+    [attr.data-testid]="name"
+    [class.visually-hidden]="errorRow().errors().length === 0"
+  >
+    @for (error of errorRow().errors(); track error) {
+      <p class="m-0">{{ error.message }}</p>
+    }
+  </div>
 </ng-template>
