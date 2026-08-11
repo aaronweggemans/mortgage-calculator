@@ -1,17 +1,16 @@
 <main class="row">
   <div class="col-md-6">
-    <h1 class="mb-3 h3">Bereken hier uw hypotheek.</h1>
-    <app-form (formError)="formError = $event" (formData)="setFormData($event)"></app-form>
+    <app-form (formError)="formError.set($event)" (formData)="formData.set($event)" />
   </div>
   <div class="col-md-6">
-    @if (formError) {
-      <div class="alert alert-danger">
+    <div role="alert" class="alert alert-danger" [class.d-none]="!formError()">
+      @if (formError()) {
         Er is iets mis gegaan. Wellicht heeft u niet alle waardes in de berekening goed gezet.
-      </div>
-    }
+      }
+    </div>
 
-    @if (!formError && formData) {
-      <app-calculation [formData]="formData"></app-calculation>
+    @if (!formError() && formData()) {
+      <app-calculation [formData]="formData()!" />
     }
   </div>
 </main>

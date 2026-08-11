@@ -1,21 +1,12 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-  AbstractControl,
-} from '@angular/forms';
-import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatStepper, MatStep, MatStepLabel, MatStepperNext } from '@angular/material/stepper';
+import { Component, output, signal } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatStep, MatStepLabel, MatStepper, MatStepperNext } from '@angular/material/stepper';
 import { NgTemplateOutlet } from '@angular/common';
-import { MatMiniFabButton, MatButton } from '@angular/material/button';
+import { MatButton, MatMiniFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MortgageCalculation } from '../mortgage-calculation';
-
-type MortgageCalculationForm = {
-  [K in keyof MortgageCalculation]: AbstractControl<MortgageCalculation[K]>;
-};
+import { form, FormField, max, min, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-form',
@@ -32,78 +23,47 @@ type MortgageCalculationForm = {
     MatMiniFabButton,
     MatIcon,
     MatButton,
+    FormField,
   ],
 })
 export class FormComponent {
-  public readonly formError: OutputEmitterRef<boolean> = output<boolean>();
-  public readonly formData: OutputEmitterRef<MortgageCalculation> = output<MortgageCalculation>();
+  public readonly formError = output<boolean>();
+  public readonly formData = output<MortgageCalculation>();
 
-  protected readonly form = new FormGroup<MortgageCalculationForm>({
-    brutoInkomen: new FormControl(30000, {
-      validators: [Validators.required, Validators.min(0), Validators.max(100000000)],
-      nonNullable: true,
-    }),
-    leeftijd: new FormControl(20, {
-      validators: [Validators.required, Validators.min(0), Validators.max(150)],
-      nonNullable: true,
-    }),
-    partner: new FormControl(false, { validators: [Validators.required], nonNullable: true }),
-    brutoInkomenPartner: new FormControl(0),
-    leeftijdPartner: new FormControl(20),
-    previousHouse: new FormControl(false, { validators: [Validators.required], nonNullable: true }),
-    spaargeld: new FormControl(false, { validators: [Validators.required], nonNullable: true }),
-    totaalGespaard: new FormControl(0),
+  protected readonly formModal = signal<MortgageCalculation>({
+    brutoInkomen: 30000,
+    leeftijd: 20,
+    partner: false,
+    brutoInkomenPartner: 0,
+    leeftijdPartner: 20,
+    previousHouse: false,
+    spaargeld: false,
+    totaalGespaard: 0,
   });
 
-  get brutoInkomen(): AbstractControl {
-    return this.form.get('brutoInkomen')!;
-  }
-  get leeftijd(): AbstractControl {
-    return this.form.get('leeftijd')!;
-  }
-  get partner(): AbstractControl {
-    return this.form.get('partner')!;
-  }
-  get brutoInkomenPartner(): AbstractControl {
-    return this.form.get('brutoInkomenPartner')!;
-  }
-  get leeftijdPartner(): AbstractControl {
-    return this.form.get('leeftijdPartner')!;
-  }
-  get spaargeld(): AbstractControl {
-    return this.form.get('spaargeld')!;
-  }
-  get totaalGespaard(): AbstractControl {
-    return this.form.get('totaalGespaard')!;
-  }
-
-  protected togglePartner(event: MatSlideToggleChange): void {
-    const brutoInkomenPartnerRules = event.checked
-      ? [Validators.required, Validators.min(0), Validators.max(100000000)]
-      : null;
-
-    const leeftijdPartnerRules = event.checked
-      ? [Validators.required, Validators.min(0), Validators.max(150)]
-      : null;
-
-    this.brutoInkomenPartner.setValidators(brutoInkomenPartnerRules);
-    this.brutoInkomenPartner.updateValueAndValidity();
-
-    this.leeftijdPartner.setValidators(leeftijdPartnerRules);
-    this.leeftijdPartner.updateValueAndValidity();
-  }
-
-  protected toggleSpaargeld(event: MatSlideToggleChange): void {
-    const rules = event.checked
-      ? [Validators.required, Validators.min(0), Validators.max(100000000)]
-      : null;
-
-    this.totaalGespaard.setValidators(rules);
-    this.totaalGespaard.updateValueAndValidity();
-  }
+  protected readonly form = form<MortgageCalculation>(this.formModal, (schemaPath) => {
+    required(schemaPath.brutoInkomen, { message: 'U moet hier een valide waarde invullen.' });
+    min(schemaPath.brutoInkomen, 0, { message: 'Negatieve getallen zijn niet toegestaan.' });
+    max(schemaPath.brutoInkomen, 100000000, { message: 'U heeft hier een te hoog getal.' });
+    required(schemaPath.leeftijd, { message: 'U moet hier een valide waarde invullen.' });
+    min(schemaPath.leeftijd, 0, { message: 'Negatieve getallen zijn niet toegestaan.' });
+    max(schemaPath.leeftijd, 150, { message: 'U heeft hier een te hoog getal.' });
+    required(schemaPath.brutoInkomenPartner, {
+      message: 'U moet hier een valide waarde invullen.',
+      when: ({ valueOf }) => valueOf(schemaPath.partner),
+    });
+    min(schemaPath.brutoInkomenPartner, 0, {
+      message: 'U moet hier een valide waarde invullen.',
+      when: ({ valueOf }) => valueOf(schemaPath.partner),
+    });
+    max(schemaPath.brutoInkomenPartner, 100000000, {
+      message: 'U moet hier een valide waarde invullen.',
+      when: ({ valueOf }) => valueOf(schemaPath.partner),
+    });
+  });
 
   protected submitForm(): void {
-    this.formError.emit(this.form.invalid);
-    this.formData.emit(this.form.getRawValue());
+    this.formError.emit(this.form().invalid());
+    this.formData.emit(this.form().value());
   }
 }
