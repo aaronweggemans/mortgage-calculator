@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Hypotheek Calculator
- * Description: Angular hypotheekcalculator voor WordPress en Elementor.
+ * Description: Hypotheekcalculator ontwikkeld voor WordPress en gemakkelijke support voor Elementor.
  * Version: 1.0.0
  * Author: Aaron Weggemans
  */

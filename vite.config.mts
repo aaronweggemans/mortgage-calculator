@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import postcssPrefixSelector from 'postcss-prefix-selector';
 
 export default defineConfig({
   build: {
@@ -17,7 +18,15 @@ export default defineConfig({
       },
     },
   },
-
+  css: {
+    postcss: {
+      plugins: [
+        postcssPrefixSelector({
+          prefix: 'wp-mortgage-calculator',
+        }),
+      ],
+    },
+  },
   plugins: [
     viteStaticCopy({
       targets: [
