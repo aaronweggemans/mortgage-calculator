@@ -27,3 +27,4 @@ environment*.ts
 .nvmrc
 .prettierignore
 .gitignore
+wp-mortgage-calculator
