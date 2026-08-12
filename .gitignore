@@ -41,4 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 *.iml
+wp-mortgage-calculator/web-component
 wp-mortgage-calculator.zip
