@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
-import { Component, computed, inject, input, InputSignal, LOCALE_ID, Signal } from '@angular/core';
+import { Component, computed, inject, input, LOCALE_ID } from '@angular/core';
 import { MortgageCalculation } from '../mortgage-calculation';
 import { CalculationService } from './calculation.service';
 
@@ -16,26 +16,25 @@ registerLocaleData(localeNl);
 export class CalculationComponent {
   private readonly calculationService: CalculationService = inject(CalculationService);
 
-  public readonly formData: InputSignal<MortgageCalculation> =
-    input.required<MortgageCalculation>();
+  public readonly formData = input.required<MortgageCalculation>();
 
-  protected readonly totalIncome: Signal<number> = computed(() => {
+  protected readonly totalIncome = computed(() => {
     return this.formData().brutoInkomen + (this.formData().brutoInkomenPartner ?? 0);
   });
 
-  protected readonly maxMortgage: Signal<number> = computed(() => {
+  protected readonly maxMortgage = computed(() => {
     return this.calculationService.calculateMaxMortgage(this.totalIncome());
   });
 
-  protected readonly monthlyCosts: Signal<number> = computed(() => {
+  protected readonly monthlyCosts = computed(() => {
     return this.calculationService.monthlyCosts(this.maxMortgage());
   });
 
-  protected readonly ownContribution: Signal<number> = computed(() => {
+  protected readonly ownContribution = computed(() => {
     return this.calculationService.ownContribution(this.maxMortgage());
   });
 
-  protected readonly transferTax: Signal<number> = computed(() => {
+  protected readonly transferTax = computed(() => {
     return this.calculationService.transferTax(this.maxMortgage());
   });
 }

@@ -1,29 +1,34 @@
-# MortgageCalculator
+# Hypotheek calculator
 
-This project is created to implement on the website of https://www.jwz-fd.nl/. It is meant to calculate the mortgage in the netherlands.
+Dit project is een plugin dat is gemaakt om de hypotheek te berekenen in Nederland.
+Het is gemaakt om te implementeren op een WordPress website en staat op het moment gedeployed op https://www.jwz-fd.nl/.
+De plugin is gemaakt met behulp van PHP en JavaScript.
 
-## Development server
+## Opstarten van het project (ontwikkelmodus)
 
-First run `npm install` to install all packages for this Angular project. Only the default material design package and the angular package will be installed. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Dit project is een Angular applciatie die is gemaakt met behulp van de Angular CLI.
+Om het project op te starten, volg de onderstaande stappen.
 
-## Code scaffolding
+1. Zorg ervoor dat je huidige node versie overeen komt met wat er in het `.nvmrc` bestand staat.
+2. Installeer de binaries en dependencies met het volgende commando met `npm ci`
+3. Start het project met `npm run start`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Nu kan je werken aan de applicatie lokaal.
 
-## Build
+### Bouw het project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Het project moet gebouwd worden voordat het kan worden gebruikt als WordPress plugin.
+Om de applicatie te bouwen, volg de volgende stappen:
 
-## Running unit tests
+1. Bouw de applicatie `npm run build:production`
+2. Om het `web-component` gebruik het volgende commando: `npm run build:wordpress`. Dit command zorgt ervoor dat in `wp-mortgage-calculator` een folder `web-component` wordt gemaakt.
+   Hierin staat de het javascript bestand en de assets.
+3. Om de plugin te kunnen gebruiken moet de folder `wp-mortgage-calculator` gezipt worden en geupload worden onder de plugins in WordPress. Dit kan je doen door de comamnd `npm run build:wordpress-plugin` te runnen.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Daadwerkelijk web-component lokaal testen
 
-## Running end-to-end tests
+Om het web-component te testen kan je de volgende stappen volgen:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-# mortgage-calculator
+1. Zorg ervoor dat je de applicatie hebt gebouwd met `npm run build:wordpress`.
+2. Navigeer naar de folder `wp-mortgage-calculator` en start een lokale server met het volgende commando: `npx http-server`.
+3. Ga naar de URL en bekijk of de applicatie draait!

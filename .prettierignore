@@ -24,3 +24,7 @@ environment*.ts
 # IDE
 .idea
 .vscode
+.nvmrc
+.prettierignore
+.gitignore
+wp-mortgage-calculator

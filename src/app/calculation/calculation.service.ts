@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class CalculationService {
   /**
    * Calculate the maximum mortgage based on gross annual income (bruto jaarinkomen).
