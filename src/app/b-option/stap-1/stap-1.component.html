@@ -1,0 +1,47 @@
+<div class="d-flex flex-column gap-4">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex flex-column gap-2">
+      <h3 class="m-0">1. Persoonlijke situatie</h3>
+      <p class="m-0">Vul uw persoonlijke gegevens in.</p>
+    </div>
+    <p class="fs-6 bg-light p-3 rounded">Stap 1 van 4</p>
+  </div>
+
+  <div class="d-flex justify-content-between gap-4">
+    <div class="d-flex flex-column flex-item gap-3">
+      <div>
+        <label for="geboortedatum" class="fs-6 fw-bold">Geboortedatum</label>
+        <input class="form-control" type="date" id="geboortedatum" />
+      </div>
+
+      <div>
+        <label for="relatiestatus" class="fs-6 fw-bold">Relatiestatus</label>
+        <select class="form-control" type="text" id="relatiestatus">
+          <option value="">Selecteer uw situatie</option>
+          <option value="">Gehuwd</option>
+          <option value="">Ongehuwd</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column flex-item gap-3">
+      <p class="m-0 fw-bold">Heeft u een partner?</p>
+      <div class="d-flex justify-content-around gap-3">
+        <button class="btn btn-light border w-100 bg-transparent">Ja</button>
+        <button class="btn btn-light border w-100 bg-transparent">Nee</button>
+      </div>
+
+      <div class="alert alert-warning">
+        <p class="m-0">
+          Deze bewerking is een indicatie en geen offerte. Wilt u persoonlijk advies, neem dan
+          contact met ons op.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-light border">Opslaan en verder</button>
+    <button class="btn btn-light border">Volgende</button>
+  </div>
+</div>

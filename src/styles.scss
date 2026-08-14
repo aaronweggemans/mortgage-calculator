@@ -52,3 +52,7 @@ $mortgage-calculator-theme: mat.m2-define-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($mortgage-calculator-theme);
+
+.flex-item {
+  flex: 1 1;
+}

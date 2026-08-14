@@ -1,0 +1,16 @@
+<main class="row w-100">
+  <div class="col-md-6">
+    <app-form (formError)="formError.set($event)" (formData)="formData.set($event)" />
+  </div>
+  <div class="col-md-6">
+    <div role="alert" class="alert alert-danger" [class.d-none]="!formError()">
+      @if (formError()) {
+        Er is iets mis gegaan. Wellicht heeft u niet alle waardes in de berekening goed gezet.
+      }
+    </div>
+
+    @if (!formError() && formData()) {
+      <app-calculation [formData]="formData()!" />
+    }
+  </div>
+</main>
