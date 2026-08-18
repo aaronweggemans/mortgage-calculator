@@ -1,1 +1,39 @@
-<p>stap-2 works!</p>
+<div class="d-flex flex-column gap-4">
+  <!-- Header -->
+  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-3">
+    <div class="d-flex flex-column gap-2">
+      <h3 class="m-0 text-primary">2. Uw inkomen</h3>
+      <p class="m-0 text-secondary">Vul uw bruto jaar inkomen(s) in.</p>
+    </div>
+    <p class="fs-6 bg-light p-3 rounded align-self-start m-0 text-secondary">Stap 2 van 4</p>
+  </div>
+
+  <!-- Formulier -->
+  <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+    <div class="d-flex flex-column flex-item gap-3">
+      <div>
+        <label for="bruto-jaarinkomen-individu" class="fs-6 fw-bold"
+          >Bruto jaarinkomen (uzelf)</label
+        >
+        <input class="form-control" type="number" id="bruto-jaarinkomen-individu" />
+      </div>
+      <div>
+        <label for="bruto-jaarinkomen-partner" class="fs-6 fw-bold"
+          >Bruto jaarinkomen (partner)</label
+        >
+        <input class="form-control" type="number" id="bruto-jaarinkomen-partner" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigatie -->
+  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-2">
+    <button class="btn btn-light border p-3">Vorige</button>
+    <button class="btn btn-light border p-3">Volgende</button>
+  </div>
+
+  <hr class="m-0" />
+  <p class="m-0 text-secondary">
+    Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
+  </p>
+</div>

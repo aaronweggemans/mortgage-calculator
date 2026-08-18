@@ -1,0 +1,37 @@
+$awwp-color-primary: var(--app-primary);
+$awwp-color-secondary: var(--app-secondary);
+$awwp-color-tertiary: var(--app-tertiary);
+
+$white-stepper-font: color-mix(in srgb, $awwp-color-primary 0%, white);
+$stepper-palette: (
+  50: color-mix(in srgb, $awwp-color-primary 5%, white),
+  100: color-mix(in srgb, $awwp-color-primary 15%, white),
+  200: color-mix(in srgb, $awwp-color-primary 30%, white),
+  300: color-mix(in srgb, $awwp-color-primary 50%, white),
+  400: color-mix(in srgb, $awwp-color-primary 75%, white),
+  500: $awwp-color-primary,
+  600: color-mix(in srgb, $awwp-color-primary 90%, black),
+  700: color-mix(in srgb, $awwp-color-primary 80%, black),
+  800: color-mix(in srgb, $awwp-color-primary 70%, black),
+  900: color-mix(in srgb, $awwp-color-primary 60%, black),
+  A100: color-mix(in srgb, $awwp-color-primary 90%, black),
+  A200: color-mix(in srgb, $awwp-color-primary 80%, black),
+  A400: color-mix(in srgb, $awwp-color-primary 70%, black),
+  A700: color-mix(in srgb, $awwp-color-primary 60%, black),
+  contrast: (
+    50: $white-stepper-font,
+    100: $white-stepper-font,
+    200: $white-stepper-font,
+    300: $white-stepper-font,
+    400: $white-stepper-font,
+    500: $white-stepper-font,
+    600: $white-stepper-font,
+    700: $white-stepper-font,
+    800: $white-stepper-font,
+    900: $white-stepper-font,
+    A100: $white-stepper-font,
+    A200: $white-stepper-font,
+    A400: $white-stepper-font,
+    A700: $white-stepper-font,
+  ),
+);

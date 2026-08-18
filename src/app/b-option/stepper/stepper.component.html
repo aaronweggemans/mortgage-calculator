@@ -1,26 +1,30 @@
 <mat-stepper
   orientation="vertical"
   #stepper
-  class="mortgage-stepper"
+  class="mortgage-stepper py-4 bg-transparent"
   (selectionChange)="onStepChange($event)"
 >
+  <ng-template matStepperIcon="edit">
+    <mat-icon>check</mat-icon>
+  </ng-template>
+
   <!-- Stap 1 -->
-  <mat-step>
-    <ng-template matStepLabel>Persoonlijk</ng-template>
+  <mat-step class="p-4">
+    <ng-template matStepLabel><p class="m-0">Persoonlijk</p></ng-template>
   </mat-step>
 
   <!-- Stap 2 -->
   <mat-step>
-    <ng-template matStepLabel>Inkomen</ng-template>
+    <ng-template matStepLabel><p class="m-0">Inkomen</p></ng-template>
   </mat-step>
 
   <!-- Stap 3 -->
   <mat-step>
-    <ng-template matStepLabel>Wonen</ng-template>
+    <ng-template matStepLabel><p class="m-0">Wonen</p></ng-template>
   </mat-step>
 
   <!-- Stap 4 -->
   <mat-step>
-    <ng-template matStepLabel>Resultaat</ng-template>
+    <ng-template matStepLabel><p class="m-0">Resultaat</p></ng-template>
   </mat-step>
 </mat-stepper>

@@ -1,27 +1,29 @@
-<div class="card bg-transparent mb-4">
-  <div class="card-body">
-    <div class="d-flex gap-4">
-      <app-stepper (stepChanged)="onStepChanged($event)"></app-stepper>
+<div class="card bg-transparent">
+  <div class="card-body p-0">
+    <div class="d-flex flex-column flex-md-row gap-4">
+      <div class="bg-light">
+        <app-stepper
+          class="align-self-stretch mb-auto"
+          (stepChanged)="onStepChanged($event)"
+        ></app-stepper>
+      </div>
       @switch (selectedStep()) {
         @case (0) {
-          <app-stap-1 class="flex-grow-1 p-4"></app-stap-1>
+          <app-stap-1 class="my-3 flex-grow-1 p-4"></app-stap-1>
         }
 
         @case (1) {
-          <app-stap-2 class="flex-grow-1 p-4"></app-stap-2>
+          <app-stap-2 class="my-3 flex-grow-1 p-4"></app-stap-2>
         }
 
         @case (2) {
-          <app-stap-3 class="flex-grow-1 p-4"></app-stap-3>
+          <app-stap-3 class="my-3 flex-grow-1 p-4"></app-stap-3>
         }
 
         @case (3) {
-          <app-stap-4 class="flex-grow-1 p-4"></app-stap-4>
+          <app-stap-4 class="my-3 flex-grow-1 p-4"></app-stap-4>
         }
       }
     </div>
-  </div>
-  <div class="card-footer">
-    <span>Uw gegevens worden alleen gebruikt voor deze berekening.</span>
   </div>
 </div>
