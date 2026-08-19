@@ -25,4 +25,8 @@ export class BOptionComponent {
   protected next() {
     this.stepper().next();
   }
+
+  protected previous() {
+    this.stepper().previous();
+  }
 }

@@ -1,39 +1,77 @@
-<div class="d-flex flex-column gap-4">
+<div class="d-flex flex-column gap-4 mb-auto">
   <!-- Header -->
   <div class="d-flex flex-column flex-md-row justify-content-md-between gap-3">
     <div class="d-flex flex-column gap-2">
-      <h3 class="m-0 text-primary">2. Uw inkomen</h3>
-      <p class="m-0 text-secondary">Vul uw bruto jaar inkomen(s) in.</p>
+      <h3 class="m-0 awwp-text-primary">2. Uw inkomen</h3>
+      <p class="m-0 awwp-text-secondary">Vul uw bruto jaar inkomen(s) in.</p>
     </div>
-    <p class="fs-6 bg-light p-3 rounded align-self-start m-0 text-secondary">Stap 2 van 4</p>
+    <p class="fs-6 bg-light p-3 rounded align-self-start m-0 text-secondary">Stap 1 van 4</p>
   </div>
 
   <!-- Formulier -->
   <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
     <div class="d-flex flex-column flex-item gap-3">
-      <div>
-        <label for="bruto-jaarinkomen-individu" class="fs-6 fw-bold"
+      <div class="d-flex flex-column gap-1">
+        <label for="bruto-jaarinkomen-individu" class="awwp-text-primary fs-6 fw-bold"
           >Bruto jaarinkomen (uzelf)</label
+        >
+        <small class="m-0 text-secondary"
+          >Uw bruto jaarinkomen is het bedrag wat u verdient per jaar zonder belastingen of andere
+          aftrekposten.</small
         >
         <input class="form-control" type="number" id="bruto-jaarinkomen-individu" />
       </div>
-      <div>
-        <label for="bruto-jaarinkomen-partner" class="fs-6 fw-bold"
-          >Bruto jaarinkomen (partner)</label
+
+      @if (hasPartner() === true) {
+        <div class="d-flex flex-column gap-1">
+          <label for="bruto-jaarinkomen-partner" class="awwp-text-primary fs-6 fw-bold"
+            >Bruto jaarinkomen (partner)</label
+          >
+          <small class="m-0 text-secondary"
+            >Voer hier de bruto jaarinkomen van uw partner in.</small
+          >
+          <input #partnerIncome class="form-control" type="number" id="bruto-jaarinkomen-partner" />
+        </div>
+      }
+    </div>
+
+    <div class="flex-item">
+      <p class="awwp-text-primary m-0 fw-bold">Heeft u een partner?</p>
+      <small class="m-0 text-secondary"
+        >Wanneer uw partner ook van een inkomen geniet, kan dit worden meegenomen in de hoogte van
+        uw hypotheek.</small
+      >
+      <div class="d-flex gap-2">
+        <button
+          (click)="hasPartner.set(true)"
+          [class.awwp-active]="hasPartner() === true"
+          class="btn btn-light py-2 border flex-fill"
         >
-        <input class="form-control" type="number" id="bruto-jaarinkomen-partner" />
+          Ja
+        </button>
+        <button
+          (click)="hasPartner.set(false)"
+          [class.awwp-active]="hasPartner() === false"
+          class="btn btn-light py-2 border flex-fill"
+        >
+          Nee
+        </button>
       </div>
     </div>
   </div>
 
   <!-- Navigatie -->
-  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-2">
-    <button class="btn btn-light border p-3">Vorige</button>
-    <button class="btn btn-light border p-3">Volgende</button>
+  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
+    <button class="btn btn-light border p-3" (click)="previous.emit()">Vorige</button>
+    <button class="btn btn-light border p-3" (click)="next.emit()">Volgende</button>
   </div>
 
   <hr class="m-0" />
-  <p class="m-0 text-secondary">
-    Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
-  </p>
+
+  <div class="d-flex flex-row gap-3">
+    <mat-icon class="icon-size awwp-text-primary flex-shrink-0">info</mat-icon>
+    <p class="m-0 text-secondary">
+      Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
+    </p>
+  </div>
 </div>

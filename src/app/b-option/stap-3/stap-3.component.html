@@ -1,9 +1,9 @@
-<div class="d-flex flex-column gap-4">
+<div class="d-flex flex-column gap-4 mb-auto">
   <!-- Header -->
   <div class="d-flex flex-column flex-md-row justify-content-md-between gap-3">
     <div class="d-flex flex-column gap-2">
-      <h3 class="m-0 text-primary">3. Wonen</h3>
-      <p class="m-0 text-secondary">Vul uw woonsituatie in.</p>
+      <h3 class="m-0 awwp-text-primary">3. Wonen</h3>
+      <p class="m-0 awwp-text-secondary">Vul uw huidige woonsituatie in.</p>
     </div>
     <p class="fs-6 bg-light p-3 rounded align-self-start m-0 text-secondary">Stap 3 van 4</p>
   </div>
@@ -11,25 +11,67 @@
   <!-- Formulier -->
   <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
     <div class="d-flex flex-column flex-item gap-3">
-      <div>
-        <label for="spaargeld" class="fs-6 fw-bold">Hoevel spaargeld heeft u?</label>
-        <input class="form-control" type="number" id="spaargeld" />
+      <div class="d-flex flex-column gap-1">
+        <p class="awwp-text-primary m-0 fw-bold">Heeft u eerder een huis gekocht?</p>
+        <small class="m-0 text-secondary">
+          In het geval dat u eerder al een keer een huis heeft gekocht, moet u overdrachtsbelasting
+          betalen. Dit is niet het geval bij mensen die voor de eerste keer een woning kopen.
+        </small>
+        <div class="d-flex gap-2">
+          <button
+            (click)="hasEerderHuisGekocht.set(true)"
+            [class.awwp-active]="hasEerderHuisGekocht() === true"
+            class="btn btn-light py-2 border flex-fill"
+          >
+            Ja
+          </button>
+          <button
+            (click)="hasEerderHuisGekocht.set(false)"
+            [class.awwp-active]="hasEerderHuisGekocht() === false"
+            class="btn btn-light py-2 border flex-fill"
+          >
+            Nee
+          </button>
+        </div>
       </div>
-      <div>
-        <label for="overige-schulden" class="fs-6 fw-bold">Overige schulden / leningen</label>
-        <input class="form-control" type="number" id="overige-schulden" />
+    </div>
+
+    <div class="d-flex flex-column flex-item gap-3 gap-md-4">
+      <div class="d-flex flex-column gap-1">
+        <label for="schulden" class="awwp-text-primary fs-6 fw-bold"
+          >Heeft u schulden/leningen?</label
+        >
+        <small class="m-0 text-secondary"
+          >Bij overige leningen of schulden kan het zijn dat u gekort wordt op de hoogte van uw
+          hyotheek.</small
+        >
+        <input class="form-control" type="number" id="schulden" />
+      </div>
+
+      <div class="d-flex flex-column gap-1">
+        <label for="spaargeld" class="awwp-text-primary fs-6 fw-bold"
+          >Hoeveel spaargeld heeft u op dit moment?</label
+        >
+        <small class="m-0 text-secondary"
+          >Meer spaargeld maakt het makkelijker om een hypotheek te krijgen.</small
+        >
+        <input class="form-control" type="number" id="spaargeld" />
       </div>
     </div>
   </div>
 
   <!-- Navigatie -->
-  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-2">
-    <button class="btn btn-light border p-3">Vorige</button>
-    <button class="btn btn-light border p-3">Volgende</button>
+  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
+    <button class="btn btn-light border p-3" (click)="previous.emit()">Vorige</button>
+    <button class="btn btn-light border p-3" (click)="next.emit()">Volgende</button>
   </div>
 
   <hr class="m-0" />
-  <p class="m-0 text-secondary">
-    Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
-  </p>
+
+  <div class="d-flex flex-row gap-3">
+    <mat-icon class="icon-size awwp-text-primary flex-shrink-0">info</mat-icon>
+    <p class="m-0 text-secondary">
+      Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
+    </p>
+  </div>
 </div>

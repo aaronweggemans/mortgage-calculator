@@ -23,4 +23,8 @@ export class StepperComponent {
   next() {
     this.stepper().next();
   }
+
+  previous() {
+    this.stepper().previous();
+  }
 }

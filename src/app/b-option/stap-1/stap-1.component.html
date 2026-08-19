@@ -11,12 +11,15 @@
   <!-- Formulier -->
   <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
     <div class="d-flex flex-column flex-item gap-3">
-      <div>
+      <div class="d-flex flex-column gap-1">
         <label for="geboortedatum" class="awwp-text-primary fs-6 fw-bold">Geboortedatum</label>
+        <small class="m-0 text-secondary"
+          >Uw geboortedatum kan invloed hebben op de hoogte van uw hypotheek.</small
+        >
         <input class="form-control" type="date" id="geboortedatum" />
       </div>
 
-      <div>
+      <div class="d-flex flex-column gap-1">
         <label for="relatiestatus" class="awwp-text-primary fs-6 fw-bold">Relatiestatus</label>
         <select class="form-control" id="relatiestatus">
           <option value="">Selecteer uw situatie</option>
@@ -26,21 +29,12 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column flex-item gap-4">
-      <div>
-        <p class="awwp-text-primary m-0 fw-bold">Heeft u een partner?</p>
-        <div class="d-flex gap-2">
-          <button class="btn btn-light py-2 border flex-fill bg-transparent">Ja</button>
-          <button class="btn btn-light py-2 border flex-fill bg-transparent">Nee</button>
-        </div>
-      </div>
-
+    <div class="flex-item">
       <div class="alert alert-warning m-0 d-flex flex-row gap-3">
         <mat-icon class="icon-size flex-shrink-0">info</mat-icon>
-        <p class="m-0">
-          Deze bewerking is een indicatie en geen offerte. Wilt u persoonlijk advies, neem dan
-          contact met ons op.
-        </p>
+        <div class="d-flex flex-column gap-2">
+          <p class="m-0">{{ warningContent() }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -48,7 +42,7 @@
   <!-- Navigatie -->
   <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
     <button class="btn btn-light border p-3">Opslaan en verder</button>
-    <button class="btn btn-light border p-3">Volgende</button>
+    <button class="btn btn-light border p-3" (click)="next.emit()">Volgende</button>
   </div>
 
   <hr class="m-0" />

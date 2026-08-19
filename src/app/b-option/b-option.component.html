@@ -1,6 +1,6 @@
 <div class="card bg-transparent">
   <div class="card-body p-0">
-    <div class="d-flex flex-column flex-md-row gap-4">
+    <div class="d-flex flex-column flex-md-row gap-0 gap-md-4 mb-auto">
       <div class="bg-light">
         <app-stepper
           class="align-self-stretch mb-auto"
@@ -9,19 +9,31 @@
       </div>
       @switch (selectedStep()) {
         @case (0) {
-          <app-stap-1 class="my-3 flex-grow-1 p-4"></app-stap-1>
+          <app-stap-1 class="my-3 flex-grow-1 p-4" (next)="next()"></app-stap-1>
         }
 
         @case (1) {
-          <app-stap-2 class="my-3 flex-grow-1 p-4"></app-stap-2>
+          <app-stap-2
+            class="my-3 flex-grow-1 p-4"
+            (next)="next()"
+            (previous)="previous()"
+          ></app-stap-2>
         }
 
         @case (2) {
-          <app-stap-3 class="my-3 flex-grow-1 p-4"></app-stap-3>
+          <app-stap-3
+            class="my-3 flex-grow-1 p-4"
+            (next)="next()"
+            (previous)="previous()"
+          ></app-stap-3>
         }
 
         @case (3) {
-          <app-stap-4 class="my-3 flex-grow-1 p-4"></app-stap-4>
+          <app-stap-4
+            class="my-3 flex-grow-1 p-4"
+            (next)="next()"
+            (previous)="previous()"
+          ></app-stap-4>
         }
       }
     </div>
