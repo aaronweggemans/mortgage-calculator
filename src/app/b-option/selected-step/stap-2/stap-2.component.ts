@@ -1,19 +1,11 @@
-import {
-  Component,
-  effect,
-  ElementRef,
-  output,
-  signal,
-  viewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
+import { Component, effect, ElementRef, output, signal, viewChild } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-stap-2',
-  imports: [MatIcon],
+  imports: [HeaderComponent, FooterComponent],
   templateUrl: './stap-2.component.html',
-  encapsulation: ViewEncapsulation.None,
 })
 export class Stap2Component {
   public readonly next = output<void>();

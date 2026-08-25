@@ -16,3 +16,7 @@
   border-left: solid 2.5px awwp.$awwp-color-secondary;
   border-radius: 4px;
 }
+
+.mat-step-header {
+  pointer-events: none !important;
+}

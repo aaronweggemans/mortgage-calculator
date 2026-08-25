@@ -1,0 +1,17 @@
+@switch (step()) {
+  @case (0) {
+    <app-stap-1 (next)="next.emit()" />
+  }
+
+  @case (1) {
+    <app-stap-2 (next)="next.emit()" (previous)="previous.emit()" />
+  }
+
+  @case (2) {
+    <app-stap-3 (next)="next.emit()" (previous)="previous.emit()" />
+  }
+
+  @case (3) {
+    <app-stap-4 (resetFlow)="resetFlow.emit()" />
+  }
+}

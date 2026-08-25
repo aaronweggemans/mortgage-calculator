@@ -1,12 +1,6 @@
 <div class="d-flex flex-column gap-4 mb-auto">
   <!-- Header -->
-  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-3">
-    <div class="d-flex flex-column gap-2">
-      <h3 class="m-0 awwp-text-primary">2. Uw inkomen</h3>
-      <p class="m-0 awwp-text-secondary">Vul uw bruto jaar inkomen(s) in.</p>
-    </div>
-    <p class="fs-6 bg-light p-3 rounded align-self-start m-0 text-secondary">Stap 1 van 4</p>
-  </div>
+  <app-header title="Uw inkomen" subtitle="Vul uw bruto jaar inkomen(s) in." [step]="2" />
 
   <!-- Formulier -->
   <div class="d-flex flex-column flex-md-row justify-content-between gap-md-4 gap-3">
@@ -61,17 +55,5 @@
   </div>
 
   <!-- Navigatie -->
-  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
-    <button class="btn btn-light border p-3" (click)="previous.emit()">Vorige</button>
-    <button class="btn border p-3 awwp-bg-primary" (click)="next.emit()">Volgende</button>
-  </div>
-
-  <hr class="m-0" />
-
-  <div class="d-flex flex-row gap-3">
-    <mat-icon class="icon-size awwp-text-primary flex-shrink-0">info</mat-icon>
-    <p class="m-0 text-secondary">
-      Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
-    </p>
-  </div>
+  <app-footer (next)="next.emit()" (previous)="previous.emit()" />
 </div>

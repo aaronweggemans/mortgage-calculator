@@ -1,41 +1,12 @@
-<div class="card bg-transparent">
-  <div class="card-body p-0">
-    <div class="d-flex flex-column flex-md-row gap-0 gap-md-4 mb-auto">
-      <div class="bg-light">
-        <app-stepper
-          class="align-self-stretch mb-auto"
-          (stepChanged)="onStepChanged($event)"
-        ></app-stepper>
-      </div>
-      @switch (selectedStep()) {
-        @case (0) {
-          <app-stap-1 class="my-3 flex-grow-1 p-4" (next)="next()"></app-stap-1>
-        }
-
-        @case (1) {
-          <app-stap-2
-            class="my-3 flex-grow-1 p-4"
-            (next)="next()"
-            (previous)="previous()"
-          ></app-stap-2>
-        }
-
-        @case (2) {
-          <app-stap-3
-            class="my-3 flex-grow-1 p-4"
-            (next)="next()"
-            (previous)="previous()"
-          ></app-stap-3>
-        }
-
-        @case (3) {
-          <app-stap-4
-            class="my-3 flex-grow-1 p-4"
-            (next)="next()"
-            (previous)="previous()"
-          ></app-stap-4>
-        }
-      }
-    </div>
-  </div>
+<div
+  class="card bg-transparent card-body p-0 d-flex flex-column flex-md-row gap-0 gap-md-4 mb-auto"
+>
+  <app-stepper class="align-self-stretch bg-light" (stepChanged)="selectedStep.set($event)" />
+  <app-selected-step
+    class="flex-grow-1 p-4 my-3"
+    [step]="selectedStep()"
+    (next)="stepper().next()"
+    (previous)="stepper().previous()"
+    (resetFlow)="stepper().reset()"
+  />
 </div>

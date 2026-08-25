@@ -1,7 +1,7 @@
 <mat-stepper
   orientation="vertical"
   class="py-4 bg-transparent"
-  (selectionChange)="onStepChange($event)"
+  (selectionChange)="stepChanged.emit($event.selectedIndex)"
 >
   <ng-template matStepperIcon="edit">
     <mat-icon>check</mat-icon>

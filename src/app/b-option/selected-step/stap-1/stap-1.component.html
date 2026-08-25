@@ -1,0 +1,42 @@
+<div class="d-flex flex-column gap-4">
+  <app-header
+    title="Persoonlijke situatie"
+    subtitle="Vul uw persoonlijke gegevens in."
+    [step]="1"
+  />
+
+  <!-- Formulier -->
+  <div class="d-flex flex-column flex-md-row justify-content-between gap-md-4 gap-3">
+    <div class="d-flex flex-column flex-item gap-3">
+      <div class="d-flex flex-column gap-1">
+        <label for="geboortedatum" class="awwp-text-primary fs-6 fw-bold">Geboortedatum</label>
+        <small class="m-0 text-secondary"
+          >Uw geboortedatum kan invloed hebben op de hoogte van uw hypotheek.</small
+        >
+        <input class="form-control" type="date" id="geboortedatum" />
+      </div>
+
+      <div class="d-flex flex-column gap-1">
+        <label for="relatiestatus" class="awwp-text-primary fs-6 fw-bold">Relatiestatus</label>
+        <select class="form-control" id="relatiestatus">
+          <option value="">Selecteer uw situatie</option>
+          <option value="">Gehuwd</option>
+          <option value="">Ongehuwd</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="alert alert-warning m-0 d-flex flex-row gap-3 flex-item">
+      <mat-icon class="icon-size flex-shrink-0">info</mat-icon>
+      <div class="d-flex flex-column">
+        <p>
+          Deze bewerking is puur een indicatie en geen offerte. Wilt u persoonlijk advies, neem dan
+          contact met ons op.
+        </p>
+        <p>U kunt contact met ons opnemen via de website, of bel naar 06-1594864</p>
+      </div>
+    </div>
+  </div>
+
+  <app-footer (next)="next.emit()" />
+</div>
