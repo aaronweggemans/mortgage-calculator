@@ -13,14 +13,30 @@
   </div>
 
   <div class="bg-light border-none rounded p-4">
-    <div class="d-flex flex-item flex-column gap-4">
-      <h4 class="awws-text-primary m-0">Wat betekent dit?</h4>
-      <ul class="m-0 list-group list-unstyled">
-        <li>Dit is het bedrag dat u waarschijnlijk kunt lenen.</li>
-        <li>Inclusief Nationale Hypotheek garantie (indien van toepassing).</li>
-        <li>Gebasseerd op uw inkomen en uitgaven</li>
-        <li>Definitieve berekening na persoonlijk advies.</li>
-      </ul>
+    <div class="d-flex flex-item flex-column gap-3">
+      <p class="fs-4 awwp-text-primary m-0">Berekening gebasseerd op:</p>
+
+      <div class="d-flex flex-row gap-2">
+        <app-card
+          class="flex-fill"
+          title="Uw bruto jaarinkomen"
+          subtitle="&euro; 30.000,-"
+          icon="person_outline"
+        />
+        <app-card
+          class="flex-fill"
+          title="Jaarinkomen partner"
+          subtitle="&euro; 20.000,-"
+          icon="people_outline"
+        />
+        <app-card
+          class="flex-fill"
+          title="Totaal bruto jaarinkomen"
+          subtitle="&euro; 50.000,-"
+          icon="euro_symbol"
+        />
+      </div>
+
       <div class="d-flex gap-2">
         <button class="btn btn-light py-2 border flex-fill" (click)="resetFlow.emit()">
           Opnieuw berekening maken
@@ -33,7 +49,7 @@
   </div>
 
   <div class="d-flex flex-row gap-3">
-    <mat-icon class="icon-size flex-shrink-0">info</mat-icon>
+    <mat-icon class="flex-shrink-0">info</mat-icon>
     <div class="d-flex flex-column gap-2">
       <p class="m-0">
         Deze berekening is een indicatie en geen offerte. Aan de berekening kunnen geen rechten
@@ -42,3 +58,6 @@
     </div>
   </div>
 </div>
+
+<!--account_balance-->
+<!--calendar_today-->

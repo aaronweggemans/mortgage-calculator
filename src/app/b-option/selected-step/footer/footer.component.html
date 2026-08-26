@@ -1,14 +1,14 @@
 <!-- Navigatie -->
 <div class="d-flex flex-column gap-4">
   <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
-    <button class="btn btn-light border p-3" (click)="previous.emit()">Vorige</button>
-    <button class="btn border p-3 awwp-bg-primary" (click)="next.emit()">Volgende</button>
+    <button class="btn p-3 btn-light" (click)="previous.emit()">Vorige</button>
+    <button class="btn p-3 awwp-bg-primary" (click)="next.emit()">Volgende</button>
   </div>
 
   <hr class="m-0" />
 
-  <div class="d-flex flex-row gap-3">
-    <mat-icon class="icon-size awwp-text-primary flex-shrink-0">info</mat-icon>
+  <div class="d-flex flex-row gap-2">
+    <mat-icon class="awwp-text-primary flex-shrink-0">info</mat-icon>
     <p class="m-0 text-secondary">
       Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
     </p>
