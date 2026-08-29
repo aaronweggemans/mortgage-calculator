@@ -16,7 +16,7 @@
     <div class="d-flex flex-item flex-column gap-3">
       <p class="fs-4 awwp-text-primary m-0">Berekening gebasseerd op:</p>
 
-      <div class="d-flex flex-row gap-2">
+      <div class="d-flex flex-column flex-md-row align-items-stretch gap-3">
         <app-card
           class="flex-fill"
           title="Uw bruto jaarinkomen"
@@ -35,6 +35,29 @@
           subtitle="&euro; 50.000,-"
           icon="euro_symbol"
         />
+      </div>
+
+      <div class="d-flex flex-column flex-md-row align-items-stretch gap-3">
+        <app-card
+          class="flex-fill"
+          title="Berekende maandlast"
+          subtitle="&euro; 30.000,-"
+          icon="calendar_today"
+        />
+        <app-card
+          class="flex-fill"
+          title="Benodigde eigengeld"
+          subtitle="&euro; 20.000,-"
+          icon="account_balance"
+        />
+        <!-- if relevant -->
+        <app-card
+          class="flex-fill"
+          title="Overdrachtsbelasting"
+          subtitle="&euro; 50.000,-"
+          icon="calendar_today"
+        />
+        <!-- else eigengeld? -->
       </div>
 
       <div class="d-flex gap-2">
@@ -58,6 +81,3 @@
     </div>
   </div>
 </div>
-
-<!--account_balance-->
-<!--calendar_today-->

@@ -1,8 +1,8 @@
 <!-- Navigatie -->
 <div class="d-flex flex-column gap-4">
   <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
-    <button class="btn p-3 btn-light" (click)="previous.emit()">Vorige</button>
-    <button class="btn p-3 awwp-bg-primary" (click)="next.emit()">Volgende</button>
+    <button #previousButton class="btn p-3 btn-light" (click)="previous.emit()">Vorige</button>
+    <button #nextButton class="btn p-3 awwp-bg-primary" (click)="next.emit()">Volgende</button>
   </div>
 
   <hr class="m-0" />
