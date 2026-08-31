@@ -5,7 +5,12 @@ import { Stap3Component } from './stap-3/stap-3.component';
 import { Stap4Component } from './stap-4/stap-4.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { form } from '@angular/forms/signals';
+import {
+  HeaderProperties,
+  IncomeAndPartnerForm,
+  LivingForm,
+  PersonalForm,
+} from './selected-step.models';
 
 @Component({
   selector: 'app-selected-step',
@@ -22,11 +27,23 @@ import { form } from '@angular/forms/signals';
 export class SelectedStepComponent {
   public readonly step = input.required<number>();
 
+  protected readonly isFormInvalid = signal<boolean>(true);
+
   public readonly next = output<void>();
   public readonly previous = output<void>();
   public readonly resetFlow = output<void>();
 
-  protected readonly header: Signal<HeaderProperties> = computed(() => {
+  protected readonly header: Signal<HeaderProperties> = computed(this.headerProperties.bind(this));
+
+  protected personal = signal<PersonalForm>({ dateOfBirth: null, status: '' });
+  protected incomeAndPartner = signal<IncomeAndPartnerForm>({
+    income: null,
+    incomePartner: null,
+    partner: false,
+  });
+  protected living = signal<LivingForm>({ debt: false, previousHouse: false, savings: 0 });
+
+  private headerProperties(): HeaderProperties {
     switch (this.step()) {
       case 0:
         return { title: 'Persoonlijke situatie', description: 'Vul uw persoonlijke gegevens in.' };
@@ -42,23 +59,5 @@ export class SelectedStepComponent {
       default:
         return { title: 'Persoonlijke situatie', description: 'Vul uw persoonlijke gegevens in.' };
     }
-  });
-
-  protected readonly formModal = signal({
-    brutoInkomen: 0,
-    leeftijd: 20,
-    partner: false,
-    brutoInkomenPartner: 0,
-    leeftijdPartner: 20,
-    previousHouse: false,
-    spaargeld: false,
-    totaalGespaard: 0,
-  });
-
-  protected readonly form = form(this.formModal);
-}
-
-interface HeaderProperties {
-  title: string;
-  description: string;
+  }
 }

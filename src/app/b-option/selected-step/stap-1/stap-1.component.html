@@ -5,15 +5,35 @@
       >Uw geboortedatum kan invloed hebben op de hoogte van uw hypotheek.</small
     >
     <input [formField]="form.dateOfBirth" class="form-control" id="geboortedatum" type="date" />
+    <div
+      class="alert alert-danger m-0"
+      role="alert"
+      [class.visually-hidden]="
+        !form.dateOfBirth().touched() || form.dateOfBirth().errors().length === 0
+      "
+    >
+      @for (error of form.dateOfBirth().errors(); track error) {
+        <p class="m-0">{{ error.message }}</p>
+      }
+    </div>
   </div>
 
   <div class="d-flex flex-column gap-1">
-    <label for="relatiestatus" class="awwp-text-primary fs-6 fw-bold">Relatiestatus</label>
-    <select [formField]="form.status" class="form-control" id="relatiestatus">
+    <label for="status" class="awwp-text-primary fs-6 fw-bold">Relatiestatus</label>
+    <select [formField]="form.status" class="form-control" id="status">
       <option value="">Selecteer uw situatie</option>
       <option value="married">Gehuwd</option>
       <option value="single">Ongehuwd</option>
     </select>
+    <div
+      class="alert alert-danger m-0"
+      role="alert"
+      [class.visually-hidden]="!form.status().touched() || form.status().errors().length === 0"
+    >
+      @for (error of form.status().errors(); track error) {
+        <p class="m-0">{{ error.message }}</p>
+      }
+    </div>
   </div>
 </div>
 

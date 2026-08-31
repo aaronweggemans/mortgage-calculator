@@ -4,15 +4,27 @@
   <div class="d-flex flex-column gap-md-4 gap-3">
     @switch (step()) {
       @case (0) {
-        <app-stap-1 class="d-contents" (next)="next.emit()" />
+        <app-stap-1
+          class="d-contents"
+          [(data)]="personal"
+          (nextButtonValidity)="isFormInvalid.set($event)"
+        />
       }
 
       @case (1) {
-        <app-stap-2 class="d-contents" (next)="next.emit()" (previous)="previous.emit()" />
+        <app-stap-2
+          class="d-contents"
+          [(data)]="incomeAndPartner"
+          (nextButtonValidity)="isFormInvalid.set($event)"
+        />
       }
 
       @case (2) {
-        <app-stap-3 class="d-contents" (next)="next.emit()" (previous)="previous.emit()" />
+        <app-stap-3
+          class="d-contents"
+          [(data)]="living"
+          (nextButtonValidity)="isFormInvalid.set($event)"
+        />
       }
 
       @case (3) {
@@ -21,5 +33,5 @@
     }
   </div>
 
-  <app-footer (previous)="previous.emit()" (next)="next.emit()" [nextDisabled]="form().invalid()" />
+  <app-footer (previous)="previous.emit()" (next)="next.emit()" [nextDisabled]="isFormInvalid()" />
 </div>

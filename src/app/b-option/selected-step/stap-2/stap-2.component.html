@@ -7,7 +7,21 @@
       >Uw bruto jaarinkomen is het bedrag wat u verdient per jaar zonder belastingen of andere
       aftrekposten.</small
     >
-    <input class="form-control" type="number" id="bruto-jaarinkomen-individu" />
+    <input
+      [formField]="form.income"
+      class="form-control"
+      id="bruto-jaarinkomen-individu"
+      type="number"
+    />
+    <div
+      class="alert alert-danger m-0"
+      role="alert"
+      [class.visually-hidden]="!form.income().touched() || form.income().errors().length === 0"
+    >
+      @for (error of form.income().errors(); track error) {
+        <p class="m-0">{{ error.message }}</p>
+      }
+    </div>
   </div>
 
   <div class="flex-item">
@@ -18,15 +32,15 @@
     >
     <div class="d-flex gap-2">
       <button
-        (click)="hasPartner.set(true)"
-        [class.awwp-active]="hasPartner() === true"
+        (click)="form.partner().value.set(true)"
+        [class.awwp-active]="form.partner().value() === true"
         class="btn btn-light p-2 flex-fill"
       >
         Ja
       </button>
       <button
-        (click)="hasPartner.set(false)"
-        [class.awwp-active]="hasPartner() === false"
+        (click)="form.partner().value.set(false)"
+        [class.awwp-active]="form.partner().value() === false"
         class="btn btn-light p-2 flex-fill"
       >
         Nee
@@ -34,13 +48,30 @@
     </div>
   </div>
 
-  @if (hasPartner() === true) {
+  @if (form.partner().value() === true) {
     <div class="d-flex flex-column gap-1">
       <label for="bruto-jaarinkomen-partner" class="awwp-text-primary fs-6 fw-bold"
         >Bruto jaarinkomen (partner)</label
       >
       <small class="m-0 text-secondary">Voer hier de bruto jaarinkomen van uw partner in.</small>
-      <input #partnerIncome class="form-control" type="number" id="bruto-jaarinkomen-partner" />
+      <input
+        #partnerIncome
+        [formField]="form.incomePartner"
+        class="form-control"
+        id="bruto-jaarinkomen-partner"
+        type="number"
+      />
+      <div
+        class="alert alert-danger m-0"
+        role="alert"
+        [class.visually-hidden]="
+          !form.incomePartner().touched() || form.incomePartner().errors().length === 0
+        "
+      >
+        @for (error of form.incomePartner().errors(); track error) {
+          <p class="m-0">{{ error.message }}</p>
+        }
+      </div>
     </div>
   }
 </div>
