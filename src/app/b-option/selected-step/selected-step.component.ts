@@ -1,10 +1,11 @@
-import { Component, computed, input, output, Signal } from '@angular/core';
+import { Component, computed, input, output, signal, Signal } from '@angular/core';
 import { Stap1Component } from './stap-1/stap-1.component';
 import { Stap2Component } from './stap-2/stap-2.component';
 import { Stap3Component } from './stap-3/stap-3.component';
 import { Stap4Component } from './stap-4/stap-4.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { form } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-selected-step',
@@ -42,6 +43,19 @@ export class SelectedStepComponent {
         return { title: 'Persoonlijke situatie', description: 'Vul uw persoonlijke gegevens in.' };
     }
   });
+
+  protected readonly formModal = signal({
+    brutoInkomen: 0,
+    leeftijd: 20,
+    partner: false,
+    brutoInkomenPartner: 0,
+    leeftijdPartner: 20,
+    previousHouse: false,
+    spaargeld: false,
+    totaalGespaard: 0,
+  });
+
+  protected readonly form = form(this.formModal);
 }
 
 interface HeaderProperties {
