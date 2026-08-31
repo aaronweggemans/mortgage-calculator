@@ -1,17 +1,25 @@
-@switch (step()) {
-  @case (0) {
-    <app-stap-1 (next)="next.emit()" />
-  }
+<div class="d-flex flex-column gap-4">
+  <app-header [title]="header().title" [subtitle]="header().description" [step]="step() + 1" />
 
-  @case (1) {
-    <app-stap-2 (next)="next.emit()" (previous)="previous.emit()" />
-  }
+  <div class="d-flex flex-column gap-md-4 gap-3">
+    @switch (step()) {
+      @case (0) {
+        <app-stap-1 class="d-contents" (next)="next.emit()" />
+      }
 
-  @case (2) {
-    <app-stap-3 (next)="next.emit()" (previous)="previous.emit()" />
-  }
+      @case (1) {
+        <app-stap-2 class="d-contents" (next)="next.emit()" (previous)="previous.emit()" />
+      }
 
-  @case (3) {
-    <app-stap-4 (resetFlow)="resetFlow.emit()" />
-  }
-}
+      @case (2) {
+        <app-stap-3 class="d-contents" (next)="next.emit()" (previous)="previous.emit()" />
+      }
+
+      @case (3) {
+        <app-stap-4 class="d-contents" (resetFlow)="resetFlow.emit()" />
+      }
+    }
+  </div>
+
+  <app-footer (previous)="previous.emit()" (next)="next.emit()" />
+</div>

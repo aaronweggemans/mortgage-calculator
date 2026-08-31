@@ -1,59 +1,46 @@
-<div class="d-flex flex-column gap-4 mb-auto">
-  <!-- Header -->
-  <app-header title="Uw inkomen" subtitle="Vul uw bruto jaar inkomen(s) in." [step]="2" />
+<div class="d-flex flex-column flex-item gap-3">
+  <div class="d-flex flex-column gap-1">
+    <label for="bruto-jaarinkomen-individu" class="awwp-text-primary fs-6 fw-bold"
+      >Bruto jaarinkomen (uzelf)</label
+    >
+    <small class="m-0 text-secondary"
+      >Uw bruto jaarinkomen is het bedrag wat u verdient per jaar zonder belastingen of andere
+      aftrekposten.</small
+    >
+    <input class="form-control" type="number" id="bruto-jaarinkomen-individu" />
+  </div>
 
-  <!-- Formulier -->
-  <div class="d-flex flex-column flex-md-row justify-content-between gap-md-4 gap-3">
-    <div class="d-flex flex-column flex-item gap-3">
-      <div class="d-flex flex-column gap-1">
-        <label for="bruto-jaarinkomen-individu" class="awwp-text-primary fs-6 fw-bold"
-          >Bruto jaarinkomen (uzelf)</label
-        >
-        <small class="m-0 text-secondary"
-          >Uw bruto jaarinkomen is het bedrag wat u verdient per jaar zonder belastingen of andere
-          aftrekposten.</small
-        >
-        <input class="form-control" type="number" id="bruto-jaarinkomen-individu" />
-      </div>
-
-      @if (hasPartner() === true) {
-        <div class="d-flex flex-column gap-1">
-          <label for="bruto-jaarinkomen-partner" class="awwp-text-primary fs-6 fw-bold"
-            >Bruto jaarinkomen (partner)</label
-          >
-          <small class="m-0 text-secondary"
-            >Voer hier de bruto jaarinkomen van uw partner in.</small
-          >
-          <input #partnerIncome class="form-control" type="number" id="bruto-jaarinkomen-partner" />
-        </div>
-      }
-    </div>
-
-    <div class="flex-item">
-      <p class="awwp-text-primary m-0 fw-bold">Heeft u een partner?</p>
-      <small class="m-0 text-secondary"
-        >Wanneer uw partner ook van een inkomen geniet, kan dit worden meegenomen in de hoogte van
-        uw hypotheek.</small
+  <div class="flex-item">
+    <p class="awwp-text-primary m-0 fw-bold">Heeft u een partner?</p>
+    <small class="m-0 text-secondary"
+      >Wanneer uw partner ook van een inkomen geniet, kan dit worden meegenomen in de hoogte van uw
+      hypotheek.</small
+    >
+    <div class="d-flex gap-2">
+      <button
+        (click)="hasPartner.set(true)"
+        [class.awwp-active]="hasPartner() === true"
+        class="btn btn-light p-2 flex-fill"
       >
-      <div class="d-flex gap-2">
-        <button
-          (click)="hasPartner.set(true)"
-          [class.awwp-active]="hasPartner() === true"
-          class="btn btn-light p-2 flex-fill"
-        >
-          Ja
-        </button>
-        <button
-          (click)="hasPartner.set(false)"
-          [class.awwp-active]="hasPartner() === false"
-          class="btn btn-light p-2 flex-fill"
-        >
-          Nee
-        </button>
-      </div>
+        Ja
+      </button>
+      <button
+        (click)="hasPartner.set(false)"
+        [class.awwp-active]="hasPartner() === false"
+        class="btn btn-light p-2 flex-fill"
+      >
+        Nee
+      </button>
     </div>
   </div>
 
-  <!-- Navigatie -->
-  <app-footer (next)="next.emit()" (previous)="previous.emit()" />
+  @if (hasPartner() === true) {
+    <div class="d-flex flex-column gap-1">
+      <label for="bruto-jaarinkomen-partner" class="awwp-text-primary fs-6 fw-bold"
+        >Bruto jaarinkomen (partner)</label
+      >
+      <small class="m-0 text-secondary">Voer hier de bruto jaarinkomen van uw partner in.</small>
+      <input #partnerIncome class="form-control" type="number" id="bruto-jaarinkomen-partner" />
+    </div>
+  }
 </div>

@@ -1,17 +1,13 @@
-import { Component, effect, output, signal, viewChild } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { form, FormField, maxDate, required, SchemaPathTree } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-stap-1',
-  imports: [MatIcon, HeaderComponent, FooterComponent, FormField],
+  imports: [MatIcon, FormField],
   templateUrl: './stap-1.component.html',
 })
 export class Stap1Component {
-  private readonly footer = viewChild.required(FooterComponent);
-
   public readonly next = output<void>();
 
   private readonly dateAndStatusModal = signal<DateAndStatus>({
@@ -29,13 +25,6 @@ export class Stap1Component {
       required(schemaPath.status, { message: 'U moet hier een valide waarde invullen.' });
     },
   );
-
-  private readonly enableAndDisableNextButton = effect(() => {
-    console.log(this.form().valid());
-    if (this.footer().nextButton()) {
-      this.footer().nextButton().nativeElement.disabled = this.form().valid();
-    }
-  });
 
   protected submitForm(): void {
     //  this.formError.emit(this.form().invalid());

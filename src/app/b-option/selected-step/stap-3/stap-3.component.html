@@ -1,59 +1,46 @@
-<div class="d-flex flex-column gap-4 mb-auto">
-  <!-- Header -->
-  <app-header title="Wonen" subtitle="Vul uw huidige woonsituatie in." [step]="3" />
-
-  <!-- Formulier -->
-  <div class="d-flex flex-column flex-md-row justify-content-between gap-md-4 gap-3">
-    <div class="d-flex flex-column flex-item gap-3">
-      <div class="d-flex flex-column gap-1">
-        <p class="awwp-text-primary m-0 fw-bold">Heeft u eerder een huis gekocht?</p>
-        <small class="m-0 text-secondary">
-          In het geval dat u eerder al een keer een huis heeft gekocht, moet u overdrachtsbelasting
-          betalen. Dit is niet het geval bij mensen die voor de eerste keer een woning kopen.
-        </small>
-        <div class="d-flex gap-2">
-          <button
-            (click)="hasEerderHuisGekocht.set(true)"
-            [class.awwp-active]="hasEerderHuisGekocht() === true"
-            class="btn btn-light py-2 border flex-fill"
-          >
-            Ja
-          </button>
-          <button
-            (click)="hasEerderHuisGekocht.set(false)"
-            [class.awwp-active]="hasEerderHuisGekocht() === false"
-            class="btn btn-light py-2 border flex-fill"
-          >
-            Nee
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex flex-column flex-item gap-3 gap-md-4">
-      <div class="d-flex flex-column gap-1">
-        <label for="schulden" class="awwp-text-primary fs-6 fw-bold"
-          >Heeft u schulden/leningen?</label
-        >
-        <small class="m-0 text-secondary"
-          >Bij overige leningen of schulden kan het zijn dat u gekort wordt op de hoogte van uw
-          hyotheek.</small
-        >
-        <input class="form-control" type="number" id="schulden" />
-      </div>
-
-      <div class="d-flex flex-column gap-1">
-        <label for="spaargeld" class="awwp-text-primary fs-6 fw-bold"
-          >Hoeveel spaargeld heeft u op dit moment?</label
-        >
-        <small class="m-0 text-secondary"
-          >Meer spaargeld maakt het makkelijker om een hypotheek te krijgen.</small
-        >
-        <input class="form-control" type="number" id="spaargeld" />
-      </div>
+<div class="d-flex flex-column flex-item gap-3">
+  <div class="d-flex flex-column gap-1">
+    <p class="awwp-text-primary m-0 fw-bold">Heeft u eerder een huis gekocht?</p>
+    <small class="m-0 text-secondary">
+      In het geval dat u eerder al een keer een huis heeft gekocht, moet u overdrachtsbelasting
+      betalen. Dit is niet het geval bij mensen die voor de eerste keer een woning kopen.
+    </small>
+    <div class="d-flex gap-2">
+      <button
+        (click)="hasEerderHuisGekocht.set(true)"
+        [class.awwp-active]="hasEerderHuisGekocht() === true"
+        class="btn btn-light py-2 border flex-fill"
+      >
+        Ja
+      </button>
+      <button
+        (click)="hasEerderHuisGekocht.set(false)"
+        [class.awwp-active]="hasEerderHuisGekocht() === false"
+        class="btn btn-light py-2 border flex-fill"
+      >
+        Nee
+      </button>
     </div>
   </div>
+</div>
 
-  <!-- Navigatie -->
-  <app-footer (next)="next.emit()" (previous)="previous.emit()" />
+<div class="d-flex flex-column flex-item gap-3 gap-md-4">
+  <div class="d-flex flex-column gap-1">
+    <label for="schulden" class="awwp-text-primary fs-6 fw-bold">Heeft u schulden/leningen?</label>
+    <small class="m-0 text-secondary"
+      >Bij overige leningen of schulden kan het zijn dat u gekort wordt op de hoogte van uw
+      hyotheek.</small
+    >
+    <input class="form-control" type="number" id="schulden" />
+  </div>
+
+  <div class="d-flex flex-column gap-1">
+    <label for="spaargeld" class="awwp-text-primary fs-6 fw-bold"
+      >Hoeveel spaargeld heeft u op dit moment?</label
+    >
+    <small class="m-0 text-secondary"
+      >Meer spaargeld maakt het makkelijker om een hypotheek te krijgen.</small
+    >
+    <input class="form-control" type="number" id="spaargeld" />
+  </div>
 </div>

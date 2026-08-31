@@ -1,9 +1,7 @@
-<div
-  class="card bg-transparent card-body p-0 d-flex flex-column flex-md-row gap-0 gap-md-4 mb-auto"
->
+<div class="card bg-transparent card-body p-0 d-flex flex-column flex-md-row gap-0 gap-md-4">
   <app-stepper class="align-self-stretch bg-light" (stepChanged)="selectedStep.set($event)" />
   <app-selected-step
-    class="flex-grow-1 p-4 my-3"
+    class="flex-grow-1 p-4 my-3 min-w-0"
     [step]="selectedStep()"
     (next)="stepper().next()"
     (previous)="stepper().previous()"
