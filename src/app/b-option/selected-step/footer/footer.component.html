@@ -1,20 +1,26 @@
 <!-- Navigatie -->
 <div class="d-flex flex-column gap-4">
-  <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
-    <button class="btn p-3 btn-light" (click)="previous.emit()" [disabled]="previousDisabled()">
-      Vorige
-    </button>
-    <button class="btn p-3 awwp-bg-primary" (click)="next.emit()" [disabled]="nextDisabled()">
-      Volgende
-    </button>
-  </div>
+  @if (showButtons()) {
+    <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
+      <button class="btn p-3 btn-light" (click)="previous.emit()" [disabled]="previousDisabled()">
+        Vorige
+      </button>
+      <button class="btn p-3 awwp-bg-primary" (click)="next.emit()" [disabled]="nextDisabled()">
+        Volgende
+      </button>
+    </div>
+  }
 
-  <hr class="m-0" />
+  @if (showLine()) {
+    <hr class="m-0" />
+  }
 
-  <div class="d-flex flex-row gap-2">
-    <mat-icon class="awwp-text-primary flex-shrink-0">info</mat-icon>
-    <p class="m-0 text-secondary">
-      Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
-    </p>
-  </div>
+  @if (showMessage()) {
+    <div class="d-flex flex-row gap-2">
+      <mat-icon class="awwp-text-primary flex-shrink-0">info</mat-icon>
+      <p class="m-0 text-secondary">
+        Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.
+      </p>
+    </div>
+  }
 </div>

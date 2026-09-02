@@ -1,7 +1,7 @@
 import { Service } from '@angular/core';
 
 @Service()
-export class CalculationService {
+export class MortgageCalculationService {
   /**
    * Calculate the maximum mortgage based on gross annual income (bruto jaarinkomen).
    * @param grossAnnualIncome

@@ -3,7 +3,7 @@ import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 import { Component, computed, inject, input, LOCALE_ID } from '@angular/core';
 import { MortgageCalculation } from '../mortgage-calculation';
-import { CalculationService } from './calculation.service';
+import { MortgageCalculationService } from '../../shared/mortgage-calculation.service';
 
 registerLocaleData(localeNl);
 
@@ -14,7 +14,7 @@ registerLocaleData(localeNl);
   providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }],
 })
 export class CalculationComponent {
-  private readonly calculationService: CalculationService = inject(CalculationService);
+  private readonly calculationService = inject(MortgageCalculationService);
 
   public readonly formData = input.required<MortgageCalculation>();
 

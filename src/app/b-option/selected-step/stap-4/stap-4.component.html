@@ -1,7 +1,7 @@
 <div class="d-flex flex-column flex-item gap-3">
   <div class="d-flex flex-item flex-column gap-3">
     <div class="alert alert-warning m-0 p-4">
-      <p class="m-0 fs-1">&euro; 335.000</p>
+      <p class="m-0 fs-1">{{ maxMortgage() | currency: 'EUR' }}</p>
       <p class="m-0 text-secondary">Indicatie maximale hypotheek</p>
     </div>
   </div>
@@ -13,19 +13,19 @@
         <app-card
           class="flex-fill"
           title="Uw bruto jaarinkomen"
-          subtitle="&euro; 30.000,-"
+          [subtitle]="`${(income() | currency: 'EUR')}`"
           icon="person_outline"
         />
         <app-card
           class="flex-fill"
           title="Jaarinkomen partner"
-          subtitle="&euro; 20.000,-"
+          [subtitle]="`${(partnerIncome() | currency: 'EUR')}`"
           icon="people_outline"
         />
         <app-card
           class="flex-fill"
           title="Totaal bruto jaarinkomen"
-          subtitle="&euro; 50.000,-"
+          [subtitle]="`${(totalIncome() | currency: 'EUR')}`"
           icon="euro_symbol"
         />
       </div>
@@ -34,26 +34,30 @@
         <app-card
           class="flex-fill"
           title="Berekende maandlast"
-          subtitle="&euro; 30.000,-"
+          [subtitle]="`${(monthlyCosts() | currency: 'EUR')}`"
           icon="calendar_today"
         />
         <app-card
           class="flex-fill"
           title="Benodigde eigengeld"
-          subtitle="&euro; 20.000,-"
+          [subtitle]="`${(ownContribution() | currency: 'EUR')}`"
           icon="account_balance"
         />
         <!-- if relevant -->
         <app-card
           class="flex-fill"
           title="Overdrachtsbelasting"
-          subtitle="&euro; 50.000,-"
+          [subtitle]="`${(transferTax() | currency: 'EUR')}`"
           icon="calendar_today"
         />
         <!-- else eigengeld? -->
       </div>
       <div class="d-flex gap-2">
-        <button class="btn btn-light py-2 border flex-fill" (click)="resetFlow.emit()">
+        <button
+          #calculateAgainButton
+          (click)="resetFlow.emit()"
+          class="btn btn-light py-2 border flex-fill"
+        >
           Opnieuw berekening maken
         </button>
         <button class="btn btn-light py-2 border flex-fill" (click)="navigate()">

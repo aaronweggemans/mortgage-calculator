@@ -9,13 +9,13 @@ export interface PersonalForm {
 }
 
 export interface IncomeAndPartnerForm {
-  income: number | null;
+  income: number;
   partner: boolean | null;
   incomePartner: number | null;
 }
 
 export interface LivingForm {
   previousHouse: boolean;
-  debt: boolean;
+  debt: number;
   savings: number;
 }

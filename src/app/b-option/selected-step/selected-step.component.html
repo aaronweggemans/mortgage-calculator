@@ -1,37 +1,47 @@
 <div class="d-flex flex-column gap-4">
-  <app-header [title]="header().title" [subtitle]="header().description" [step]="step() + 1" />
+  <app-header [step]="step() + 1" [subtitle]="header().description" [title]="header().title" />
 
   <div class="d-flex flex-column gap-md-4 gap-3">
     @switch (step()) {
       @case (0) {
         <app-stap-1
-          class="d-contents"
-          [(data)]="personal"
           (nextButtonValidity)="isFormInvalid.set($event)"
+          [(data)]="personal"
+          class="d-contents"
         />
       }
 
       @case (1) {
         <app-stap-2
-          class="d-contents"
-          [(data)]="incomeAndPartner"
           (nextButtonValidity)="isFormInvalid.set($event)"
+          [(data)]="incomeAndPartner"
+          class="d-contents"
         />
       }
 
       @case (2) {
         <app-stap-3
-          class="d-contents"
-          [(data)]="living"
           (nextButtonValidity)="isFormInvalid.set($event)"
+          [(data)]="living"
+          class="d-contents"
         />
       }
 
       @case (3) {
-        <app-stap-4 class="d-contents" (resetFlow)="resetFlow.emit()" />
+        <app-stap-4
+          (resetFlow)="resetFlow.emit()"
+          [income]="incomeAndPartner().income"
+          [partnerIncome]="incomeAndPartner().incomePartner ?? 0"
+          class="d-contents"
+        />
       }
     }
   </div>
 
-  <app-footer (previous)="previous.emit()" (next)="next.emit()" [nextDisabled]="isFormInvalid()" />
+  <app-footer
+    (next)="next.emit()"
+    (previous)="previous.emit()"
+    [nextDisabled]="isFormInvalid()"
+    [showButtons]="step() !== 3"
+  />
 </div>

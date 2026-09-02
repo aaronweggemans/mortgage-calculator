@@ -37,11 +37,11 @@ export class SelectedStepComponent {
 
   protected personal = signal<PersonalForm>({ dateOfBirth: null, status: '' });
   protected incomeAndPartner = signal<IncomeAndPartnerForm>({
-    income: null,
-    incomePartner: null,
-    partner: false,
+    income: 30000,
+    incomePartner: 30000,
+    partner: null,
   });
-  protected living = signal<LivingForm>({ debt: false, previousHouse: false, savings: 0 });
+  protected living = signal<LivingForm>({ debt: 0, previousHouse: false, savings: 0 });
 
   private headerProperties(): HeaderProperties {
     switch (this.step()) {

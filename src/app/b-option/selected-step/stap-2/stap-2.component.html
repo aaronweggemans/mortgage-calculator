@@ -32,6 +32,7 @@
     >
     <div class="d-flex gap-2">
       <button
+        type="button"
         (click)="form.partner().value.set(true)"
         [class.awwp-active]="form.partner().value() === true"
         class="btn btn-light p-2 flex-fill"
@@ -39,6 +40,7 @@
         Ja
       </button>
       <button
+        type="button"
         (click)="form.partner().value.set(false)"
         [class.awwp-active]="form.partner().value() === false"
         class="btn btn-light p-2 flex-fill"

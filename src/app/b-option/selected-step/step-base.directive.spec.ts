@@ -1,17 +1,17 @@
-import { StepBase } from './step-base-class.directive';
+import { StepBase } from './step-base.directive';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator/vitest';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/vitest';
 
 describe('Step', () => {
-  let spectator: SpectatorDirective<StepBase<any>>;
+  let spectator: Spectator<StepBase<any>>;
 
-  const createDirective = createDirectiveFactory({ directive: StepBase });
+  const createComponent = createComponentFactory({ component: StepBase });
 
   beforeEach(() => {
-    spectator = createDirective();
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(spectator.directive).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

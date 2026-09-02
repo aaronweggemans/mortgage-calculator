@@ -12,7 +12,7 @@ export class Stap2Component extends StepBase<IncomeAndPartnerForm> {
   private readonly partnerIncomeInputField =
     viewChild<ElementRef<HTMLInputElement>>('partnerIncome');
 
-  private readonly focusIncomePqartnerField = effect(() => {
+  private readonly focusOnInputPartnerWhenInputIsShown = effect(() => {
     if (this.form.partner().value() && this.partnerIncomeInputField()) {
       this.partnerIncomeInputField()!.nativeElement.focus();
     }

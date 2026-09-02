@@ -1,12 +1,12 @@
 import { describe, beforeEach, it, expect } from 'vitest';
-import { CalculationService } from './calculation.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/vitest';
+import { MortgageCalculationService } from './mortgage-calculation.service';
 
-describe('CalculateMortgageService', () => {
-  let spectator: SpectatorService<CalculationService>;
+describe('MortgageCalculationService', () => {
+  let spectator: SpectatorService<MortgageCalculationService>;
 
   const createService = createServiceFactory({
-    service: CalculationService,
+    service: MortgageCalculationService,
   });
 
   beforeEach(() => {

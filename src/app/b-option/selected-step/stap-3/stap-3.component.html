@@ -7,15 +7,15 @@
     </small>
     <div class="d-flex gap-2">
       <button
-        (click)="hasEerderHuisGekocht.set(true)"
-        [class.awwp-active]="hasEerderHuisGekocht() === true"
+        (click)="form.previousHouse().value.set(true)"
+        [class.awwp-active]="form.previousHouse().value() === true"
         class="btn btn-light py-2 border flex-fill"
       >
         Ja
       </button>
       <button
-        (click)="hasEerderHuisGekocht.set(false)"
-        [class.awwp-active]="hasEerderHuisGekocht() === false"
+        (click)="form.previousHouse().value.set(false)"
+        [class.awwp-active]="form.previousHouse().value() === false"
         class="btn btn-light py-2 border flex-fill"
       >
         Nee
@@ -31,7 +31,7 @@
       >Bij overige leningen of schulden kan het zijn dat u gekort wordt op de hoogte van uw
       hyotheek.</small
     >
-    <input class="form-control" type="number" id="schulden" />
+    <input [formField]="form.debt" class="form-control" type="number" id="schulden" />
   </div>
 
   <div class="d-flex flex-column gap-1">
@@ -41,6 +41,6 @@
     <small class="m-0 text-secondary"
       >Meer spaargeld maakt het makkelijker om een hypotheek te krijgen.</small
     >
-    <input class="form-control" type="number" id="spaargeld" />
+    <input [formField]="form.savings" class="form-control" type="number" id="spaargeld" />
   </div>
 </div>

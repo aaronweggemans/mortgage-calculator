@@ -9,7 +9,6 @@ export abstract class StepBase<FormInterface extends object> implements OnDestro
   protected abstract readonly form: FieldTree<FormInterface>;
 
   private readonly updateInvalidState = effect(() => {
-    console.log(this.form().invalid());
     this.nextButtonValidity.emit(this.form().invalid());
   });
 
