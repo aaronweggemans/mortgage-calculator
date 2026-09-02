@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectator/vitest';
 import { screen } from '@testing-library/dom';
 import { MortgageCalculation } from '../mortgage-calculation';
-import { CalculationService } from './calculation.service';
+import { MortgageCalculationService } from '../../shared/mortgage-calculation.service';
 import { CurrencyPipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -30,7 +30,7 @@ describe('CalculationComponent', () => {
   const createComponent = createComponentFactory({
     component: CalculationComponent,
     providers: [
-      mockProvider(CalculationService, {
+      mockProvider(MortgageCalculationService, {
         calculateMaxMortgage: vi.fn().mockReturnValue(270000),
       }),
     ],
@@ -133,7 +133,7 @@ describe('CalculationComponent', () => {
           },
         },
         providers: [
-          mockProvider(CalculationService, {
+          mockProvider(MortgageCalculationService, {
             calculateMaxMortgage: vi.fn().mockReturnValue(500000),
           }),
         ],
@@ -172,7 +172,7 @@ describe('CalculationComponent', () => {
       spectator = createComponent({
         props: { formData: emptyFormData },
         providers: [
-          mockProvider(CalculationService, {
+          mockProvider(MortgageCalculationService, {
             calculateMaxMortgage: vi.fn().mockReturnValue(500000),
             monthlyCosts: vi.fn().mockReturnValue(2200),
             ownContribution: vi.fn().mockReturnValue(48000),

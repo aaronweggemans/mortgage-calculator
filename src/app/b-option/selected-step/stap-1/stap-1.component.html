@@ -8,6 +8,7 @@
     <div
       class="alert alert-danger m-0"
       role="alert"
+      data-testid="date-of-birth-error"
       [class.visually-hidden]="
         !form.dateOfBirth().touched() || form.dateOfBirth().errors().length === 0
       "
@@ -28,6 +29,7 @@
     <div
       class="alert alert-danger m-0"
       role="alert"
+      data-testid="status-error"
       [class.visually-hidden]="!form.status().touched() || form.status().errors().length === 0"
     >
       @for (error of form.status().errors(); track error) {

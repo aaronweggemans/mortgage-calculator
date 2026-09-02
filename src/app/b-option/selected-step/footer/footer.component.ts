@@ -9,9 +9,9 @@ import { MatIcon } from '@angular/material/icon';
 export class FooterComponent {
   public readonly showButtons = input<boolean>(true);
   // Not used but for future use
-  public readonly showLine = input<boolean>(true);
+  public readonly showSeparator = input<boolean>(true);
   // Not used but for future use
-  public readonly showMessage = input<boolean>(true);
+  public readonly showDisclaimer = input<boolean>(true);
 
   public readonly nextDisabled = input<boolean>(false);
   public readonly previousDisabled = input<boolean>(false);

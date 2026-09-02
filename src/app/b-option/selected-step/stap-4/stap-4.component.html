@@ -13,19 +13,19 @@
         <app-card
           class="flex-fill"
           title="Uw bruto jaarinkomen"
-          [subtitle]="`${(income() | currency: 'EUR')}`"
+          [subtitle]="(income() | currency: 'EUR') ?? 'N/A'"
           icon="person_outline"
         />
         <app-card
           class="flex-fill"
           title="Jaarinkomen partner"
-          [subtitle]="`${(partnerIncome() | currency: 'EUR')}`"
+          [subtitle]="(partnerIncome() | currency: 'EUR') ?? 'N/A'"
           icon="people_outline"
         />
         <app-card
           class="flex-fill"
           title="Totaal bruto jaarinkomen"
-          [subtitle]="`${(totalIncome() | currency: 'EUR')}`"
+          [subtitle]="(totalIncome() | currency: 'EUR') ?? 'N/A'"
           icon="euro_symbol"
         />
       </div>
@@ -34,20 +34,20 @@
         <app-card
           class="flex-fill"
           title="Berekende maandlast"
-          [subtitle]="`${(monthlyCosts() | currency: 'EUR')}`"
+          [subtitle]="(monthlyCosts() | currency: 'EUR') ?? 'N/A'"
           icon="calendar_today"
         />
         <app-card
           class="flex-fill"
           title="Benodigde eigengeld"
-          [subtitle]="`${(ownContribution() | currency: 'EUR')}`"
+          [subtitle]="(ownContribution() | currency: 'EUR') ?? 'N/A'"
           icon="account_balance"
         />
         <!-- if relevant -->
         <app-card
           class="flex-fill"
           title="Overdrachtsbelasting"
-          [subtitle]="`${(transferTax() | currency: 'EUR')}`"
+          [subtitle]="(transferTax() | currency: 'EUR') ?? 'N/A'"
           icon="calendar_today"
         />
         <!-- else eigengeld? -->

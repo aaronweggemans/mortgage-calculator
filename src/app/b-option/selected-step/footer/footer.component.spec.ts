@@ -16,6 +16,32 @@ describe('FooterComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  it('should initially render the buttons, separator and the disclaimer', () => {
+    expect(screen.getByRole('button', { name: 'Vorige' })).toExist();
+    expect(screen.getByRole('button', { name: 'Volgende' })).toExist();
+    expect(screen.getByRole('separator')).toExist();
+    expect(
+      screen.getByText(
+        'Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.',
+      ),
+    ).toExist();
+  });
+
+  it('should not show the buttons, separator and the disclaimer when those options are set to false', () => {
+    spectator.setInput('showButtons', false);
+    spectator.setInput('showSeparator', false);
+    spectator.setInput('showDisclaimer', false);
+
+    expect(screen.queryByRole('button', { name: 'Vorige' })).not.toExist();
+    expect(screen.queryByRole('button', { name: 'Volgende' })).not.toExist();
+    expect(screen.queryByRole('separator')).not.toExist();
+    expect(
+      screen.queryByRole(
+        'Uw gegevens worden alleen gebruikt voor deze berekening en niet opgeslagen in een database.',
+      ),
+    ).not.toExist();
+  });
+
   it('should emit next event when next button is clicked', () => {
     const nextSpy = vi.spyOn(spectator.component.next, 'emit');
 

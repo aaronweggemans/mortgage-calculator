@@ -1,14 +1,31 @@
+import { Component, signal } from '@angular/core';
+import { form } from '@angular/forms/signals';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/vitest';
 import { StepBase } from './step-base.directive';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { createComponentFactory, Spectator } from '@ngneat/spectator/vitest';
 
-describe('Step', () => {
-  let spectator: Spectator<StepBase<any>>;
+interface FormStub {
+  name: string;
+}
 
-  const createComponent = createComponentFactory({ component: StepBase });
+@Component({
+  selector: 'app-step-test',
+  template: '',
+})
+class StepComponentStub extends StepBase<FormStub> {
+  private readonly name = signal<FormStub>({ name: '' });
+  protected readonly form = form(this.name);
+}
+
+describe('StepBase', () => {
+  let spectator: Spectator<StepComponentStub>;
+
+  const createComponent = createComponentFactory({
+    component: StepComponentStub,
+  });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({ props: { data: { name: '' } } });
   });
 
   it('should create', () => {
