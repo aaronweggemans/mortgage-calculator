@@ -1,4 +1,21 @@
-import { Component, computed, input, output, signal, Signal } from '@angular/core';
+import {
+  afterNextRender,
+  afterRenderEffect,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+  Signal,
+  viewChild,
+  viewChildren,
+} from '@angular/core';
 import { Stap1Component } from './stap-1/stap-1.component';
 import { Stap2Component } from './stap-2/stap-2.component';
 import { Stap3Component } from './stap-3/stap-3.component';
@@ -11,6 +28,7 @@ import {
   LivingForm,
   PersonalForm,
 } from './selected-step.models';
+import { outputToObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-selected-step',
@@ -25,15 +43,16 @@ import {
   templateUrl: './selected-step.component.html',
 })
 export class SelectedStepComponent {
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
+
   public readonly step = input.required<number>();
-
-  protected readonly isFormInvalid = signal<boolean>(true);
-
   public readonly next = output<void>();
   public readonly previous = output<void>();
   public readonly resetFlow = output<void>();
 
-  protected readonly header: Signal<HeaderProperties> = computed(this.headerProperties.bind(this));
+  private readonly focus = afterRenderEffect(this.focusOnTheFirstElement.bind(this));
+  protected readonly header = computed(this.headerProperties.bind(this));
+  protected readonly isFormInvalid = signal<boolean>(true);
 
   protected personal = signal<PersonalForm>({ dateOfBirth: null, status: '' });
   protected incomeAndPartner = signal<IncomeAndPartnerForm>({
@@ -42,6 +61,12 @@ export class SelectedStepComponent {
     partner: null,
   });
   protected living = signal<LivingForm>({ debt: 0, previousHouse: false, savings: 0 });
+
+  private focusOnTheFirstElement() {
+    if (this.step()) {
+      this.elementRef.nativeElement.querySelector('input, button, select')?.focus();
+    }
+  }
 
   private headerProperties(): HeaderProperties {
     switch (this.step()) {
