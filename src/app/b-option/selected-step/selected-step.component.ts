@@ -5,6 +5,7 @@ import {
   ElementRef,
   inject,
   input,
+  OnInit,
   output,
   signal,
 } from '@angular/core';
@@ -33,7 +34,7 @@ import {
   ],
   templateUrl: './selected-step.component.html',
 })
-export class SelectedStepComponent {
+export class SelectedStepComponent implements OnInit {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly step = input.required<number>();
@@ -52,6 +53,14 @@ export class SelectedStepComponent {
     partner: null,
   });
   protected readonly living = signal<LivingForm>({ debt: 0, previousHouse: false, savings: 0 });
+
+  ngOnInit(): void {
+    this.resetFlow.subscribe(() => {
+      this.personal.set({ dateOfBirth: null, status: '' });
+      this.incomeAndPartner.set({ income: 30000, incomePartner: null, partner: null });
+      this.living.set({ debt: 0, previousHouse: false, savings: 0 });
+    });
+  }
 
   private focusOnTheFirstElement(): void {
     if (this.step()) {

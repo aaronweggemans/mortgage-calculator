@@ -41,9 +41,9 @@
   </div>
 
   <app-footer
-    [hidePrevious]="step() === 0"
+    [hideNext]="step() === 3"
+    [hidePrevious]="step() === 0 || step() === 3"
     [nextDisabled]="isFormInvalid()"
-    [showButtons]="step() !== 3"
     (next)="next.emit()"
     (previous)="previous.emit()"
   />
