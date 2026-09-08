@@ -56,7 +56,8 @@ $mortgage-calculator-theme: mat.m2-define-light-theme(
   )
 );
 
-@include mat.all-component-themes($mortgage-calculator-theme);
+@include mat.stepper-theme($mortgage-calculator-theme);
+@include mat.icon-theme($mortgage-calculator-theme);
 
 .flex-item {
   flex: 1 1;
