@@ -1,6 +1,6 @@
 import { FormComponent } from './form.component';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { screen, within } from '@testing-library/dom';
+import { ByRoleOptions, screen, within } from '@testing-library/dom';
 import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { createComponentFactory, Spectator } from '@ngneat/spectator/vitest';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ describe('FormComponent', () => {
     { input: '9'.repeat(10), expectation: 'U heeft hier een te hoog getal.' },
   ];
 
-  const onDataTestId = (testId: string) => ({
+  const onDataTestId: (testId: string) => ByRoleOptions = (testId: string) => ({
     name: (_: string, el: Element) => el.getAttribute('data-testid') === testId,
   });
 

@@ -8,11 +8,11 @@ import { BOptionComponent } from './b-option/b-option.component';
   imports: [AOptionComponent, BOptionComponent],
 })
 export class AppComponent {
-  public readonly option = input<Option>();
+  readonly option = input<Option>();
 
-  public readonly primaryColor = input('#222356');
-  public readonly secondaryColor = input('#81B4DE');
-  public readonly tertiaryColor = input('#f5f5f8');
+  readonly primaryColor = input('#222356');
+  readonly secondaryColor = input('#81B4DE');
+  readonly tertiaryColor = input('#f5f5f8');
 
   @HostBinding('style.--app-primary')
   get primaryColorCss(): string {
@@ -22,11 +22,6 @@ export class AppComponent {
   @HostBinding('style.--app-secondary')
   get secondaryColorCss(): string {
     return this.secondaryColor();
-  }
-
-  @HostBinding('style.--app-tertiary')
-  get tertiaryColorCss(): string {
-    return this.tertiaryColor();
   }
 }
 

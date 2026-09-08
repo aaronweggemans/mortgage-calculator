@@ -36,24 +36,24 @@ import {
 export class SelectedStepComponent {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
-  public readonly step = input.required<number>();
-  public readonly next = output<void>();
-  public readonly previous = output<void>();
-  public readonly resetFlow = output<void>();
+  readonly step = input.required<number>();
+  readonly next = output<void>();
+  readonly previous = output<void>();
+  readonly resetFlow = output<void>();
 
   private readonly focus = afterRenderEffect(this.focusOnTheFirstElement.bind(this));
   protected readonly header = computed(this.headerProperties.bind(this));
   protected readonly isFormInvalid = signal<boolean>(true);
 
-  protected personal = signal<PersonalForm>({ dateOfBirth: null, status: '' });
-  protected incomeAndPartner = signal<IncomeAndPartnerForm>({
+  protected readonly personal = signal<PersonalForm>({ dateOfBirth: null, status: '' });
+  protected readonly incomeAndPartner = signal<IncomeAndPartnerForm>({
     income: 30000,
     incomePartner: 30000,
     partner: null,
   });
-  protected living = signal<LivingForm>({ debt: 0, previousHouse: false, savings: 0 });
+  protected readonly living = signal<LivingForm>({ debt: 0, previousHouse: false, savings: 0 });
 
-  private focusOnTheFirstElement() {
+  private focusOnTheFirstElement(): void {
     if (this.step()) {
       this.elementRef.nativeElement.querySelector('input, button, select')?.focus();
     }

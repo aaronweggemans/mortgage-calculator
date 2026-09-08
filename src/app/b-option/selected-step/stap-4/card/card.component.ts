@@ -7,7 +7,7 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './card.component.html',
 })
 export class CardComponent {
-  public readonly title = input.required<string>();
-  public readonly subtitle = input.required<string>();
-  public readonly icon = input.required<string>();
+  readonly title = input.required<string>();
+  readonly subtitle = input.required<string>();
+  readonly icon = input.required<string>();
 }

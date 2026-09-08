@@ -4,9 +4,9 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator/vitest';
 import { StepBase } from './step-base.directive';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-interface FormStub {
+type FormStub = {
   name: string;
-}
+};
 
 @Component({
   selector: 'app-step-test',

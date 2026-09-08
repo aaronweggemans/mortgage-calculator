@@ -6,7 +6,7 @@ export class MortgageCalculationService {
    * Calculate the maximum mortgage based on gross annual income (bruto jaarinkomen).
    * @param grossAnnualIncome
    */
-  public calculateMaxMortgage(grossAnnualIncome: number): number {
+  calculateMaxMortgage(grossAnnualIncome: number): number {
     const slope = 0.000011;
     const intercept = 3.7;
 
@@ -20,7 +20,7 @@ export class MortgageCalculationService {
    * Calculate monthly costs based on maximum mortgage.
    * @param maxMortgage
    */
-  public monthlyCosts(maxMortgage: number): number {
+  monthlyCosts(maxMortgage: number): number {
     const x1 = 120000;
     const y1 = 580;
 
@@ -38,7 +38,7 @@ export class MortgageCalculationService {
    * Calculate transfer tax based on maximum mortgage (overdrachtsbelasting).
    * @param maxMortgage
    */
-  public transferTax(maxMortgage: number): number {
+  transferTax(maxMortgage: number): number {
     return Math.floor(maxMortgage * 0.02);
   }
 
@@ -46,7 +46,7 @@ export class MortgageCalculationService {
    * Calculate own contribution based on maximum mortgage (eigen inbreng).
    * @param maxMortgage
    */
-  public ownContribution(maxMortgage: number): number {
+  ownContribution(maxMortgage: number): number {
     return Math.floor(maxMortgage * 0.1);
   }
 }

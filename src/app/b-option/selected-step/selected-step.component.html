@@ -5,43 +5,43 @@
     @switch (step()) {
       @case (0) {
         <app-stap-1
-          (nextButtonValidity)="isFormInvalid.set($event)"
-          [(data)]="personal"
           class="d-contents"
+          [(data)]="personal"
+          (nextButtonValidity)="isFormInvalid.set($event)"
         />
       }
 
       @case (1) {
         <app-stap-2
-          (nextButtonValidity)="isFormInvalid.set($event)"
-          [(data)]="incomeAndPartner"
           class="d-contents"
+          [(data)]="incomeAndPartner"
+          (nextButtonValidity)="isFormInvalid.set($event)"
         />
       }
 
       @case (2) {
         <app-stap-3
-          (nextButtonValidity)="isFormInvalid.set($event)"
-          [(data)]="living"
           class="d-contents"
+          [(data)]="living"
+          (nextButtonValidity)="isFormInvalid.set($event)"
         />
       }
 
       @case (3) {
         <app-stap-4
-          (resetFlow)="resetFlow.emit()"
+          class="d-contents"
           [income]="incomeAndPartner().income"
           [partnerIncome]="incomeAndPartner().incomePartner ?? 0"
-          class="d-contents"
+          (resetFlow)="resetFlow.emit()"
         />
       }
     }
   </div>
 
   <app-footer
-    (next)="next.emit()"
-    (previous)="previous.emit()"
     [nextDisabled]="isFormInvalid()"
     [showButtons]="step() !== 3"
+    (next)="next.emit()"
+    (previous)="previous.emit()"
   />
 </div>

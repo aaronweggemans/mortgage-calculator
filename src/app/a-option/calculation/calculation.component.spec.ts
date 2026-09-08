@@ -5,14 +5,7 @@ import { screen } from '@testing-library/dom';
 import { MortgageCalculation } from '../mortgage-calculation';
 import { MortgageCalculationService } from '../../shared/mortgage-calculation.service';
 import { CurrencyPipe } from '@angular/common';
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({ name: 'currency' })
-class CurrencyPipeMock implements PipeTransform {
-  transform(value: number) {
-    return value;
-  }
-}
+import { MockPipe } from 'ng-mocks';
 
 describe('CalculationComponent', () => {
   let spectator: Spectator<CalculationComponent>;
@@ -34,19 +27,7 @@ describe('CalculationComponent', () => {
         calculateMaxMortgage: vi.fn().mockReturnValue(270000),
       }),
     ],
-    overrideComponents: [
-      [
-        CalculationComponent,
-        {
-          remove: {
-            imports: [CurrencyPipe],
-          },
-          add: {
-            imports: [CurrencyPipeMock],
-          },
-        },
-      ],
-    ],
+    componentImports: [[CurrencyPipe, MockPipe(CurrencyPipe)]],
   });
 
   describe('Always rendered definitions', () => {

@@ -6,7 +6,7 @@ import { Component, input } from '@angular/core';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  public readonly title = input.required<string>();
-  public readonly subtitle = input.required<string>();
-  public readonly step = input.required<number>();
+  readonly title = input.required<string>();
+  readonly subtitle = input.required<string>();
+  readonly step = input.required<number>();
 }

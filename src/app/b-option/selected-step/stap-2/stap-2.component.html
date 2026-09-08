@@ -1,6 +1,6 @@
 <div class="d-flex flex-column flex-item gap-3">
   <div class="d-flex flex-column gap-1">
-    <label for="bruto-jaarinkomen-individu" class="awwp-text-primary fs-6 fw-bold"
+    <label class="awwp-text-primary fs-6 fw-bold" for="bruto-jaarinkomen-individu"
       >Bruto jaarinkomen (uzelf)</label
     >
     <small class="m-0 text-secondary"
@@ -8,10 +8,10 @@
       aftrekposten.</small
     >
     <input
-      [formField]="form.income"
       class="form-control"
       id="bruto-jaarinkomen-individu"
       type="number"
+      [formField]="form.income"
     />
     <div
       class="alert alert-danger m-0"
@@ -32,18 +32,18 @@
     >
     <div class="d-flex gap-2">
       <button
-        type="button"
-        (click)="form.partner().value.set(true)"
-        [class.awwp-active]="form.partner().value() === true"
         class="btn btn-light p-2 flex-fill"
+        type="button"
+        [class.awwp-active]="form.partner().value() === true"
+        (click)="form.partner().value.set(true)"
       >
         Ja
       </button>
       <button
-        type="button"
-        (click)="form.partner().value.set(false)"
-        [class.awwp-active]="form.partner().value() === false"
         class="btn btn-light p-2 flex-fill"
+        type="button"
+        [class.awwp-active]="form.partner().value() === false"
+        (click)="form.partner().value.set(false)"
       >
         Nee
       </button>
@@ -52,16 +52,16 @@
 
   @if (form.partner().value() === true) {
     <div class="d-flex flex-column gap-1">
-      <label for="bruto-jaarinkomen-partner" class="awwp-text-primary fs-6 fw-bold"
+      <label class="awwp-text-primary fs-6 fw-bold" for="bruto-jaarinkomen-partner"
         >Bruto jaarinkomen (partner)</label
       >
       <small class="m-0 text-secondary">Voer hier de bruto jaarinkomen van uw partner in.</small>
       <input
         #partnerIncome
-        [formField]="form.incomePartner"
         class="form-control"
         id="bruto-jaarinkomen-partner"
         type="number"
+        [formField]="form.incomePartner"
       />
       <div
         class="alert alert-danger m-0"

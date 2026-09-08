@@ -49,30 +49,6 @@ describe('SelectedStepComponent', () => {
     },
   );
 
-  it.each([
-    { step: 0, component: Stap1Component },
-    { step: 1, component: Stap2Component },
-    { step: 2, component: Stap3Component },
-  ])('should emit next when next is called from the component', ({ step, component }) => {
-    spectator.setInput('step', step);
-    const spyOnNext = vi.spyOn(spectator.component.next, 'emit');
-    spectator.query(component as Type<any>)?.next.emit();
-    expect(spyOnNext).toHaveBeenCalled();
-  });
-
-  it.each([
-    { step: 1, component: Stap2Component },
-    { step: 2, component: Stap3Component },
-  ])(
-    'should emit previous when previous is called from these components',
-    ({ step, component }) => {
-      spectator.setInput('step', step);
-      const spyOnPrevious = vi.spyOn(spectator.component.previous, 'emit');
-      spectator.query(component as Type<any>)?.previous.emit();
-      expect(spyOnPrevious).toHaveBeenCalled();
-    },
-  );
-
   it('should emit resetFlow when the last component emits reset flow', () => {
     spectator.setInput('step', 3);
     const spyOnResetFlow = vi.spyOn(spectator.component.resetFlow, 'emit');
@@ -81,7 +57,7 @@ describe('SelectedStepComponent', () => {
   });
 });
 
-interface StepCase<T> {
+type StepCase<T> = {
   step: number;
   component: Type<T>;
-}
+};

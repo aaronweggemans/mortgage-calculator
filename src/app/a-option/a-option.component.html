@@ -1,9 +1,9 @@
 <main class="row w-100">
   <div class="col-md-6">
-    <app-form (formError)="formError.set($event)" (formData)="formData.set($event)" />
+    <app-form (formData)="formData.set($event)" (formError)="formError.set($event)" />
   </div>
   <div class="col-md-6">
-    <div role="alert" class="alert alert-danger" [class.d-none]="!formError()">
+    <div class="alert alert-danger" role="alert" [class.d-none]="!formError()">
       @if (formError()) {
         Er is iets mis gegaan. Wellicht heeft u niet alle waardes in de berekening goed gezet.
       }

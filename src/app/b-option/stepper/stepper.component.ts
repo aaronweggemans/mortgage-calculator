@@ -11,18 +11,18 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './stepper.component.scss',
 })
 export class StepperComponent {
-  public readonly stepper = viewChild.required(MatStepper);
-  public readonly stepChanged = output<number>();
+  readonly stepper = viewChild.required(MatStepper);
+  readonly stepChanged = output<number>();
 
-  public next(): void {
+  next(): void {
     this.stepper().next();
   }
 
-  public previous(): void {
+  previous(): void {
     this.stepper().previous();
   }
 
-  public reset(): void {
+  reset(): void {
     this.stepper().reset();
   }
 }

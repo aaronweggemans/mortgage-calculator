@@ -29,9 +29,9 @@ export class Stap4Component {
     }
   });
 
-  public readonly income = input.required<number>();
-  public readonly partnerIncome = input.required<number>();
-  public readonly resetFlow = output<void>();
+  readonly income = input.required<number>();
+  readonly partnerIncome = input.required<number>();
+  readonly resetFlow = output<void>();
 
   protected readonly totalIncome = computed(() => {
     return this.income() + this.partnerIncome();

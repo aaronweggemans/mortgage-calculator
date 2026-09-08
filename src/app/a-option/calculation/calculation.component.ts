@@ -16,7 +16,7 @@ registerLocaleData(localeNl);
 export class CalculationComponent {
   private readonly calculationService = inject(MortgageCalculationService);
 
-  public readonly formData = input.required<MortgageCalculation>();
+  readonly formData = input.required<MortgageCalculation>();
 
   protected readonly totalIncome = computed(() => {
     return this.formData().brutoInkomen + (this.formData().brutoInkomenPartner ?? 0);

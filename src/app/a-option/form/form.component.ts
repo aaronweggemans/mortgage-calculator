@@ -27,8 +27,8 @@ import { form, FormField, max, min, required } from '@angular/forms/signals';
   ],
 })
 export class FormComponent {
-  public readonly formError = output<boolean>();
-  public readonly formData = output<MortgageCalculation>();
+  readonly formError = output<boolean>();
+  readonly formData = output<MortgageCalculation>();
 
   protected readonly formModal = signal<MortgageCalculation>({
     brutoInkomen: 30000,

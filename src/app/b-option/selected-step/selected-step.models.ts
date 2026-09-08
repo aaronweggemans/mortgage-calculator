@@ -1,21 +1,21 @@
-export interface HeaderProperties {
+export type HeaderProperties = {
   title: string;
   description: string;
-}
+};
 
-export interface PersonalForm {
+export type PersonalForm = {
   dateOfBirth: Date | null;
   status: '';
-}
+};
 
-export interface IncomeAndPartnerForm {
+export type IncomeAndPartnerForm = {
   income: number;
   partner: boolean | null;
   incomePartner: number | null;
-}
+};
 
-export interface LivingForm {
+export type LivingForm = {
   previousHouse: boolean;
   debt: number;
   savings: number;
-}
+};

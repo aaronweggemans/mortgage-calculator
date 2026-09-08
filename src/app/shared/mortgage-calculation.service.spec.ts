@@ -1,4 +1,4 @@
-import { describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/vitest';
 import { MortgageCalculationService } from './mortgage-calculation.service';
 
