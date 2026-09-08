@@ -1,5 +1,5 @@
-import { Component, output, signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, output, signal, ViewEncapsulation } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatStep, MatStepLabel, MatStepper, MatStepperNext } from '@angular/material/stepper';
 import { NgTemplateOutlet } from '@angular/common';
@@ -12,6 +12,7 @@ import { form, FormField, max, min, required } from '@angular/forms/signals';
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   imports: [
     MatStepper,
     ReactiveFormsModule,
@@ -24,6 +25,7 @@ import { form, FormField, max, min, required } from '@angular/forms/signals';
     MatIcon,
     MatButton,
     FormField,
+    FormsModule,
   ],
 })
 export class FormComponent {

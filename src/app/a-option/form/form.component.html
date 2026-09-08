@@ -1,202 +1,187 @@
 <mat-stepper #stepper orientation="vertical" [linear]="true">
-  <form (submit)="submitForm()">
-    <mat-step>
-      <div class="card bg-light p-4 m-2">
-        <ng-template matStepLabel>Wat is uw bruto jaarinkomen?</ng-template>
-        <div class="form-group">
-          <label class="h6 text-jwz-primary" for="bruto-inkomen"
-            >Wat is uw bruto jaar inkomen</label
-          >
-          <input
-            class="form-control mb-3"
-            id="bruto-inkomen"
-            type="number"
-            [formField]="form.brutoInkomen"
-          />
-          <ng-container
-            *ngTemplateOutlet="
-              errorHandler;
-              context: { $implicit: form.brutoInkomen, name: 'brutoInkomen' }
-            "
-          />
+  <mat-step>
+    <div class="card bg-light p-4 m-2">
+      <ng-template matStepLabel>Wat is uw bruto jaarinkomen?</ng-template>
+      <div class="form-group">
+        <label class="h6" for="bruto-inkomen">Wat is uw bruto jaar inkomen</label>
+        <input
+          class="form-control mb-3"
+          id="bruto-inkomen"
+          type="number"
+          [formField]="form.brutoInkomen"
+        />
+        <ng-container
+          *ngTemplateOutlet="
+            errorHandler;
+            context: { $implicit: form.brutoInkomen, name: 'brutoInkomen' }
+          "
+        />
 
-          <label class="h6 text-jwz-primary" for="leeftijd">Wat is uw leeftijd</label>
-          <input
-            class="form-control mb-3"
-            id="leeftijd"
-            type="number"
-            [formField]="form.leeftijd"
-          />
-          <ng-container
-            *ngTemplateOutlet="
-              errorHandler;
-              context: { $implicit: form.leeftijd, name: 'leeftijd' }
-            "
-          />
+        <label class="h6" for="leeftijd">Wat is uw leeftijd</label>
+        <input class="form-control mb-3" id="leeftijd" type="number" [formField]="form.leeftijd" />
+        <ng-container
+          *ngTemplateOutlet="errorHandler; context: { $implicit: form.leeftijd, name: 'leeftijd' }"
+        />
 
-          <mat-slide-toggle
-            class="mb-3"
-            color="primary"
-            id="heeft-een-partner"
-            [formField]="form.partner"
-          >
-            Partner
-          </mat-slide-toggle>
+        <mat-slide-toggle
+          class="mb-3"
+          color="primary"
+          id="heeft-een-partner"
+          [formField]="form.partner"
+        >
+          Partner
+        </mat-slide-toggle>
 
-          @if (form.partner().value()) {
-            <div>
-              <label class="h6 text-jwz-primary" for="bruto-inkomen-partner"
-                >Bruto jaarinkomen van uw partner</label
-              >
-              <input
-                class="form-control mb-3"
-                id="bruto-inkomen-partner"
-                type="number"
-                [formField]="form.brutoInkomenPartner"
-              />
-              <ng-container
-                *ngTemplateOutlet="
-                  errorHandler;
-                  context: { $implicit: form.brutoInkomenPartner, name: 'brutoInkomenPartner' }
-                "
-              />
+        @if (form.partner().value()) {
+          <div>
+            <label class="h6" for="bruto-inkomen-partner">Bruto jaarinkomen van uw partner</label>
+            <input
+              class="form-control mb-3"
+              id="bruto-inkomen-partner"
+              type="number"
+              [formField]="form.brutoInkomenPartner"
+            />
+            <ng-container
+              *ngTemplateOutlet="
+                errorHandler;
+                context: { $implicit: form.brutoInkomenPartner, name: 'brutoInkomenPartner' }
+              "
+            />
 
-              <label class="h6 text-jwz-primary" for="leeftijd-partner"
-                >Leeftijd van uw partner</label
-              >
-              <input
-                class="form-control mb-3"
-                id="leeftijd-partner"
-                type="number"
-                [formField]="form.leeftijdPartner"
-              />
-              <ng-container
-                *ngTemplateOutlet="
-                  errorHandler;
-                  context: { $implicit: form.leeftijdPartner, name: 'leeftijdPartner' }
-                "
-              />
-            </div>
-          }
+            <label class="h6" for="leeftijd-partner">Leeftijd van uw partner</label>
+            <input
+              class="form-control mb-3"
+              id="leeftijd-partner"
+              type="number"
+              [formField]="form.leeftijdPartner"
+            />
+            <ng-container
+              *ngTemplateOutlet="
+                errorHandler;
+                context: { $implicit: form.leeftijdPartner, name: 'leeftijdPartner' }
+              "
+            />
+          </div>
+        }
 
-          <button
-            aria-label="Next question"
-            class="next-button"
-            color="primary"
-            mat-mini-fab
-            matStepperNext
-            type="button"
-          >
-            <mat-icon>arrow_downward</mat-icon>
-          </button>
-        </div>
-      </div>
-    </mat-step>
-
-    <mat-step>
-      <div class="card bg-light p-4 m-2">
-        <ng-template matStepLabel>Voorgaande woning?</ng-template>
-        <div class="form-group">
-          <p class="h6 text-jwz-primary">Heeft u al eerder een keer een huis gekocht?</p>
-          <p class="text-jwz-primary">
-            In het geval dat u eerder al een keer een huis heeft gekocht, moet u
-            overdrachtsbelasting betalen. Dit is niet het geval bij mensen die voor de eerste keer
-            een woning kopen. Vink a.u.b. hieronder aan of u al eerder een keer een huis heeft
-            gekocht.
-          </p>
-
-          <mat-slide-toggle
-            class="mb-3"
-            color="primary"
-            id="eerder-een-huis"
-            [formField]="form.previousHouse"
-          >
-            Ik heb eerder een keer een huis gekocht.
-          </mat-slide-toggle>
-
-          <button
-            aria-label="Next question"
-            class="next-button"
-            color="primary"
-            mat-mini-fab
-            matStepperNext
-            type="button"
-          >
-            <mat-icon>arrow_downward</mat-icon>
-          </button>
-        </div>
-      </div>
-    </mat-step>
-
-    <mat-step>
-      <div class="card bg-light p-4 m-2">
-        <ng-template matStepLabel>Heeft u spaargeld?</ng-template>
-        <div class="form-group">
-          <label class="h6 text-jwz-primary" for="spaargeld">Uw spaargeld</label>
-          <p class="text-jwz-primary">
-            Heeft u spaargeld? Zo ja, dit kan namelijk invloed hebben het hypotheek dat u kunt
-            krijgen. Tel eventueel ook uw partner's spaargeld hierbij op.
-          </p>
-
-          <mat-slide-toggle
-            class="mb-3"
-            color="primary"
-            id="toggle-spaargeld"
-            [formField]="form.spaargeld"
-            >Spaargeld</mat-slide-toggle
-          >
-
-          @if (form.spaargeld().value()) {
-            <div class="form-group">
-              <input
-                class="form-control mb-3"
-                id="spaargeld"
-                type="number"
-                [formField]="form.totaalGespaard"
-              />
-              <ng-container
-                *ngTemplateOutlet="
-                  errorHandler;
-                  context: { $implicit: form.totaalGespaard, name: 'totaalGespaard' }
-                "
-              />
-            </div>
-          }
-
-          <button
-            aria-label="Next question"
-            class="next-button"
-            color="primary"
-            mat-mini-fab
-            matStepperNext
-            type="button"
-          >
-            <mat-icon>arrow_downward</mat-icon>
-          </button>
-        </div>
-      </div>
-    </mat-step>
-
-    <mat-step>
-      <div class="card bg-light p-4 m-2">
-        <ng-template matStepLabel>Bereken de hoogte van uw hypotheek.</ng-template>
-        <div class="form-group">
-          <p class="h6 text-jwz-primary">Bereken uw hypotheek.</p>
-          <p class="text-jwz-primary">
-            U heeft alle benodigde hypotheek gevens ingevoerd. U kunt nu een berekening maken. Druk
-            op de onderste knop om de computer een berekening te laten maken.
-          </p>
-          <button class="btn btn-primary" type="submit">Bereken uw hypotheek</button>
-        </div>
-      </div>
-
-      <div>
-        <button mat-button type="button" (click)="stepper.reset()">
-          Reset de pagina en begin opnieuw
+        <button
+          aria-label="Next question"
+          class="next-button"
+          color="primary"
+          mat-mini-fab
+          matStepperNext
+          type="button"
+        >
+          <mat-icon>arrow_downward</mat-icon>
         </button>
       </div>
-    </mat-step>
-  </form>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <div class="card bg-light p-4 m-2">
+      <ng-template matStepLabel>Voorgaande woning?</ng-template>
+      <div class="form-group">
+        <p class="h6">Heeft u al eerder een keer een huis gekocht?</p>
+        <p>
+          In het geval dat u eerder al een keer een huis heeft gekocht, moet u overdrachtsbelasting
+          betalen. Dit is niet het geval bij mensen die voor de eerste keer een woning kopen. Vink
+          a.u.b. hieronder aan of u al eerder een keer een huis heeft gekocht.
+        </p>
+
+        <mat-slide-toggle
+          class="mb-3"
+          color="primary"
+          id="eerder-een-huis"
+          [formField]="form.previousHouse"
+        >
+          Ik heb eerder een keer een huis gekocht.
+        </mat-slide-toggle>
+
+        <button
+          aria-label="Next question"
+          class="next-button"
+          color="primary"
+          mat-mini-fab
+          matStepperNext
+          type="button"
+        >
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <div class="card bg-light p-4 m-2">
+      <ng-template matStepLabel>Heeft u spaargeld?</ng-template>
+      <div class="form-group">
+        <label class="h6" for="spaargeld">Uw spaargeld</label>
+        <p>
+          Heeft u spaargeld? Zo ja, dit kan namelijk invloed hebben het hypotheek dat u kunt
+          krijgen. Tel eventueel ook uw partner's spaargeld hierbij op.
+        </p>
+
+        <mat-slide-toggle
+          class="mb-3"
+          color="primary"
+          id="toggle-spaargeld"
+          [formField]="form.spaargeld"
+          >Spaargeld</mat-slide-toggle
+        >
+
+        @if (form.spaargeld().value()) {
+          <div class="form-group">
+            <input
+              class="form-control mb-3"
+              id="spaargeld"
+              type="number"
+              [formField]="form.totaalGespaard"
+            />
+            <ng-container
+              *ngTemplateOutlet="
+                errorHandler;
+                context: { $implicit: form.totaalGespaard, name: 'totaalGespaard' }
+              "
+            />
+          </div>
+        }
+
+        <button
+          aria-label="Next question"
+          class="next-button"
+          color="primary"
+          mat-mini-fab
+          matStepperNext
+          type="button"
+        >
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <div class="card bg-light p-4 m-2">
+      <ng-template matStepLabel>Bereken de hoogte van uw hypotheek.</ng-template>
+      <div class="form-group">
+        <p class="h6">Bereken uw hypotheek.</p>
+        <p>
+          U heeft alle benodigde hypotheek gevens ingevoerd. U kunt nu een berekening maken. Druk op
+          de onderste knop om de computer een berekening te laten maken.
+        </p>
+        <button class="btn btn-primary" type="button" (click)="submitForm()">
+          Bereken uw hypotheek
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <button mat-button type="button" (click)="stepper.reset()">
+        Reset de pagina en begin opnieuw
+      </button>
+    </div>
+  </mat-step>
 </mat-stepper>
 
 <ng-template #errorHandler let-errorRow let-name="name">

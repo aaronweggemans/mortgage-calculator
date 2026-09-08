@@ -1,17 +1,20 @@
 <!-- Navigatie -->
 <div class="d-flex flex-column gap-4">
   @if (showButtons()) {
-    <div class="d-flex flex-column flex-md-row justify-content-md-between gap-4">
+    <div class="d-flex flex-column flex-md-row gap-4">
+      @if (!hidePrevious()) {
+        <button
+          class="btn p-3 btn-light"
+          type="button"
+          [disabled]="previousDisabled()"
+          (click)="previous.emit()"
+        >
+          Vorige
+        </button>
+      }
+
       <button
-        class="btn p-3 btn-light"
-        type="button"
-        [disabled]="previousDisabled()"
-        (click)="previous.emit()"
-      >
-        Vorige
-      </button>
-      <button
-        class="btn p-3 awwp-bg-primary"
+        class="btn p-3 awwp-bg-primary ms-md-auto"
         type="button"
         [disabled]="nextDisabled()"
         (click)="next.emit()"

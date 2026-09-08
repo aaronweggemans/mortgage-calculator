@@ -23,6 +23,10 @@ export class Stap4Component {
   private readonly calculateAgainButton =
     viewChild.required<ElementRef<HTMLButtonElement>>('calculateAgainButton');
 
+  readonly shouldPayTransferTax = computed(() => {
+    return new Date().getFullYear() - this.dateOfBirth().getFullYear() > 35 || this.previousHouse();
+  });
+
   private readonly forceFocusOnCalculateAgainButton = effect(() => {
     if (this.calculateAgainButton()) {
       this.calculateAgainButton()!.nativeElement.focus();
@@ -31,6 +35,9 @@ export class Stap4Component {
 
   readonly income = input.required<number>();
   readonly partnerIncome = input.required<number>();
+  readonly dateOfBirth = input.required<Date>();
+  readonly previousHouse = input.required<boolean>();
+
   readonly resetFlow = output<void>();
 
   protected readonly totalIncome = computed(() => {
@@ -52,8 +59,4 @@ export class Stap4Component {
   protected readonly transferTax = computed(() => {
     return this.calculationService.transferTax(this.maxMortgage());
   });
-
-  protected navigate(): void {
-    window.location.href = window.location.hostname + '/contact';
-  }
 }

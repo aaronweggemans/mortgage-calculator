@@ -48,7 +48,7 @@ export class SelectedStepComponent {
   protected readonly personal = signal<PersonalForm>({ dateOfBirth: null, status: '' });
   protected readonly incomeAndPartner = signal<IncomeAndPartnerForm>({
     income: 30000,
-    incomePartner: 30000,
+    incomePartner: null,
     partner: null,
   });
   protected readonly living = signal<LivingForm>({ debt: 0, previousHouse: false, savings: 0 });

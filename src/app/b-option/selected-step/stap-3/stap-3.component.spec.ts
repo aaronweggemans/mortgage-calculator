@@ -11,16 +11,11 @@ describe('Stap3Component', () => {
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({ props: { data: { debt: 0, previousHouse: false, savings: 0 } } });
   });
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
-  });
-
-  it('should initially not show a custom design on the has bought a house previously buttons', () => {
-    expect(screen.getByRole('button', { name: 'Ja' })).not.toHaveClass('awwp-active');
-    expect(screen.getByRole('button', { name: 'Nee' })).not.toHaveClass('awwp-active');
   });
 
   it('should be able to toggle the has bought a house previously field', () => {
@@ -28,8 +23,10 @@ describe('Stap3Component', () => {
 
     spectator.click(screen.getByRole('button', { name: 'Ja' }));
     expect(screen.getByRole('button', { name: 'Ja' })).toHaveClass('awwp-active');
+    expect(screen.getByRole('button', { name: 'Nee' })).not.toHaveClass('awwp-active');
 
     spectator.click(screen.getByRole('button', { name: 'Nee' }));
     expect(screen.getByRole('button', { name: 'Nee' })).toHaveClass('awwp-active');
+    expect(screen.getByRole('button', { name: 'Ja' })).not.toHaveClass('awwp-active');
   });
 });

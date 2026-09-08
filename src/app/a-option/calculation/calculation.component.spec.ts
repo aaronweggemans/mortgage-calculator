@@ -6,6 +6,7 @@ import { MortgageCalculation } from '../mortgage-calculation';
 import { MortgageCalculationService } from '../../shared/mortgage-calculation.service';
 import { CurrencyPipe } from '@angular/common';
 import { MockPipe } from 'ng-mocks';
+import { PipeTransform } from '@angular/core';
 
 describe('CalculationComponent', () => {
   let spectator: Spectator<CalculationComponent>;
@@ -27,7 +28,7 @@ describe('CalculationComponent', () => {
         calculateMaxMortgage: vi.fn().mockReturnValue(270000),
       }),
     ],
-    componentImports: [[CurrencyPipe, MockPipe(CurrencyPipe)]],
+    componentImports: [[CurrencyPipe, MockPipe<PipeTransform>(CurrencyPipe, (data) => data)]],
   });
 
   describe('Always rendered definitions', () => {

@@ -30,8 +30,10 @@
       @case (3) {
         <app-stap-4
           class="d-contents"
+          [dateOfBirth]="personal().dateOfBirth!"
           [income]="incomeAndPartner().income"
           [partnerIncome]="incomeAndPartner().incomePartner ?? 0"
+          [previousHouse]="living().previousHouse"
           (resetFlow)="resetFlow.emit()"
         />
       }
@@ -39,6 +41,7 @@
   </div>
 
   <app-footer
+    [hidePrevious]="step() === 0"
     [nextDisabled]="isFormInvalid()"
     [showButtons]="step() !== 3"
     (next)="next.emit()"

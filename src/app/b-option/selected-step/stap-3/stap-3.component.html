@@ -9,7 +9,7 @@
       <button
         class="btn btn-light py-2 border flex-fill"
         type="button"
-        [class.awwp-active]="form.previousHouse().value() === true"
+        [class.awwp-active]="form.previousHouse().value()"
         (click)="form.previousHouse().value.set(true)"
       >
         Ja
@@ -17,7 +17,7 @@
       <button
         class="btn btn-light py-2 border flex-fill"
         type="button"
-        [class.awwp-active]="form.previousHouse().value() === false"
+        [class.awwp-active]="!form.previousHouse().value()"
         (click)="form.previousHouse().value.set(false)"
       >
         Nee

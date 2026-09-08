@@ -13,6 +13,8 @@ export class FooterComponent {
   // Not used but for future use
   readonly showDisclaimer = input<boolean>(true);
 
+  readonly hidePrevious = input(false);
+
   readonly nextDisabled = input<boolean>(false);
   readonly previousDisabled = input<boolean>(false);
 

@@ -14,19 +14,19 @@
           class="flex-fill"
           icon="person_outline"
           title="Uw bruto jaarinkomen"
-          [subtitle]="(income() | currency: 'EUR') ?? 'N/A'"
+          [subtitle]="(income() | currency: 'EUR')!"
         />
         <app-card
           class="flex-fill"
           icon="people_outline"
           title="Jaarinkomen partner"
-          [subtitle]="(partnerIncome() | currency: 'EUR') ?? 'N/A'"
+          [subtitle]="(partnerIncome() | currency: 'EUR')!"
         />
         <app-card
           class="flex-fill"
           icon="euro_symbol"
           title="Totaal bruto jaarinkomen"
-          [subtitle]="(totalIncome() | currency: 'EUR') ?? 'N/A'"
+          [subtitle]="(totalIncome() | currency: 'EUR')!"
         />
       </div>
 
@@ -35,20 +35,20 @@
           class="flex-fill"
           icon="calendar_today"
           title="Berekende maandlast"
-          [subtitle]="(monthlyCosts() | currency: 'EUR') ?? 'N/A'"
+          [subtitle]="(monthlyCosts() | currency: 'EUR')!"
         />
         <app-card
           class="flex-fill"
           icon="account_balance"
           title="Benodigde eigengeld"
-          [subtitle]="(ownContribution() | currency: 'EUR') ?? 'N/A'"
+          [subtitle]="(ownContribution() | currency: 'EUR')!"
         />
         <!-- if relevant -->
         <app-card
           class="flex-fill"
           icon="calendar_today"
           title="Overdrachtsbelasting"
-          [subtitle]="(transferTax() | currency: 'EUR') ?? 'N/A'"
+          [subtitle]="shouldPayTransferTax() ? (transferTax() | currency: 'EUR')! : 'n.v.t.'"
         />
         <!-- else eigengeld? -->
       </div>
@@ -61,7 +61,9 @@
         >
           Opnieuw berekening maken
         </button>
-        <a class="btn btn-light py-2 border flex-fill" href="#"> Persoonlijk advies aanvragen </a>
+        <a class="btn btn-light py-2 border flex-fill" href="/contact"
+          >Persoonlijk advies aanvragen</a
+        >
       </div>
     </div>
   </div>

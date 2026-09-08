@@ -11,7 +11,9 @@ describe('Stap2Component', () => {
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: { data: { income: 0, partner: null, incomePartner: null } },
+    });
   });
 
   it('should create', () => {
