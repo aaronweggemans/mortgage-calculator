@@ -1,0 +1,48 @@
+<div class="d-flex flex-column flex-item gap-3">
+  <div class="d-flex flex-column gap-1">
+    <p class="awwp-text-primary m-0 fw-bold">Heeft u eerder een huis gekocht?</p>
+    <small class="m-0 text-secondary">
+      In het geval dat u eerder al een keer een huis heeft gekocht, moet u overdrachtsbelasting
+      betalen. Dit is niet het geval bij mensen die voor de eerste keer een woning kopen.
+    </small>
+    <div class="d-flex gap-2">
+      <button
+        class="btn btn-light py-2 border flex-fill"
+        type="button"
+        [class.awwp-active]="form.previousHouse().value()"
+        (click)="form.previousHouse().value.set(true)"
+      >
+        Ja
+      </button>
+      <button
+        class="btn btn-light py-2 border flex-fill"
+        type="button"
+        [class.awwp-active]="!form.previousHouse().value()"
+        (click)="form.previousHouse().value.set(false)"
+      >
+        Nee
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex flex-column flex-item gap-3 gap-md-4">
+  <div class="d-flex flex-column gap-1">
+    <label class="awwp-text-primary fs-6 fw-bold" for="schulden">Heeft u schulden/leningen?</label>
+    <small class="m-0 text-secondary"
+      >Bij overige leningen of schulden kan het zijn dat u gekort wordt op de hoogte van uw
+      hyotheek.</small
+    >
+    <input class="form-control" id="schulden" type="number" [formField]="form.debt" />
+  </div>
+
+  <div class="d-flex flex-column gap-1">
+    <label class="awwp-text-primary fs-6 fw-bold" for="spaargeld"
+      >Hoeveel spaargeld heeft u op dit moment?</label
+    >
+    <small class="m-0 text-secondary"
+      >Meer spaargeld maakt het makkelijker om een hypotheek te krijgen.</small
+    >
+    <input class="form-control" id="spaargeld" type="number" [formField]="form.savings" />
+  </div>
+</div>

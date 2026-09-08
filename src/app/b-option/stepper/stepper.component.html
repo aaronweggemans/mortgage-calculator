@@ -1,0 +1,29 @@
+<mat-stepper
+  class="py-4 bg-transparent"
+  orientation="vertical"
+  (selectionChange)="stepChanged.emit($event.selectedIndex)"
+>
+  <ng-template matStepperIcon="edit">
+    <mat-icon>check</mat-icon>
+  </ng-template>
+
+  <!-- Stap 1 -->
+  <mat-step>
+    <ng-template matStepLabel>Persoonlijk</ng-template>
+  </mat-step>
+
+  <!-- Stap 2 -->
+  <mat-step>
+    <ng-template matStepLabel>Inkomen</ng-template>
+  </mat-step>
+
+  <!-- Stap 3 -->
+  <mat-step>
+    <ng-template matStepLabel>Wonen</ng-template>
+  </mat-step>
+
+  <!-- Stap 4 -->
+  <mat-step>
+    <ng-template matStepLabel>Resultaat</ng-template>
+  </mat-step>
+</mat-stepper>

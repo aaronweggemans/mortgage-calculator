@@ -1,5 +1,5 @@
 import { Component, output, signal, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatStep, MatStepLabel, MatStepper, MatStepperNext } from '@angular/material/stepper';
 import { NgTemplateOutlet } from '@angular/common';
@@ -25,11 +25,12 @@ import { form, FormField, max, min, required } from '@angular/forms/signals';
     MatIcon,
     MatButton,
     FormField,
+    FormsModule,
   ],
 })
 export class FormComponent {
-  public readonly formError = output<boolean>();
-  public readonly formData = output<MortgageCalculation>();
+  readonly formError = output<boolean>();
+  readonly formData = output<MortgageCalculation>();
 
   protected readonly formModal = signal<MortgageCalculation>({
     brutoInkomen: 30000,
