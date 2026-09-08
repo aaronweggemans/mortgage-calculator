@@ -1,20 +1,12 @@
 import {
-  afterNextRender,
   afterRenderEffect,
-  AfterViewInit,
-  ChangeDetectorRef,
   Component,
   computed,
-  effect,
   ElementRef,
   inject,
   input,
-  model,
   output,
   signal,
-  Signal,
-  viewChild,
-  viewChildren,
 } from '@angular/core';
 import { Stap1Component } from './stap-1/stap-1.component';
 import { Stap2Component } from './stap-2/stap-2.component';
@@ -28,7 +20,6 @@ import {
   LivingForm,
   PersonalForm,
 } from './selected-step.models';
-import { outputToObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-selected-step',
