@@ -27,7 +27,10 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss", "./node_modules/bootstrap/dist/css/bootstrap.min.css"],
             "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
-            "browser": "src/main.ts"
+            "browser": "src/main.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src"]
+            }
           },
           "configurations": {
             "production": {
@@ -43,6 +46,7 @@
                   "maximumError": "4kb"
                 }
               ],
+              "styles": ["src/styles.scss"],
               "outputHashing": "all"
             },
             "development": {

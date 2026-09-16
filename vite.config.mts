@@ -33,7 +33,7 @@ export default defineConfig({
         {
           src: 'dist/mortgage-calculator/browser/styles.css',
           dest: 'assets',
-          rename: { stripBase: 3 },
+          rename: { stripBase: true },
         },
       ],
     }),

@@ -1,4 +1,4 @@
-export interface MortgageCalculation {
+export type MortgageCalculation = {
   brutoInkomen: number;
   leeftijd: number;
   partner: boolean;
@@ -7,4 +7,4 @@ export interface MortgageCalculation {
   previousHouse: boolean;
   spaargeld: boolean;
   totaalGespaard: number | null;
-}
+};

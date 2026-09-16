@@ -3,16 +3,10 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectator/vitest';
 import { screen } from '@testing-library/dom';
 import { MortgageCalculation } from '../mortgage-calculation';
-import { CalculationService } from './calculation.service';
+import { MortgageCalculationService } from '../../shared/mortgage-calculation.service';
 import { CurrencyPipe } from '@angular/common';
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({ name: 'currency' })
-class CurrencyPipeMock implements PipeTransform {
-  transform(value: number) {
-    return value;
-  }
-}
+import { MockPipe } from 'ng-mocks';
+import { PipeTransform } from '@angular/core';
 
 describe('CalculationComponent', () => {
   let spectator: Spectator<CalculationComponent>;
@@ -30,23 +24,11 @@ describe('CalculationComponent', () => {
   const createComponent = createComponentFactory({
     component: CalculationComponent,
     providers: [
-      mockProvider(CalculationService, {
+      mockProvider(MortgageCalculationService, {
         calculateMaxMortgage: vi.fn().mockReturnValue(270000),
       }),
     ],
-    overrideComponents: [
-      [
-        CalculationComponent,
-        {
-          remove: {
-            imports: [CurrencyPipe],
-          },
-          add: {
-            imports: [CurrencyPipeMock],
-          },
-        },
-      ],
-    ],
+    componentImports: [[CurrencyPipe, MockPipe<PipeTransform>(CurrencyPipe, (data) => data)]],
   });
 
   describe('Always rendered definitions', () => {
@@ -133,7 +115,7 @@ describe('CalculationComponent', () => {
           },
         },
         providers: [
-          mockProvider(CalculationService, {
+          mockProvider(MortgageCalculationService, {
             calculateMaxMortgage: vi.fn().mockReturnValue(500000),
           }),
         ],
@@ -172,7 +154,7 @@ describe('CalculationComponent', () => {
       spectator = createComponent({
         props: { formData: emptyFormData },
         providers: [
-          mockProvider(CalculationService, {
+          mockProvider(MortgageCalculationService, {
             calculateMaxMortgage: vi.fn().mockReturnValue(500000),
             monthlyCosts: vi.fn().mockReturnValue(2200),
             ownContribution: vi.fn().mockReturnValue(48000),

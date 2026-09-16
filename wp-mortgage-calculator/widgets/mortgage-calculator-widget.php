@@ -42,25 +42,14 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
     );
 
     $this->add_control(
-      'heading',
-      [
-        'label' => esc_html__('Titel', 'jwz-calculator'),
-        'type' => \Elementor\Controls_Manager::TEXT,
-        'default' => 'Bereken uw hypotheek',
-        'placeholder' => 'Vul een titel in',
-        'label_block' => true,
-      ]
-    );
-
-    $this->add_control(
       'theme',
       [
         'label' => esc_html__('Thema', 'jwz-calculator'),
         'type' => \Elementor\Controls_Manager::SELECT,
-        'default' => 'light',
+        'default' => 'A',
         'options' => [
-          'light' => 'Licht',
-          'dark' => 'Donker',
+          'A' => 'Thema 1',
+          'B' => 'Thema 2',
         ],
       ]
     );
@@ -74,14 +63,28 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
       ]
     );
 
+    $this->add_control(
+      'secondary_color',
+      [
+        'label' => esc_html__('Secundaire kleur', 'jwz-calculator'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#315d54',
+      ]
+    );
+
     $this->end_controls_section();
   }
 
   protected function render(): void {
     $settings = $this->get_settings_for_display();
     $theme = esc_attr($settings['theme']);
+    $primaryColor = esc_attr($settings['primary_color']);
+    $secondaryColor = esc_attr($settings['secondary_color']);
 
-    printf('<wp-mortgage-calculator theme="%s"></wp-mortgage-calculator>', $theme);
+    printf(
+      '<wp-mortgage-calculator option="%s" primaryColor="%s" secondaryColor="%s"></wp-mortgage-calculator>',
+      $theme, $primaryColor, $secondaryColor
+    );
   }
 
   /**
@@ -90,7 +93,11 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
   protected function content_template(): void
   {
     ?>
-      <wp-mortgage-calculator theme="{{ settings.theme }}">Calculator laden…</wp-mortgage-calculator>
+      <wp-mortgage-calculator
+        option="{{ settings.theme }}"
+        primaryColor="{{ settings.primary_color }}"
+        secondaryColor="{{ settings.secondary_color }}"
+      >Calculator laden…</wp-mortgage-calculator>
     <?php
   }
 }
