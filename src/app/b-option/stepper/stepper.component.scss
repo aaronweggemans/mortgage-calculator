@@ -1,4 +1,4 @@
-@use '_variables.scss' as awwp;
+@use '_variables.scss' as ewfwp;
 
 .mat-step-label {
   margin: auto !important;
@@ -12,7 +12,7 @@
 }
 
 .mat-step-header[aria-expanded='true'] {
-  border-left: solid 2.5px awwp.$awwp-color-secondary;
+  border-left: solid 2.5px ewfwp.$ewfwp-color-secondary;
   border-radius: 4px;
 }
 

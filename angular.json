@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mortgage-calculator": {
+    "ewfwp-mortgage-calculator-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
           "builder": "@angular/build:application",
           "options": {
             "outputPath": {
-              "base": "dist/mortgage-calculator"
+              "base": "dist/ewfwp-mortgage-calculator-app"
             },
             "index": "src/index.html",
             "polyfills": ["zone.js"],
@@ -26,7 +26,6 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss", "./node_modules/bootstrap/dist/css/bootstrap.min.css"],
-            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
             "browser": "src/main.ts",
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
@@ -62,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mortgage-calculator:build:production"
+              "buildTarget": "ewfwp-mortgage-calculator-app:build:production"
             },
             "development": {
-              "buildTarget": "mortgage-calculator:build:development"
+              "buildTarget": "ewfwp-mortgage-calculator-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "mortgage-calculator:build"
+            "buildTarget": "ewfwp-mortgage-calculator-app:build"
           }
         },
         "test": {

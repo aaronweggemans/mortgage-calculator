@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
  */
 function jwz_calculator_register_assets(): void
 {
-  $handle = 'wp-mortgage-calculator';
+  $handle = 'ewfwp-mortgage-calculator-app';
 
   $script_path = plugin_dir_path(__FILE__) . 'web-component/web-component.js';
   $style_path = plugin_dir_path(__FILE__) . 'web-component/assets/styles.css';

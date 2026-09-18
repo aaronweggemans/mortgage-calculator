@@ -1,7 +1,7 @@
 {
   "plugins": {
     "postcss-prefix-selector": {
-      "prefix": "wp-mortgage-calculator"
+      "prefix": "ewfwp-mortgage-calculator-app"
     }
   }
 }

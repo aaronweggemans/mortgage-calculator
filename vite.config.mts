@@ -4,7 +4,7 @@ import postcssPrefixSelector from 'postcss-prefix-selector';
 
 export default defineConfig({
   build: {
-    outDir: 'wp-mortgage-calculator/web-component',
+    outDir: 'ewfwp-mortgage-calculator-app/web-component',
     emptyOutDir: true,
     sourcemap: true,
 
@@ -22,7 +22,7 @@ export default defineConfig({
     postcss: {
       plugins: [
         postcssPrefixSelector({
-          prefix: 'wp-mortgage-calculator',
+          prefix: 'ewfwp-mortgage-calculator-app',
         }),
       ],
     },
@@ -31,7 +31,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'dist/mortgage-calculator/browser/styles.css',
+          src: 'dist/ewfwp-mortgage-calculator-app/browser/styles.css',
           dest: 'assets',
           rename: { stripBase: true },
         },

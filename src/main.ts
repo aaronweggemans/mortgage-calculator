@@ -13,8 +13,8 @@ createApplication({
   .then((app) => {
     const element = createCustomElement(AppComponent, { injector: app.injector });
 
-    if (!customElements.get('wp-mortgage-calculator')) {
-      customElements.define('wp-mortgage-calculator', element);
+    if (!customElements.get('ewfwp-mortgage-calculator-app')) {
+      customElements.define('ewfwp-mortgage-calculator-app', element);
     }
   })
   .catch((err) => console.error(err));

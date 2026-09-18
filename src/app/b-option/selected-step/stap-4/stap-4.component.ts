@@ -20,16 +20,12 @@ import { CurrencyPipe } from '@angular/common';
 export class Stap4Component {
   private readonly calculationService = inject(MortgageCalculationService);
 
-  private readonly calculateAgainButton =
-    viewChild.required<ElementRef<HTMLButtonElement>>('calculateAgainButton');
+  private readonly indicationMortgage =
+    viewChild.required<ElementRef<HTMLDivElement>>('indicationMortgage');
 
-  readonly shouldPayTransferTax = computed(() => {
-    return new Date().getFullYear() - this.dateOfBirth().getFullYear() > 35 || this.previousHouse();
-  });
-
-  private readonly forceFocusOnCalculateAgainButton = effect(() => {
-    if (this.calculateAgainButton()) {
-      this.calculateAgainButton()!.nativeElement.focus();
+  private readonly forceFocusOnTheMortgage = effect(() => {
+    if (this.indicationMortgage()) {
+      this.indicationMortgage()!.nativeElement.focus();
     }
   });
 
@@ -39,6 +35,10 @@ export class Stap4Component {
   readonly previousHouse = input.required<boolean>();
 
   readonly resetFlow = output<void>();
+
+  protected readonly shouldPayTransferTax = computed(() => {
+    return new Date().getFullYear() - this.dateOfBirth().getFullYear() > 35 || this.previousHouse();
+  });
 
   protected readonly totalIncome = computed(() => {
     return this.income() + this.partnerIncome();
@@ -50,10 +50,6 @@ export class Stap4Component {
 
   protected readonly monthlyCosts = computed(() => {
     return this.calculationService.monthlyCosts(this.maxMortgage());
-  });
-
-  protected readonly ownContribution = computed(() => {
-    return this.calculationService.ownContribution(this.maxMortgage());
   });
 
   protected readonly transferTax = computed(() => {

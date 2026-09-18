@@ -1,2 +1,2 @@
-import './dist/mortgage-calculator/browser/main.js';
-import './dist/mortgage-calculator/browser/polyfills.js';
+import './dist/ewfwp-mortgage-calculator-app/browser/main.js';
+import './dist/ewfwp-mortgage-calculator-app/browser/polyfills.js';

@@ -63,7 +63,7 @@ export class SelectedStepComponent implements OnInit {
   }
 
   private focusOnTheFirstElement(): void {
-    if (this.step()) {
+    if (this.step() !== 3) {
       this.elementRef.nativeElement.querySelector('input, button, select')?.focus();
     }
   }

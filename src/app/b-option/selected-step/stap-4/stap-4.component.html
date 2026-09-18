@@ -1,6 +1,6 @@
 <div class="d-flex flex-column flex-item gap-3">
   <div class="d-flex flex-item flex-column gap-3">
-    <div class="alert alert-warning m-0 p-4">
+    <div #indicationMortgage class="alert alert-warning m-0 p-4" tabindex="0">
       <p class="m-0 fs-1">{{ maxMortgage() | currency: 'EUR' : 'symbol' : '1.0-0' }},-</p>
       <p class="m-0 text-secondary">Indicatie maximale hypotheek</p>
     </div>
@@ -8,7 +8,7 @@
 
   <div class="bg-light border-none rounded p-4">
     <div class="d-flex flex-item flex-column gap-3">
-      <p class="fs-4 awwp-text-primary m-0">Berekening gebasseerd op:</p>
+      <p class="fs-4 ewfwp-text-primary m-0">Berekening gebasseerd op:</p>
       <div class="d-flex flex-wrap gap-3">
         <app-card
           class="flex-fill"
@@ -43,13 +43,6 @@
         />
         <app-card
           class="flex-fill"
-          icon="account_balance"
-          title="Benodigde eigengeld"
-          [subtitle]="(ownContribution() | currency: 'EUR' : 'symbol' : '1.0-0')! + ',-'"
-        />
-        <!-- if relevant -->
-        <app-card
-          class="flex-fill"
           icon="calendar_today"
           title="Overdrachtsbelasting"
           [subtitle]="
@@ -58,11 +51,9 @@
               : 'n.v.t.'
           "
         />
-        <!-- else eigengeld? -->
       </div>
       <div class="d-flex gap-2">
         <button
-          #calculateAgainButton
           class="btn btn-light py-2 border flex-fill"
           type="button"
           (click)="resetFlow.emit()"

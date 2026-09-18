@@ -6,15 +6,15 @@ if (!defined('ABSPATH')) {
 
 class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
   public function get_name(): string {
-    return 'wp-mortgage-calculator';
+    return 'ewfwp-mortgage-calculator-app';
   }
 
   public function get_title(): string {
-    return esc_html__('Hypotheekcalculator', 'jwz-calculator');
+    return esc_html__('Hypotheekcalculator', 'ewfwp-mortgage-calculator');
   }
 
   public function get_icon(): string {
-    return 'eicon-calculator';
+    return 'eicon-site-identity';
   }
 
   public function get_categories(): array {
@@ -26,17 +26,17 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
   }
 
   public function get_script_depends(): array {
-    return ['wp-mortgage-calculator-script'];
+    return ['ewfwp-mortgage-calculator-app-script'];
   }
 
   public function get_style_depends(): array {
-    return ['wp-mortgage-calculator-style'];
+    return ['ewfwp-mortgage-calculator-app-style'];
   }
 
   protected function register_controls(): void {
     $this->start_controls_section(
       'content_section', [
-        'label' => esc_html__('Calculator', 'jwz-calculator'),
+        'label' => esc_html__('Calculator', 'ewfwp-mortgage-calculator'),
         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
       ]
     );
@@ -44,7 +44,7 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
     $this->add_control(
       'theme',
       [
-        'label' => esc_html__('Thema', 'jwz-calculator'),
+        'label' => esc_html__('Thema', 'ewfwp-mortgage-calculator'),
         'type' => \Elementor\Controls_Manager::SELECT,
         'default' => 'A',
         'options' => [
@@ -57,7 +57,7 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
     $this->add_control(
       'primary_color',
       [
-        'label' => esc_html__('Primaire kleur', 'jwz-calculator'),
+        'label' => esc_html__('Primaire kleur', 'ewfwp-mortgage-calculator'),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#315d54',
       ]
@@ -66,7 +66,7 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
     $this->add_control(
       'secondary_color',
       [
-        'label' => esc_html__('Secundaire kleur', 'jwz-calculator'),
+        'label' => esc_html__('Secundaire kleur', 'ewfwp-mortgage-calculator'),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#315d54',
       ]
@@ -82,7 +82,7 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
     $secondaryColor = esc_attr($settings['secondary_color']);
 
     printf(
-      '<wp-mortgage-calculator option="%s" primaryColor="%s" secondaryColor="%s"></wp-mortgage-calculator>',
+      '<ewfwp-mortgage-calculator-app option="%s" primaryColor="%s" secondaryColor="%s"></ewfwp-mortgage-calculator-app>',
       $theme, $primaryColor, $secondaryColor
     );
   }
@@ -93,11 +93,11 @@ class JWZ_Mortgage_Calculator_Widget extends \Elementor\Widget_Base {
   protected function content_template(): void
   {
     ?>
-      <wp-mortgage-calculator
+      <ewfwp-mortgage-calculator-app
         option="{{ settings.theme }}"
         primaryColor="{{ settings.primary_color }}"
         secondaryColor="{{ settings.secondary_color }}"
-      >Calculator laden…</wp-mortgage-calculator>
+      >Calculator laden…</ewfwp-mortgage-calculator-app>
     <?php
   }
 }

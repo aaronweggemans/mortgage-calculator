@@ -4,8 +4,8 @@ import postcss from 'postcss';
 import prefixSelector from 'postcss-prefix-selector';
 
 const bootstrapFile = 'node_modules/bootstrap/dist/css/bootstrap.min.css';
-const angularStylesFile = 'dist/mortgage-calculator/browser/styles.css';
-const targetFile = 'wp-mortgage-calculator/web-component/assets/styles.css';
+const angularStylesFile = 'dist/ewfwp-mortgage-calculator-app/browser/styles.css';
+const targetFile = 'ewfwp-mortgage-calculator-app/web-component/assets/styles.css';
 
 const [purged] = await new PurgeCSS().purge({
   content: ['src/**/*.html', 'src/**/*.ts'],
@@ -14,7 +14,7 @@ const [purged] = await new PurgeCSS().purge({
 
 const prefixed = await postcss([
   prefixSelector({
-    prefix: 'wp-mortgage-calculator',
+    prefix: 'ewfwp-mortgage-calculator-app',
   }),
 ]).process(purged.css, {
   from: bootstrapFile,

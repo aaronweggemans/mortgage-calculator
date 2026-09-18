@@ -21,14 +21,14 @@ Het project moet gebouwd worden voordat het kan worden gebruikt als WordPress pl
 Om de applicatie te bouwen, volg de volgende stappen:
 
 1. Bouw de applicatie `npm run build:production`
-2. Om het `web-component` gebruik het volgende commando: `npm run build:wordpress`. Dit command zorgt ervoor dat in `wp-mortgage-calculator` een folder `web-component` wordt gemaakt.
+2. Om het `web-component` gebruik het volgende commando: `npm run build:wordpress`. Dit command zorgt ervoor dat in `ewfwp-mortgage-calculator-app` een folder `web-component` wordt gemaakt.
    Hierin staat de het javascript bestand en de assets.
-3. Om de plugin te kunnen gebruiken moet de folder `wp-mortgage-calculator` gezipt worden en geupload worden onder de plugins in WordPress. Dit kan je doen door de comamnd `npm run build:wordpress-plugin` te runnen.
+3. Om de plugin te kunnen gebruiken moet de folder `ewfwp-mortgage-calculator-app` gezipt worden en geupload worden onder de plugins in WordPress. Dit kan je doen door de comamnd `npm run build:wordpress-plugin` te runnen.
 
 ### Daadwerkelijk web-component lokaal testen
 
 Om het web-component te testen kan je de volgende stappen volgen:
 
 1. Zorg ervoor dat je de applicatie hebt gebouwd met `npm run build:wordpress`.
-2. Navigeer naar de folder `wp-mortgage-calculator` en start een lokale server met het volgende commando: `npx http-server`.
+2. Navigeer naar de folder `ewfwp-mortgage-calculator-app` en start een lokale server met het volgende commando: `npx http-server`.
 3. Ga naar de URL en bekijk of de applicatie draait!

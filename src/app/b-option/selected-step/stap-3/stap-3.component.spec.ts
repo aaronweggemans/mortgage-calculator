@@ -22,11 +22,11 @@ describe('Stap3Component', () => {
     expect(screen.queryByLabelText('Bruto jaarinkomen (partner)')).not.toExist();
 
     spectator.click(screen.getByRole('button', { name: 'Ja' }));
-    expect(screen.getByRole('button', { name: 'Ja' })).toHaveClass('awwp-active');
-    expect(screen.getByRole('button', { name: 'Nee' })).not.toHaveClass('awwp-active');
+    expect(screen.getByRole('button', { name: 'Ja' })).toHaveClass('ewfwp-active');
+    expect(screen.getByRole('button', { name: 'Nee' })).not.toHaveClass('ewfwp-active');
 
     spectator.click(screen.getByRole('button', { name: 'Nee' }));
-    expect(screen.getByRole('button', { name: 'Nee' })).toHaveClass('awwp-active');
-    expect(screen.getByRole('button', { name: 'Ja' })).not.toHaveClass('awwp-active');
+    expect(screen.getByRole('button', { name: 'Nee' })).toHaveClass('ewfwp-active');
+    expect(screen.getByRole('button', { name: 'Ja' })).not.toHaveClass('ewfwp-active');
   });
 });

@@ -21,19 +21,19 @@ describe('Stap2Component', () => {
   });
 
   it('should initially not show a custom design on the has partner buttons', () => {
-    expect(screen.getByRole('button', { name: 'Ja' })).not.toHaveClass('awwp-active');
-    expect(screen.getByRole('button', { name: 'Nee' })).not.toHaveClass('awwp-active');
+    expect(screen.getByRole('button', { name: 'Ja' })).not.toHaveClass('ewfwp-active');
+    expect(screen.getByRole('button', { name: 'Nee' })).not.toHaveClass('ewfwp-active');
   });
 
   it('should be able to toggle the has partner field', () => {
     expect(screen.queryByLabelText('Bruto jaarinkomen (partner)')).not.toExist();
 
     spectator.click(screen.getByRole('button', { name: 'Ja' }));
-    expect(screen.getByRole('button', { name: 'Ja' })).toHaveClass('awwp-active');
+    expect(screen.getByRole('button', { name: 'Ja' })).toHaveClass('ewfwp-active');
     expect(screen.getByLabelText('Bruto jaarinkomen (partner)')).toExist();
 
     spectator.click(screen.getByRole('button', { name: 'Nee' }));
-    expect(screen.getByRole('button', { name: 'Nee' })).toHaveClass('awwp-active');
+    expect(screen.getByRole('button', { name: 'Nee' })).toHaveClass('ewfwp-active');
     expect(screen.queryByLabelText('Bruto jaarinkomen (partner)')).not.toExist();
   });
 

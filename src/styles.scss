@@ -1,18 +1,18 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
-@use '_variables' as awwp;
+@use '_variables' as ewfwp;
 
-.awwp-text-primary {
-  color: awwp.$awwp-color-primary !important;
+.ewfwp-text-primary {
+  color: ewfwp.$ewfwp-color-primary !important;
 }
 
-.awwp-bg-primary {
-  background-color: awwp.$awwp-color-primary !important;
+.ewfwp-bg-primary {
+  background-color: ewfwp.$ewfwp-color-primary !important;
   color: white !important;
 }
 
-.awwp-active {
-  background-color: awwp.$awwp-color-primary !important;
+.ewfwp-active {
+  background-color: ewfwp.$ewfwp-color-primary !important;
   color: white !important;
 }
 
@@ -50,8 +50,8 @@
 $mortgage-calculator-theme: mat.m2-define-light-theme(
   (
     color: (
-      primary: mat.m2-define-palette(awwp.$stepper-palette, A200, A100, A400),
-      accent: mat.m2-define-palette(awwp.$stepper-palette, A200, A100, A400),
+      primary: mat.m2-define-palette(ewfwp.$stepper-palette, A200, A100, A400),
+      accent: mat.m2-define-palette(ewfwp.$stepper-palette, A200, A100, A400),
     ),
   )
 );
